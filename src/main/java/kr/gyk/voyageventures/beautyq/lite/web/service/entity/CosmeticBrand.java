@@ -2,18 +2,18 @@ package kr.gyk.voyageventures.beautyq.lite.web.service.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.catalina.valves.rewrite.Substitution;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "cosmetic_brand")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Brand {
+public class CosmeticBrand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

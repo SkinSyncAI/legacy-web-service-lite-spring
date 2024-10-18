@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "cosmetic_category")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class CosmeticCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

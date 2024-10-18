@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "cosmetic_ingredient")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ingredient {
+public class CosmeticIngredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
