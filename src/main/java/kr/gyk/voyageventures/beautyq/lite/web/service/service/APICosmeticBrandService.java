@@ -15,35 +15,19 @@ import org.springframework.stereotype.Service;
 public class APICosmeticBrandService {
     private final CosmeticBrandRepository cosmeticBrandRepository;
 
-    public APICosmeticBrandInfoDTO getCosmeticBrandInfoById (Integer id) throws Exception {
+    public APICosmeticBrandInfoDTO getAPICosmeticBrandInfoById (Integer id) throws Exception {
         CosmeticBrand cosmeticBrand = cosmeticBrandRepository.findById(id).orElseThrow(EntityDataNotFoundException::new);
 
         return new APICosmeticBrandInfoDTO(cosmeticBrand);
     }
 
-    public APICosmeticBrandInfoDTO getCosmeticBrandInfoByCode (String code) throws Exception {
+    public APICosmeticBrandInfoDTO getAPICosmeticBrandInfoByCode (String code) throws Exception {
         CosmeticBrand cosmeticBrand = cosmeticBrandRepository.findByCode(code).orElseThrow(EntityDataNotFoundException::new);
 
         return new APICosmeticBrandInfoDTO(cosmeticBrand);
     }
 
-    public Boolean deleteCosmeticBrandInfoById (Integer id) throws Exception {
-        try {
-            cosmeticBrandRepository.deleteById(id);
-        } catch (Exception e) { throw new EntityDataNotFoundException(); }
-
-        return true;
-    }
-
-    public Boolean deleteCosmeticBrandInfoByCode (String code) throws Exception {
-        try {
-            cosmeticBrandRepository.deleteByCode(code);
-        } catch (Exception e) { throw new EntityDataNotFoundException(); }
-
-        return true;
-    }
-
-    public Boolean postCosmeticBrand (APICosmeticBrandInfoDTO apiCosmeticBrandInfoDTO) throws Exception {
+    public Boolean postAPICosmeticBrand (APICosmeticBrandInfoDTO apiCosmeticBrandInfoDTO) throws Exception {
         try {
             CosmeticBrand cosmeticBrand = CosmeticBrand.builder()
                     .code(apiCosmeticBrandInfoDTO.getCode())
@@ -55,4 +39,21 @@ public class APICosmeticBrandService {
 
         return true;
     }
+
+    public Boolean deleteAPICosmeticBrandInfoById (Integer id) throws Exception {
+        try {
+            cosmeticBrandRepository.deleteById(id);
+        } catch (Exception e) { throw new EntityDataNotFoundException(); }
+
+        return true;
+    }
+
+    public Boolean deleteAPICosmeticBrandInfoByCode (String code) throws Exception {
+        try {
+            cosmeticBrandRepository.deleteByCode(code);
+        } catch (Exception e) { throw new EntityDataNotFoundException(); }
+
+        return true;
+    }
+
 }
