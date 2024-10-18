@@ -1,8 +1,8 @@
-package kr.gyk.voyageventures.beautyq.lite.web.service.controller;
+package kr.gyk.voyageventures.beautyq.lite.web.service.api.controller;
 
-import kr.gyk.voyageventures.beautyq.lite.web.service.dto.APICosmeticIngredientInfoDTO;
-import kr.gyk.voyageventures.beautyq.lite.web.service.service.APIAuthenticationService;
-import kr.gyk.voyageventures.beautyq.lite.web.service.service.APICosmeticIngredientService;
+import kr.gyk.voyageventures.beautyq.lite.web.service.api.dto.APICosmeticIngredientInfoDTO;
+import kr.gyk.voyageventures.beautyq.lite.web.service.api.service.APIAuthenticationService;
+import kr.gyk.voyageventures.beautyq.lite.web.service.api.service.APICosmeticIngredientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

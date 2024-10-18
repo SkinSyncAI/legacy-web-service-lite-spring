@@ -1,4 +1,4 @@
-package kr.gyk.voyageventures.beautyq.lite.web.service.dto;
+package kr.gyk.voyageventures.beautyq.lite.web.service.api.dto;
 
 import kr.gyk.voyageventures.beautyq.lite.web.service.entity.CosmeticCategory;
 import lombok.*;

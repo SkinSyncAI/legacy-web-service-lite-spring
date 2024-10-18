@@ -1,14 +1,13 @@
-package kr.gyk.voyageventures.beautyq.lite.web.service.service;
+package kr.gyk.voyageventures.beautyq.lite.web.service.api.service;
 
 import jakarta.validation.ConstraintViolationException;
-import kr.gyk.voyageventures.beautyq.lite.web.service.dto.APICosmeticCategoryInfoDTO;
+import kr.gyk.voyageventures.beautyq.lite.web.service.api.dto.APICosmeticCategoryInfoDTO;
 import kr.gyk.voyageventures.beautyq.lite.web.service.entity.CosmeticCategory;
 import kr.gyk.voyageventures.beautyq.lite.web.service.exception.EntityCodeDuplicatedException;
 import kr.gyk.voyageventures.beautyq.lite.web.service.exception.EntityDataNotFoundException;
 import kr.gyk.voyageventures.beautyq.lite.web.service.repository.CosmeticCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 @Service

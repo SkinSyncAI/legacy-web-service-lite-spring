@@ -1,7 +1,7 @@
-package kr.gyk.voyageventures.beautyq.lite.web.service.service;
+package kr.gyk.voyageventures.beautyq.lite.web.service.api.service;
 
 import jakarta.validation.ConstraintViolationException;
-import kr.gyk.voyageventures.beautyq.lite.web.service.dto.APICosmeticBrandInfoDTO;
+import kr.gyk.voyageventures.beautyq.lite.web.service.api.dto.APICosmeticBrandInfoDTO;
 import kr.gyk.voyageventures.beautyq.lite.web.service.entity.CosmeticBrand;
 import kr.gyk.voyageventures.beautyq.lite.web.service.exception.EntityCodeDuplicatedException;
 import kr.gyk.voyageventures.beautyq.lite.web.service.exception.EntityDataNotFoundException;

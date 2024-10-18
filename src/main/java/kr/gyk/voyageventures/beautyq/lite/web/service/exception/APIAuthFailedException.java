@@ -1,6 +1,5 @@
 package kr.gyk.voyageventures.beautyq.lite.web.service.exception;
 
-import kr.gyk.voyageventures.beautyq.lite.web.service.service.APIAuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

@@ -1,4 +1,4 @@
-package kr.gyk.voyageventures.beautyq.lite.web.service.service;
+package kr.gyk.voyageventures.beautyq.lite.web.service.api.service;
 
 import kr.gyk.voyageventures.beautyq.lite.web.service.exception.APIAuthFailedException;
 import lombok.RequiredArgsConstructor;
