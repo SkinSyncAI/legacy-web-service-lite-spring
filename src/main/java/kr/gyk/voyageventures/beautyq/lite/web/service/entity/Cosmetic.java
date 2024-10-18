@@ -1,7 +1,7 @@
 package kr.gyk.voyageventures.beautyq.lite.web.service.entity;
 
 import jakarta.persistence.*;
-import kr.gyk.voyageventures.beautyq.lite.web.service.component.StringListConverter;
+import kr.gyk.voyageventures.beautyq.lite.web.service.utils.StringListConverter;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ public class Cosmetic {
     @Column(nullable = false, unique = false, length = 256)
     private Long nameEn;
 
-    @ManyToMany(mappedBy = "cosmetic", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "cosmetic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CosmeticCategory> category = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "cosmetic", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "cosmetic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CosmeticIngredient> ingredient = new ArrayList<>();
 
     // TODO: Analysis

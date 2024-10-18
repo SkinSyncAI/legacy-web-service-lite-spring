@@ -1,4 +1,4 @@
-package kr.gyk.voyageventures.beautyq.lite.web.service.component;
+package kr.gyk.voyageventures.beautyq.lite.web.service.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
