@@ -11,7 +11,7 @@ public class APIAuthenticationService {
     @Value("${auth.api.token}") private String authToken;
 
     public Boolean verifyAuthToken(String token) throws Exception {
-        if (compareAuthToken(token)) throw new APIAuthFailedException();
+        if (!compareAuthToken(token)) throw new APIAuthFailedException();
         return true;
     }
 
