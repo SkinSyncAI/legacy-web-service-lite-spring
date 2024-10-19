@@ -12,12 +12,14 @@ import kr.gyk.voyageventures.beautyq.lite.web.service.repository.CosmeticIngredi
 import kr.gyk.voyageventures.beautyq.lite.web.service.repository.CosmeticRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class APICosmeticService {
     private final CosmeticRepository cosmeticRepository;
     private final CosmeticBrandRepository cosmeticBrandRepository;
@@ -28,7 +30,7 @@ public class APICosmeticService {
     private final APICosmeticCategoryService apiCosmeticCategoryService;
     private final APICosmeticIngredientService apiCosmeticCategoryIngredientService;
 
-    public APIGetCosmeticDTO getAPICosmeticInfoById (Long id) throws Exception {
+    public APIGetCosmeticDTO getAPICosmeticInfoById (Long id) {
         Cosmetic cosmetic = cosmeticRepository.findById(id).orElseThrow(EntityDataNotFoundException::new);
 
         APICosmeticBrandInfoDTO brandDTO = apiCosmeticBrandService.getAPICosmeticBrandInfoById(cosmetic.getBrand().getId());
@@ -56,10 +58,15 @@ public class APICosmeticService {
                 .discount(cosmetic.getDiscount())
                 .howToUse(cosmetic.getHowToUse())
                 .recommendSkin(cosmetic.getRecommendSkin())
+                .scoreHydration(cosmetic.getScoreHydration())
+                .scoreSoothing(cosmetic.getScoreSoothing())
+                .scoreBrightening(cosmetic.getScoreBrightening())
+                .scoreBarrier(cosmetic.getScoreBarrier())
+                .scoreMoisture(cosmetic.getScoreMoisture())
                 .build();
     }
 
-    public Boolean postAPICosmeticInfo (APIPostCosmeticDTO apiPostCosmeticDTO) throws Exception {
+    public Boolean postAPICosmeticInfo (APIPostCosmeticDTO apiPostCosmeticDTO) {
         List<CosmeticCategory> listCategory = new ArrayList<>();
         List<CosmeticIngredient> listIngredient = new ArrayList<>();
         for (Integer id : apiPostCosmeticDTO.getCategory()) listCategory.add(cosmeticCategoryRepository.findById(id).orElseThrow(EntityDataNotFoundException::new));
@@ -79,15 +86,31 @@ public class APICosmeticService {
                 .discount(apiPostCosmeticDTO.getDiscount())
                 .howToUse(apiPostCosmeticDTO.getHowToUse())
                 .recommendSkin(apiPostCosmeticDTO.getRecommendSkin())
+                .scoreHydration(apiPostCosmeticDTO.getScoreHydration())
+                .scoreSoothing(apiPostCosmeticDTO.getScoreSoothing())
+                .scoreBrightening(apiPostCosmeticDTO.getScoreBrightening())
+                .scoreBarrier(apiPostCosmeticDTO.getScoreBarrier())
+                .scoreMoisture(apiPostCosmeticDTO.getScoreMoisture())
                 .build();
-        cosmeticRepository.save(newCosmetic);
+        newCosmetic = cosmeticRepository.save(newCosmetic);
+
+        cosmeticBrand.getCosmetic().add(newCosmetic);
+        cosmeticBrandRepository.save(cosmeticBrand);
+        for (CosmeticCategory category : listCategory) {
+            category.getCosmetic().add(newCosmetic);
+            cosmeticCategoryRepository.save(category);
+        }
+        for (CosmeticIngredient ingredient : listIngredient) {
+            ingredient.getCosmetic().add(newCosmetic);
+            cosmeticIngredientRepository.save(ingredient);
+        }
 
         return true;
     }
 
-    public Boolean deleteAPICosmeticInfoById (Long id) throws Exception {
+    public Boolean deleteAPICosmeticInfoById (Long id) {
         try {
-            cosmeticRepository.deleteById(id);
+            cosmeticRepository.delete(cosmeticRepository.findById(id).orElseThrow(EntityDataNotFoundException::new));
         } catch (Exception e) { throw new EntityDataNotFoundException(); }
 
         return true;

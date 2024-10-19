@@ -16,29 +16,42 @@ public class APICosmeticBrandController {
     private final APICosmeticBrandService apiCosmeticBrandService;
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<APICosmeticBrandInfoDTO> getAPICosmeticBrandInfoById (@PathVariable("id") Integer id) throws Exception {
+    public ResponseEntity<APICosmeticBrandInfoDTO> getAPICosmeticBrandInfoById (
+            @PathVariable("id") Integer id
+    ) throws Exception {
         return new ResponseEntity<>(apiCosmeticBrandService.getAPICosmeticBrandInfoById(id), HttpStatus.OK);
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<APICosmeticBrandInfoDTO> getAPICosmeticBrandInfoByCode (@PathVariable("code") String code) throws Exception {
+    public ResponseEntity<APICosmeticBrandInfoDTO> getAPICosmeticBrandInfoByCode (
+            @PathVariable("code") String code
+    ) throws Exception {
         return new ResponseEntity<>(apiCosmeticBrandService.getAPICosmeticBrandInfoByCode(code), HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<Boolean> postAPICosmeticBrand (@RequestParam("token") String token, @RequestBody APICosmeticBrandInfoDTO apiCosmeticBrandInfoDTO) throws Exception {
+    public ResponseEntity<Boolean> postAPICosmeticBrand (
+            @RequestParam(value = "token", required = false) String token,
+            @RequestBody APICosmeticBrandInfoDTO apiCosmeticBrandInfoDTO
+    ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
         return new ResponseEntity<>(apiCosmeticBrandService.postAPICosmeticBrand(apiCosmeticBrandInfoDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<Boolean> deleteAPICosmeticBrandById (@RequestParam("token") String token, @PathVariable("id") Integer id) throws Exception {
+    public ResponseEntity<Boolean> deleteAPICosmeticBrandById (
+            @RequestParam(value = "token", required = false) String token,
+            @PathVariable("id") Integer id
+    ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
         return new ResponseEntity<>(apiCosmeticBrandService.deleteAPICosmeticBrandInfoById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/code/{code}")
-    public ResponseEntity<Boolean> deleteAPICosmeticBrandByCode (@RequestParam("token") String token, @PathVariable("code") String code) throws Exception {
+    public ResponseEntity<Boolean> deleteAPICosmeticBrandByCode (
+            @RequestParam(value = "token", required = false) String token,
+            @PathVariable("code") String code
+    ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
         return new ResponseEntity<>(apiCosmeticBrandService.deleteAPICosmeticBrandInfoByCode(code), HttpStatus.OK);
     }

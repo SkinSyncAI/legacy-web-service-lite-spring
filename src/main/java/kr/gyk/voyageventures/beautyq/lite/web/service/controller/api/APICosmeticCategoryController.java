@@ -16,29 +16,42 @@ public class APICosmeticCategoryController {
     private final APICosmeticCategoryService apiCosmeticCategoryService;
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<APICosmeticCategoryInfoDTO> getAPICosmeticCategoryInfoById (@PathVariable("id") Integer id) throws Exception {
+    public ResponseEntity<APICosmeticCategoryInfoDTO> getAPICosmeticCategoryInfoById (
+            @PathVariable("id") Integer id
+    ) throws Exception {
         return new ResponseEntity<>(apiCosmeticCategoryService.getAPICosmeticCategoryInfoById(id), HttpStatus.OK);
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<APICosmeticCategoryInfoDTO> getAPICosmeticCategoryInfoByCode (@PathVariable("code") String code) throws Exception {
+    public ResponseEntity<APICosmeticCategoryInfoDTO> getAPICosmeticCategoryInfoByCode (
+            @PathVariable("code") String code
+    ) throws Exception {
         return new ResponseEntity<>(apiCosmeticCategoryService.getAPICosmeticCategoryInfoByCode(code), HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<Boolean> postAPICosmeticCategory (@RequestParam("token") String token, @RequestBody APICosmeticCategoryInfoDTO apiCosmeticCategoryInfoDTO) throws Exception {
+    public ResponseEntity<Boolean> postAPICosmeticCategory (
+            @RequestParam(value = "token", required = false) String token,
+            @RequestBody APICosmeticCategoryInfoDTO apiCosmeticCategoryInfoDTO
+    ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
         return new ResponseEntity<>(apiCosmeticCategoryService.postAPICosmeticCategory(apiCosmeticCategoryInfoDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<Boolean> deleteAPICosmeticCategoryById (@RequestParam("token") String token, @PathVariable("id") Integer id) throws Exception {
+    public ResponseEntity<Boolean> deleteAPICosmeticCategoryById (
+            @RequestParam(value = "token", required = false) String token,
+            @PathVariable("id") Integer id
+    ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
         return new ResponseEntity<>(apiCosmeticCategoryService.deleteAPICosmeticCategoryById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/code/{code}")
-    public ResponseEntity<Boolean> deleteAPICosmeticCategoryByCode (@RequestParam("token") String token, @PathVariable("code") String code) throws Exception {
+    public ResponseEntity<Boolean> deleteAPICosmeticCategoryByCode (
+            @RequestParam(value = "token", required = false) String token,
+            @PathVariable("code") String code
+    ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
         return new ResponseEntity<>(apiCosmeticCategoryService.deleteAPICosmeticCategoryByCode(code), HttpStatus.OK);
     }

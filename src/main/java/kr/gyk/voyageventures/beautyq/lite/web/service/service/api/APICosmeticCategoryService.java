@@ -15,19 +15,19 @@ import org.springframework.stereotype.Service;
 public class APICosmeticCategoryService {
     private final CosmeticCategoryRepository cosmeticCategoryRepository;
 
-    public APICosmeticCategoryInfoDTO getAPICosmeticCategoryInfoById (Integer id) throws Exception {
+    public APICosmeticCategoryInfoDTO getAPICosmeticCategoryInfoById (Integer id) {
         CosmeticCategory cosmeticCategory = cosmeticCategoryRepository.findById(id).orElseThrow(EntityDataNotFoundException::new);
 
         return new APICosmeticCategoryInfoDTO(cosmeticCategory);
     }
 
-    public APICosmeticCategoryInfoDTO getAPICosmeticCategoryInfoByCode (String code) throws Exception {
+    public APICosmeticCategoryInfoDTO getAPICosmeticCategoryInfoByCode (String code) {
         CosmeticCategory cosmeticCategory = cosmeticCategoryRepository.findByCode(code).orElseThrow(EntityDataNotFoundException::new);
 
         return new APICosmeticCategoryInfoDTO(cosmeticCategory);
     }
 
-    public Boolean postAPICosmeticCategory (APICosmeticCategoryInfoDTO apiCosmeticCategoryInfoDTO) throws Exception {
+    public Boolean postAPICosmeticCategory (APICosmeticCategoryInfoDTO apiCosmeticCategoryInfoDTO) {
         try {
             CosmeticCategory cosmeticCategory = CosmeticCategory.builder()
                     .code(apiCosmeticCategoryInfoDTO.getCode())
@@ -40,7 +40,7 @@ public class APICosmeticCategoryService {
         return true;
     }
 
-    public Boolean deleteAPICosmeticCategoryById (Integer id) throws Exception {
+    public Boolean deleteAPICosmeticCategoryById (Integer id) {
         try {
             cosmeticCategoryRepository.deleteById(id);
         } catch (Exception e) { throw new EntityDataNotFoundException(); }
@@ -48,7 +48,7 @@ public class APICosmeticCategoryService {
         return true;
     }
 
-    public Boolean deleteAPICosmeticCategoryByCode (String code) throws Exception {
+    public Boolean deleteAPICosmeticCategoryByCode (String code) {
         try {
             cosmeticCategoryRepository.deleteByCode(code);
         } catch (Exception e) { throw new EntityDataNotFoundException(); }

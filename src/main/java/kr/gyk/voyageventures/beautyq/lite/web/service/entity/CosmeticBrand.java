@@ -28,7 +28,7 @@ public class CosmeticBrand {
     @Column(nullable = true, unique = false, length = 128)
     private String nameEn;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cosmetic> cosmetic = new ArrayList<>();
 
 }

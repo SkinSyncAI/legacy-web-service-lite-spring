@@ -31,7 +31,7 @@ public class CosmeticIngredient {
     @Column(nullable = true, unique = false, length = 512)
     private List<String> nameEn;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Cosmetic> cosmetic = new ArrayList<>();
 
 }

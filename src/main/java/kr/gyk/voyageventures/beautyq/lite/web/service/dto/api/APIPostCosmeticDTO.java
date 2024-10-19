@@ -24,4 +24,10 @@ public class APIPostCosmeticDTO {
     private Integer discount;
     private String howToUse;
     private Integer recommendSkin;
+
+    private Integer scoreHydration;
+    private Integer scoreSoothing;
+    private Integer scoreBrightening;
+    private Integer scoreBarrier;
+    private Integer scoreMoisture;
 }

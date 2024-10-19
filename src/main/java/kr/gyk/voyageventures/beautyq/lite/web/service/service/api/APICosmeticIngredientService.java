@@ -15,19 +15,19 @@ import org.springframework.stereotype.Service;
 public class APICosmeticIngredientService {
     private final CosmeticIngredientRepository cosmeticIngredientRepository;
 
-    public APICosmeticIngredientInfoDTO getAPICosmeticIngredientInfoById (Integer id) throws Exception {
+    public APICosmeticIngredientInfoDTO getAPICosmeticIngredientInfoById (Integer id) {
         CosmeticIngredient cosmeticIngredient = cosmeticIngredientRepository.findById(id).orElseThrow(EntityDataNotFoundException::new);
 
         return new APICosmeticIngredientInfoDTO(cosmeticIngredient);
     }
 
-    public APICosmeticIngredientInfoDTO getAPICosmeticIngredientInfoByCode (String code) throws Exception {
+    public APICosmeticIngredientInfoDTO getAPICosmeticIngredientInfoByCode (String code) {
         CosmeticIngredient cosmeticIngredient = cosmeticIngredientRepository.findByCode(code).orElseThrow(EntityDataNotFoundException::new);
 
         return new APICosmeticIngredientInfoDTO(cosmeticIngredient);
     }
 
-    public Boolean postAPICosmeticIngredient (APICosmeticIngredientInfoDTO apiCosmeticIngredientInfoDTO) throws Exception {
+    public Boolean postAPICosmeticIngredient (APICosmeticIngredientInfoDTO apiCosmeticIngredientInfoDTO) {
         try {
             CosmeticIngredient cosmeticIngredient = CosmeticIngredient.builder()
                     .code(apiCosmeticIngredientInfoDTO.getCode())
@@ -40,7 +40,7 @@ public class APICosmeticIngredientService {
         return true;
     }
 
-    public Boolean deleteAPICosmeticIngredientInfoById (Integer id) throws Exception {
+    public Boolean deleteAPICosmeticIngredientInfoById (Integer id) {
         try {
             cosmeticIngredientRepository.deleteById(id);
         } catch (Exception e) { throw new EntityDataNotFoundException(); }
@@ -48,7 +48,7 @@ public class APICosmeticIngredientService {
         return true;
     }
 
-    public Boolean deleteAPICosmeticIngredientInfoByCode (String code) throws Exception {
+    public Boolean deleteAPICosmeticIngredientInfoByCode (String code) {
         try {
             cosmeticIngredientRepository.deleteByCode(code);
         } catch (Exception e) { throw new EntityDataNotFoundException(); }
