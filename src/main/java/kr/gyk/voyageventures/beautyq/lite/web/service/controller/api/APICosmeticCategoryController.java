@@ -16,14 +16,12 @@ public class APICosmeticCategoryController {
     private final APICosmeticCategoryService apiCosmeticCategoryService;
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<APICosmeticCategoryInfoDTO> getAPICosmeticCategoryInfoById (@RequestParam("token") String token, @PathVariable("id") Integer id) throws Exception {
-        apiAuthenticationService.verifyAuthToken(token);
+    public ResponseEntity<APICosmeticCategoryInfoDTO> getAPICosmeticCategoryInfoById (@PathVariable("id") Integer id) throws Exception {
         return new ResponseEntity<>(apiCosmeticCategoryService.getAPICosmeticCategoryInfoById(id), HttpStatus.OK);
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<APICosmeticCategoryInfoDTO> getAPICosmeticCategoryInfoByCode (@RequestParam("token") String token, @PathVariable("code") String code) throws Exception {
-        apiAuthenticationService.verifyAuthToken(token);
+    public ResponseEntity<APICosmeticCategoryInfoDTO> getAPICosmeticCategoryInfoByCode (@PathVariable("code") String code) throws Exception {
         return new ResponseEntity<>(apiCosmeticCategoryService.getAPICosmeticCategoryInfoByCode(code), HttpStatus.OK);
     }
 

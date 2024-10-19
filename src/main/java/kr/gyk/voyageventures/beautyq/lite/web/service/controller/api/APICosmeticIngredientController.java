@@ -16,14 +16,12 @@ public class APICosmeticIngredientController {
     private final APICosmeticIngredientService apiCosmeticIngredientService;
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<APICosmeticIngredientInfoDTO> getAPICosmeticIngredientInfoById (@RequestParam("token") String token, @PathVariable("id") Integer id) throws Exception {
-        apiAuthenticationService.verifyAuthToken(token);
+    public ResponseEntity<APICosmeticIngredientInfoDTO> getAPICosmeticIngredientInfoById (@PathVariable("id") Integer id) throws Exception {
         return new ResponseEntity<>(apiCosmeticIngredientService.getAPICosmeticIngredientInfoById(id), HttpStatus.OK);
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<APICosmeticIngredientInfoDTO> getAPICosmeticIngredientInfoByCode (@RequestParam("token") String token, @PathVariable("code") String code) throws Exception {
-        apiAuthenticationService.verifyAuthToken(token);
+    public ResponseEntity<APICosmeticIngredientInfoDTO> getAPICosmeticIngredientInfoByCode (@PathVariable("code") String code) throws Exception {
         return new ResponseEntity<>(apiCosmeticIngredientService.getAPICosmeticIngredientInfoByCode(code), HttpStatus.OK);
     }
 

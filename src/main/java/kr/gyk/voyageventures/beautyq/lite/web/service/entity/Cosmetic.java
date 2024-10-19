@@ -22,13 +22,13 @@ public class Cosmetic {
 
     @JoinColumn(name = "brand")
     @ManyToOne(fetch = FetchType.LAZY)
-    private CosmeticBrand cosmeticBrand;
+    private CosmeticBrand brand;
 
     @Column(nullable = false, unique = false, length = 256)
-    private Long nameKo;
+    private String nameKo;
 
     @Column(nullable = false, unique = false, length = 256)
-    private Long nameEn;
+    private String nameEn;
 
     @ManyToMany(mappedBy = "cosmetic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CosmeticCategory> category = new ArrayList<>();
@@ -45,16 +45,22 @@ public class Cosmetic {
     @Column(nullable = true, unique = false, length = 512)
     private List<String> tag;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private Double rating;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private Integer countReview;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private Integer cost;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private Integer discount;
+
+    @Column(nullable = true, unique = false, length = 768)
+    private String howToUse;
+
+    @Column(nullable = true, unique = false)
+    private Integer recommendSkin;
 
 }

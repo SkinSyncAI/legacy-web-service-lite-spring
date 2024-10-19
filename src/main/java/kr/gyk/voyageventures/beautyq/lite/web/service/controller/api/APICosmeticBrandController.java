@@ -16,14 +16,12 @@ public class APICosmeticBrandController {
     private final APICosmeticBrandService apiCosmeticBrandService;
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<APICosmeticBrandInfoDTO> getAPICosmeticBrandInfoById (@RequestParam("token") String token, @PathVariable("id") Integer id) throws Exception {
-        apiAuthenticationService.verifyAuthToken(token);
+    public ResponseEntity<APICosmeticBrandInfoDTO> getAPICosmeticBrandInfoById (@PathVariable("id") Integer id) throws Exception {
         return new ResponseEntity<>(apiCosmeticBrandService.getAPICosmeticBrandInfoById(id), HttpStatus.OK);
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<APICosmeticBrandInfoDTO> getAPICosmeticBrandInfoByCode (@RequestParam("token") String token, @PathVariable("code") String code) throws Exception {
-        apiAuthenticationService.verifyAuthToken(token);
+    public ResponseEntity<APICosmeticBrandInfoDTO> getAPICosmeticBrandInfoByCode (@PathVariable("code") String code) throws Exception {
         return new ResponseEntity<>(apiCosmeticBrandService.getAPICosmeticBrandInfoByCode(code), HttpStatus.OK);
     }
 
