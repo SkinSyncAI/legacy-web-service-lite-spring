@@ -30,4 +30,13 @@ public class APIPostCosmeticDTO {
     private Integer scoreBrightening;
     private Integer scoreBarrier;
     private Integer scoreMoisture;
+
+    private Integer typeScoreD;
+    private Integer typeScoreO;
+    private Integer typeScoreS;
+    private Integer typeScoreR;
+    private Integer typeScoreP;
+    private Integer typeScoreN;
+    private Integer typeScoreW;
+    private Integer typeScoreT;
 }

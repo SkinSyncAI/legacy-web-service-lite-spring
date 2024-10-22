@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<script>
+    $(document).ready(function(){
+        if (!('url' in window) && ('webkitURL' in window)) {
+            window.URL = window.webkitURL;
+        }
+
+        $('#camera').change(function(e){
+            $('#pic').attr('src', URL.createObjectURL(e.target.files[0]));
+        });
+    });
+</script>
+
+<input type="file" id="camera" name="camera" capture="camera" accept="image/*" />
+<br />
+
+<img id="pic" style="width:100%;" />
+
+</html>

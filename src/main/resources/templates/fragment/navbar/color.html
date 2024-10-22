@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="Navbar">
+    <style>
+        .bq-navbar { margin-top: 1%; padding-left: 7%; padding-right: 7%; height: 3.2rem; }
+        .bq-navbar .bq-navbar-logo-div { height: 100%; width: auto; margin-left: auto; margin-right: auto;}
+        .bq-navbar .bq-navbar-logo-div a { height: 100%; }
+        .bq-navbar .bq-navbar-icon-div a { display: block; height: 100%; }
+        .bq-navbar .bq-navbar-img-container { height: 100%; display: flex; }
+        .bq-navbar .bq-navbar-img-container .bq-navbar-img { display: block; width: auto; margin: auto; }
+        .bq-navbar #bq-navbar-img-logo { height: 100%; }
+    </style>
+
+    <nav class="bq-navbar navbar sticky-top">
+        <div class="bq-navbar-logo-div">
+            <a>
+                <div class="bq-navbar-img-container">
+                    <img id="bq-navbar-img-logo" class="bq-navbar-img" src="image/logo_top_color.svg" alt="BeautyQ">
+                </div>
+            </a>
+        </div>
+    </nav>
+</th:block>
+
+</html>

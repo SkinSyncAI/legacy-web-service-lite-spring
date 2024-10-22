@@ -64,6 +64,7 @@ public class Cosmetic {
     private Integer recommendSkin;
 
 
+
     @Column(nullable = true, unique = false)
     private Integer scoreHydration;
 
@@ -78,5 +79,30 @@ public class Cosmetic {
 
     @Column(nullable = true, unique = false)
     private Integer scoreMoisture;
+
+
+    @Column(nullable = true, unique = false)
+    private Integer typeScoreD;
+
+    @Column(nullable = true, unique = false)
+    private Integer typeScoreO;
+
+    @Column(nullable = true, unique = false)
+    private Integer typeScoreS;
+
+    @Column(nullable = true, unique = false)
+    private Integer typeScoreR;
+
+    @Column(nullable = true, unique = false)
+    private Integer typeScoreP;
+
+    @Column(nullable = true, unique = false)
+    private Integer typeScoreN;
+
+    @Column(nullable = true, unique = false)
+    private Integer typeScoreW;
+
+    @Column(nullable = true, unique = false)
+    private Integer typeScoreT;
 
 }
