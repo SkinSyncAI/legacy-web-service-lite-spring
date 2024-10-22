@@ -63,6 +63,14 @@ public class APICosmeticService {
                 .scoreBrightening(cosmetic.getScoreBrightening())
                 .scoreBarrier(cosmetic.getScoreBarrier())
                 .scoreMoisture(cosmetic.getScoreMoisture())
+                .typeScoreD(cosmetic.getTypeScoreD())
+                .typeScoreO(cosmetic.getTypeScoreO())
+                .typeScoreS(cosmetic.getTypeScoreS())
+                .typeScoreR(cosmetic.getTypeScoreR())
+                .typeScoreP(cosmetic.getTypeScoreP())
+                .typeScoreN(cosmetic.getTypeScoreN())
+                .typeScoreW(cosmetic.getTypeScoreW())
+                .typeScoreT(cosmetic.getTypeScoreT())
                 .build();
     }
 
@@ -91,6 +99,14 @@ public class APICosmeticService {
                 .scoreBrightening(apiPostCosmeticDTO.getScoreBrightening())
                 .scoreBarrier(apiPostCosmeticDTO.getScoreBarrier())
                 .scoreMoisture(apiPostCosmeticDTO.getScoreMoisture())
+                .typeScoreD(apiPostCosmeticDTO.getTypeScoreD())
+                .typeScoreO(apiPostCosmeticDTO.getTypeScoreO())
+                .typeScoreS(apiPostCosmeticDTO.getTypeScoreS())
+                .typeScoreR(apiPostCosmeticDTO.getTypeScoreR())
+                .typeScoreP(apiPostCosmeticDTO.getTypeScoreP())
+                .typeScoreN(apiPostCosmeticDTO.getTypeScoreN())
+                .typeScoreW(apiPostCosmeticDTO.getTypeScoreW())
+                .typeScoreT(apiPostCosmeticDTO.getTypeScoreT())
                 .build();
         newCosmetic = cosmeticRepository.save(newCosmetic);
 
