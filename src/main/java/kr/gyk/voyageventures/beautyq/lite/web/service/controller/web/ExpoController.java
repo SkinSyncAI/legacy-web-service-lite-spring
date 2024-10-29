@@ -2,7 +2,6 @@ package kr.gyk.voyageventures.beautyq.lite.web.service.controller.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import kr.gyk.voyageventures.beautyq.lite.web.service.component.ScoringComponent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,25 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping()
-public class IndexController {
+@RequestMapping("/expo")
+public class ExpoController {
 
-    @GetMapping()
-    public String getIndex (
+    @GetMapping("/intro")
+    public String getExpoDiagnosisIntro (
             Model model,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse
     ) throws Exception {
-        return "loading";
-    }
-
-    @GetMapping("/test")
-    public String getTest (
-            Model model,
-            HttpServletRequest httpServletRequest,
-            HttpServletResponse httpServletResponse
-    ) throws Exception {
-        return "index";
+        return "service_intro";
     }
 
 }

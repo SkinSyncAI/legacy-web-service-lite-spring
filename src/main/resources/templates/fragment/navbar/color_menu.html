@@ -3,7 +3,7 @@
 
 <th:block th:fragment="Navbar">
     <style>
-        .bq-navbar { margin-top: 1%; padding-left: 7%; padding-right: 7%; height: 3.2rem; }
+        .bq-navbar { padding-left: 4%; padding-right: 4%; height: 2.8rem; background-color: rgba(255, 255, 255, 0.8); }
         .bq-navbar .bq-navbar-logo-div { height: 100%; width: auto; margin-left: auto; margin-right: auto; }
         .bq-navbar .bq-navbar-logo-div a { height: 100%; }
         .bq-navbar .bq-navbar-icon-div { height: 100%; width: 2.5rem; }
@@ -11,31 +11,24 @@
         .bq-navbar .bq-navbar-img-container { height: 100%; display: flex; }
         .bq-navbar .bq-navbar-img-container .bq-navbar-img { display: block; width: auto; margin: auto; }
         .bq-navbar #bq-navbar-img-logo { height: 100%; }
-        .bq-navbar #bq-navbar-img-home { height: 79%; }
-        .bq-navbar #bq-navbar-img-menu { height: 58%; }
+        .bq-navbar #bq-navbar-img-menu { height: 70%; }
     </style>
 
     <nav class="bq-navbar navbar sticky-top">
-        <div class="bq-navbar-icon-div">
-            <a href="/">
-                <div class="bq-navbar-img-container ">
-                    <img id="bq-navbar-img-home" class="bq-navbar-img" src="image/navbar_home.svg" alt="home">
-                </div>
-            </a>
-        </div>
+        <div class="bq-navbar-icon-div"></div>
 
         <div class="bq-navbar-logo-div">
             <a>
                 <div class="bq-navbar-img-container">
-                    <img id="bq-navbar-img-logo" class="bq-navbar-img" src="image/logo_top_white.svg" alt="BeautyQ">
+                    <img id="bq-navbar-img-logo" class="bq-navbar-img" src="/image/navbar/logo_color.svg" alt="BeautyQ">
                 </div>
             </a>
         </div>
 
         <div class="bq-navbar-icon-div">
             <a href="/">
-                <div class="bq-navbar-img-container">
-                    <img id="bq-navbar-img-menu" class="bq-navbar-img" src="image/navbar_menu.svg" alt="menu">
+                <div class="bq-navbar-img-container ">
+                    <img id="bq-navbar-img-menu" class="bq-navbar-img" src="/image/navbar/navbar_menu.svg" alt="menu">
                 </div>
             </a>
         </div>

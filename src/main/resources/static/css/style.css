@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bq-mt-40vh { margin-top: 40vh; }
+.bq-mt-1vh { margin-top: 1vh; }
+
+.bq-m-auto { margin: auto; }
+.bq-ml-auto { margin-left: auto; }
+.bq-mr-auto { margin-right: auto; }
+.bq-mt-auto { margin-top: auto; }
+.bq-mb-auto { margin-bottom: auto; }
+
+.bq-mt-5p { margin-top: 5%; }
+.bq-mt-10p { margin-top: 10%; }
+
+.bq-mt-5vh { margin-top: 5vh; }
+
+.bq-pos-fixed { position: fixed; }
+
+.bq-h-100vh { height: 100vh; }
+.bq-h-100p { height: 100%; }
+
+.bq-w-100p { width: 100%; }
+
+@font-face { font-family: Paperlogy1Thin; src: url("../font/paperlogy/Paperlogy-1Thin.ttf") format("truetype"); }
+@font-face { font-family: Paperlogy2ExtraLight; src: url("../font/paperlogy/Paperlogy-2ExtraLight.ttf") format("truetype"); }
+@font-face { font-family: Paperlogy3Light; src: url("../font/paperlogy/Paperlogy-3Light.ttf") format("truetype"); }
+@font-face { font-family: Paperlogy4Regular; src: url("../font/paperlogy/Paperlogy-4Regular.ttf") format("truetype"); }
+@font-face { font-family: Paperlogy5Medium; src: url("../font/paperlogy/Paperlogy-5Medium.ttf") format("truetype"); }
+@font-face { font-family: Paperlogy6SemiBold; src: url("../font/paperlogy/Paperlogy-6SemiBold.ttf") format("truetype"); }
+@font-face { font-family: Paperlogy7Bold; src: url("../font/paperlogy/Paperlogy-7Bold.ttf") format("truetype"); }
+@font-face { font-family: Paperlogy8Extrabold; src: url("../font/paperlogy/Paperlogy-8ExtraBold.ttf") format("truetype"); }
+@font-face { font-family: Paperlogy9Black; src: url("../font/paperlogy/Paperlogy-9Black.ttf") format("truetype"); }

@@ -14,6 +14,7 @@ public class LogInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         long reqTime = System.currentTimeMillis();
         request.setAttribute("reqTime", reqTime);
+        request.getSession();
         log.info("Begin {}:{}", request.getRequestedSessionId(), reqTime);
         log.info("{} {} -> {}", request.getMethod(), request.getRequestURI(), handler);
         return true;

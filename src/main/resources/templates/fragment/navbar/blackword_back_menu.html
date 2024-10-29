@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:fragment="Navbar">
+<th:block th:fragment="Navbar(title)">
     <style>
-        .bq-navbar { margin-top: 1%; padding-left: 7%; padding-right: 7%; height: 3.2rem; }
-        .bq-navbar .bq-navbar-logo-div { height: 100%; width: auto; margin-left: auto; margin-right: auto; }
+        .bq-navbar { padding-left: 4%; padding-right: 4%; height: 2.8rem; background-color: rgba(255, 255, 255, 0.8); }
+        .bq-navbar .bq-navbar-logo-div { height: 100%; width: auto; margin-left: auto; margin-right: auto; margin-top: 0.5rem; }
         .bq-navbar .bq-navbar-logo-div a { height: 100%; }
         .bq-navbar .bq-navbar-icon-div { height: 100%; width: 2.5rem; }
         .bq-navbar .bq-navbar-icon-div a { display: block; height: 100%; }
         .bq-navbar .bq-navbar-img-container { height: 100%; display: flex; }
         .bq-navbar .bq-navbar-img-container .bq-navbar-img { display: block; width: auto; margin: auto; }
-        .bq-navbar #bq-navbar-img-logo { height: 100%; }
-        .bq-navbar #bq-navbar-img-home { height: 79%; }
-        .bq-navbar #bq-navbar-img-menu { height: 58%; }
+        .bq-navbar #bq-navbar-img-back { height: 70%; }
+        .bq-navbar #bq-navbar-img-menu { height: 70%; }
+
+        #bq-navbar-title { font-family: Paperlogy4Regular; font-size: 16px; }
     </style>
 
     <nav class="bq-navbar navbar sticky-top">
         <div class="bq-navbar-icon-div">
-            <a href="/">
+            <a onclick="history.back();">
                 <div class="bq-navbar-img-container ">
-                    <img id="bq-navbar-img-home" class="bq-navbar-img" src="image/navbar_home.svg" alt="home">
+                    <img id="bq-navbar-img-back" class="bq-navbar-img" src="/image/navbar/navbar_back.svg" alt="back">
                 </div>
             </a>
         </div>
@@ -27,15 +28,15 @@
         <div class="bq-navbar-logo-div">
             <a>
                 <div class="bq-navbar-img-container">
-                    <img id="bq-navbar-img-logo" class="bq-navbar-img" src="image/logo_top_color.svg" alt="BeautyQ">
+                    <p id="bq-navbar-title" th:text="${title}"></p>
                 </div>
             </a>
         </div>
 
         <div class="bq-navbar-icon-div">
             <a href="/">
-                <div class="bq-navbar-img-container">
-                    <img id="bq-navbar-img-menu" class="bq-navbar-img" src="image/navbar_menu.svg" alt="menu">
+                <div class="bq-navbar-img-container ">
+                    <img id="bq-navbar-img-menu" class="bq-navbar-img" src="/image/navbar/navbar_menu.svg" alt="menu">
                 </div>
             </a>
         </div>

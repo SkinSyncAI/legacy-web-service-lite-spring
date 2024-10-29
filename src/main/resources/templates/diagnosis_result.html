@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<style>
+    #bq-title { font-family: Paperlogy3Light; font-size: 1.5rem; }
+    #bq-title #bq-title-keyword { font-family: Paperlogy5Medium; font-size: 1.5rem;; color: #5A81FA; }
+    #bq-need-title { font-family: Paperlogy3Light; font-size: 1rem; color: black; }
+    #bq-need-title #bq-need-user { font-family: Paperlogy5Medium; font-size: 1rem; color: black; }
+    #bq-more-title { font-family: Paperlogy3Light; font-size: 1rem; color: black; }
+
+    #bq-title-container { margin-top: 11vh; width: 100%; }
+    #bq-need-container { margin-top: 7vh; }
+    #bq-need-content { width: 83%; margin-top: 3vh; }
+    .bq-need-image-container { padding-left: 1.5vw; padding-right: 1.5vw; }
+    .bq-need-image { opacity: 0.5; width: 100%; height: auto; }
+    #bq-more-container { margin-top: 7vh; }
+    #bq-more-image { width: 83%; margin-top: 3vh; }
+    #bq-more-btn { width: 84%; margin-top: 2vh; }
+</style>
+
+<div id="bq-content-container" class="bq-h-100p bq-w-100p">
+    <th:block th:insert="~{fragment/navbar/color_back :: Navbar}"></th:block>
+
+    <div id="bq-title-container" class="bq-ml-auto bq-mr-auto text-center">
+        <p id="bq-title">테스트 결과 <span id="bq-title-keyword" th:text="${resultDTO.skintype}"></span>입니다</p>
+    </div>
+
+    <div id="bq-need-container" class="bq-ml-auto bq-mr-auto text-center">
+        <p id="bq-need-title">지금 <span id="bq-need-user">Geust</span> 님께 필요한 것은</p>
+        <div id="bq-need-content" class="row bq-ml-auto bq-mr-auto">
+            <th:block th:each="need:${resultDTO.needs}">
+                <div th:if="${need} == 0" class="col bq-ml-auto bq-mr-auto bq-need-image-container">
+                    <img class="bq-image bq-need-image" src="/image/diagnosis_result/need_barrier.svg" alt="barrier">
+                </div>
+                <div th:if="${need} == 1" class="col bq-ml-auto bq-mr-auto bq-need-image-container">
+                    <img class="bq-image bq-need-image" src="/image/diagnosis_result/need_brightening.svg" alt="brightening">
+                </div>
+                <div th:if="${need} == 2" class="col bq-ml-auto bq-mr-auto bq-need-image-container">
+                    <img class="bq-image bq-need-image" src="/image/diagnosis_result/need_hydration.svg" alt="hydration">
+                </div>
+                <div th:if="${need} == 3" class="col bq-ml-auto bq-mr-auto bq-need-image-container">
+                    <img class="bq-image bq-need-image" src="/image/diagnosis_result/need_moisture.svg" alt="moisture">
+                </div>
+                <div th:if="${need} == 4" class="col bq-ml-auto bq-mr-auto bq-need-image-container">
+                    <img class="bq-image bq-need-image" src="/image/diagnosis_result/need_soothing.svg" alt="soothing">
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+    <div id="bq-more-container" class="bq-ml-auto bq-mr-auto text-center">
+        <p id="bq-more-title">더 자세히 확인해볼까요?</p>
+        <img id="bq-more-image" class="bq-image bq-more-image bq-ml-auto bq-mr-auto" src="/image/diagnosis_result/more_score.svg" alt="Score ?">
+    </div>
+
+    <div id="bq-more-btn" class="bq-ml-auto bq-mr-auto text-center">
+        <a id="bq-a-btn-next" href="/"><img id="bq-btn-next" class="bq-ml-auto bq-mr-auto" src="/image/diagnosis_result/btn_next.png" alt="내 피부타입와 화장품 궁합점수 알아보기"></a>
+    </div>
+
+</div>
+
+</html>

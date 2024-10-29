@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#D0FDFF" />
+
+<style>
+    body { width: 100%; height: 100vh; }
+
+    #bq-content-container { background-image: linear-gradient(to bottom, #D0FDFF, #FFFFFF 12%);}
+
+    #bq-title { font-family: Paperlogy3Light; font-size: 1.5rem; }
+    #bq-title-score {font-family: Paperlogy4Regular; font-size: 1.5rem;}
+
+    #bq-title-container { margin-top: 11vh; height: 10vh; width: 20rem;}
+    #bq-image-container { margin-top: 14vh; height: 23vh;}
+    #bq-a-btn-next { margin-top: 0; height: 10vh;}
+    #bq-description { margin-top: 0; height: 10vh; }
+</style>
+
+<div id="bq-content-container" class="bq-h-100p bq-w-100p">
+    <th:block th:insert="~{fragment/navbar/color :: Navbar}"></th:block>
+
+    <div id="bq-title-container" class="bq-ml-auto bq-mr-auto">
+        <p id="bq-title">지금 사용하고 계신 화장품,</p>
+        <p id="bq-title">내 피부와의 <span id="bq-title-score">점수</span>는 몇 점일까요?</p>
+    </div>
+    <div id="bq-image-container">
+        <img id="bq-image" class="bq-ml-auto bq-mr-auto" src="/image/service_intro/score.svg" alt="98">
+    </div>
+    <a id="bq-a-btn-next" href="/expo/diagnosis/intro">
+        <img id="bq-btn-next" class="bq-ml-auto bq-mr-auto" src="/image/service_intro/btn_next.png" alt="점수로 알아보는 화장품 매칭도!">
+    </a>
+    <img id="bq-description" class="bq-ml-auto bq-mr-auto" src="/image/service_intro/description.svg" alt="화장품 평가 및 수치화 기술 S/W 3초만에 찾는 나만의 화장품">
+</div>
+
+</html>
