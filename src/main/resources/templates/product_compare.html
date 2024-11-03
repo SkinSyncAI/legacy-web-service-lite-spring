@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<style>
+    .bq-category-btn { font-family: PretendardLight; font-size: 0.8125rem; color: rgba(52, 52, 52, 0.8); }
+    .bq-category-btn span { font-family: PretendardBold; }
+    #bq-category-btn-0 { font-family: PretendardBold; }
+    .bq-product-goods-data-brand { font-family: PretendardRegular; font-size: 0.6rem; color: rgba(0, 0, 0, 0.3); }
+    .bq-product-goods-data-name { font-family: PretendardRegular; font-size: 0.9rem; color: #000000; }
+    .bq-product-goods-data-price { font-family: PretendardMedium; font-size: 0.8rem; color: #000000; }
+    .bq-product-goods-data-volume { font-family: PretendardRegular; font-size: 0.6rem; color: rgba(0, 0, 0, 0.5); }
+    .bq-product-goods-data-review { font-family: PretendardRegular; font-size: 0.68rem; color: #000000; }
+    .bq-product-score-main { font-family: Paperlogy5Medium; font-size: 2.215rem; color: #567DFA; }
+    .bq-product-score-main span { font-size: 0.75rem; }
+    .bq-product-score-matching { font-family: Paperlogy5Medium; font-size: 0.78rem; color: rgba(86, 125, 250, 0.9); }
+    .bq-product-score-matching span { font-family: Paperlogy7Bold; color: #567DFA; }
+    #bq-recommend-title { font-family: Paperlogy4Regular; font-size: 0.8125rem; color: #000000; }
+    #bq-recommend-title span { font-family: Paperlogy5Medium; }
+    #bq-compare-btn { font-family: Paperlogy5Medium; font-size: 0.9rem; color: #FFFFFF; }
+
+    #bq-category { margin-top: 2vh; width: 100vw; }
+    #bq-category-content { overflow-x: scroll; -ms-overflow-style: none; }
+    #bq-category-content::-webkit-scrollbar { display: none; }
+    #bq-category-row { display: flex; margin-left: 2vw; }
+    .bq-category-btn { text-wrap: nowrap; height: 4.8vh; padding-left: 2vh; padding-right: 2vh; margin-left: 1vw; margin-right: 1vw; display: block; background-color: #FFFFFF; border-color: rgba(90, 129, 250, 0.7); border-width: 0.125rem; border-radius: 3vh; }
+    #bq-now { margin-top: 1.5vh; padding: 1.5vh 6%; width: 100%; background-color: rgba(90, 129, 250, 0.1); border-top-width: 0.0625rem; border-top-color: rgba(86, 125, 250, 0.5); border-bottom-width: 0.0625rem; border-bottom-color: rgba(86, 125, 250, 0.5); }
+    #bq-now-title { margin-bottom: 1.5vh; }
+    .bq-product { display: flex; }
+    .bq-product-goods { height: 22vw; display: flex; align-content: flex-start; margin-right: auto; }
+    .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #D0FDFF; border-radius: 1rem; margin-right: 3vw; }
+    .bq-product-goods-data { height: 22vw; display: flex; align-items: center; }
+    .bq-product-goods-data-inner { display: block; width: 43vw; }
+    .bq-product-goods-data-etc { margin-top: 3%; display: flex; align-content: flex-start; align-items: center; }
+    .bq-product-goods-data-volume { margin-left: 1%; }
+    .bq-product-goods-data-star { margin-left: 3%; height: 0.68rem; width: 0.68rem; }
+    .bq-product-goods-data-review { margin-left: 0.5%; }
+    .bq-product-goods-data-name { overflow-x: hidden; }
+    .bq-product-score { text-align: right; }
+    .bq-product-score-main { margin-top: 0.2vh; margin-bottom: 0.2vh;}
+    .bq-product-score-main span { margin-left: 1vw; }
+    #bq-recommend { margin-bottom: 15vh; }
+    #bq-recommend-title { padding: 1.5vh 6%; border-bottom-color: rgba(0, 0, 0, 0.15); border-bottom-width: 0.03125rem; }
+    .bq-product-recommend { padding: 1.5vh 6%; border-bottom-color: rgba(0, 0, 0, 0.15); border-bottom-width: 0.03125rem; }
+
+    #bq-compare { height: 4.4vh; margin-bottom: 12.5vh; margin-left: auto; margin-right: 3.5vw; }
+    #bq-compare-btn { height: 100%; padding-left: 2vh; padding-right: 2vh; background-color: #567DFA; border-radius: 3vh; }
+</style>
+
+<th:block th:insert="~{fragment/navbar/blackword_back_menu :: Navbar('비슷한 추천 제품')}"></th:block>
+<div id="bq-content-container" >
+    <div id="bq-category">
+        <div id="bq-category-content">
+            <div id="bq-category-row">
+                <button id="bq-category-btn-0" data-bq-btn-num=0 data-bq-btn-title="전체" class="bq-category-btn" style="background-color: #567DFA; color: #FFFFFF; ">전체</button>
+                <button id="bq-category-btn-1" data-bq-btn-num=1 data-bq-btn-title="수분공급" class="bq-category-btn">수분 <span>공급</span></button>
+                <button id="bq-category-btn-2" data-bq-btn-num=2 data-bq-btn-title="수분보호" class="bq-category-btn">수분 <span>보호</span></button>
+                <button id="bq-category-btn-3" data-bq-btn-num=3 data-bq-btn-title="피부장벽" class="bq-category-btn">피부 <span>장벽</span></button>
+                <button id="bq-category-btn-4" data-bq-btn-num=4 data-bq-btn-title="피부진정" class="bq-category-btn">피부 <span>진정</span></button>
+                <button id="bq-category-btn-5" data-bq-btn-num=5 data-bq-btn-title="피부미백" class="bq-category-btn">피부 <span>미백</span></button>
+            </div>
+        </div>
+    </div>
+    <div id="bq-now">
+        <p id="bq-now-title"><span>Guest</span>님이 방금 보던 제품</p>
+        <div class="bq-product">
+            <div class="bq-product-goods">
+                <div class="bq-product-goods-image"></div>
+                <div class="bq-product-goods-data">
+                    <div class="bq-product-goods-data-inner">
+                        <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
+                        <p class="bq-product-goods-data-name">Lorem Ipsum</p>
+                        <div class="bq-product-goods-data-etc">
+                            <p class="bq-product-goods-data-price">000,000원</p>
+                            <p class="bq-product-goods-data-volume">/000ml</p>
+                            <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                            <p class="bq-product-goods-data-review">0.00(000)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bq-product-score">
+                <p class="bq-product-score-main">00<span>점</span></p>
+                <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
+            </div>
+        </div>
+    </div>
+    <div id="bq-recommend">
+        <div id="bq-recommend-title" class="bq-ml-auto bq-mr-auto">
+            <p id="bq-recommend-title-text">비슷한 '<span>전체</span>' 제품</p>
+        </div>
+        <div id="bq-recommend-content">
+            <!-- TODO:: Ajax 처리 -->
+            <div class="bq-product bq-product-recommend">
+                <div class="bq-product-goods">
+                    <div class="bq-product-goods-image"></div>
+                    <div class="bq-product-goods-data">
+                        <div class="bq-product-goods-data-inner">
+                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
+                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
+                            <div class="bq-product-goods-data-etc">
+                                <p class="bq-product-goods-data-price">000,000원</p>
+                                <p class="bq-product-goods-data-volume">/000ml</p>
+                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                                <p class="bq-product-goods-data-review">0.00(000)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bq-product-score">
+                    <p class="bq-product-score-main">00<span>점</span></p>
+                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
+                </div>
+            </div>
+            <div class="bq-product bq-product-recommend">
+                <div class="bq-product-goods">
+                    <div class="bq-product-goods-image"></div>
+                    <div class="bq-product-goods-data">
+                        <div class="bq-product-goods-data-inner">
+                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
+                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
+                            <div class="bq-product-goods-data-etc">
+                                <p class="bq-product-goods-data-price">000,000원</p>
+                                <p class="bq-product-goods-data-volume">/000ml</p>
+                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                                <p class="bq-product-goods-data-review">0.00(000)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bq-product-score">
+                    <p class="bq-product-score-main">00<span>점</span></p>
+                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
+                </div>
+            </div>
+            <div class="bq-product bq-product-recommend">
+                <div class="bq-product-goods">
+                    <div class="bq-product-goods-image"></div>
+                    <div class="bq-product-goods-data">
+                        <div class="bq-product-goods-data-inner">
+                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
+                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
+                            <div class="bq-product-goods-data-etc">
+                                <p class="bq-product-goods-data-price">000,000원</p>
+                                <p class="bq-product-goods-data-volume">/000ml</p>
+                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                                <p class="bq-product-goods-data-review">0.00(000)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bq-product-score">
+                    <p class="bq-product-score-main">00<span>점</span></p>
+                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
+                </div>
+            </div>
+            <div class="bq-product bq-product-recommend">
+                <div class="bq-product-goods">
+                    <div class="bq-product-goods-image"></div>
+                    <div class="bq-product-goods-data">
+                        <div class="bq-product-goods-data-inner">
+                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
+                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
+                            <div class="bq-product-goods-data-etc">
+                                <p class="bq-product-goods-data-price">000,000원</p>
+                                <p class="bq-product-goods-data-volume">/000ml</p>
+                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                                <p class="bq-product-goods-data-review">0.00(000)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bq-product-score">
+                    <p class="bq-product-score-main">00<span>점</span></p>
+                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
+                </div>
+            </div>
+            <div class="bq-product bq-product-recommend">
+                <div class="bq-product-goods">
+                    <div class="bq-product-goods-image"></div>
+                    <div class="bq-product-goods-data">
+                        <div class="bq-product-goods-data-inner">
+                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
+                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
+                            <div class="bq-product-goods-data-etc">
+                                <p class="bq-product-goods-data-price">000,000원</p>
+                                <p class="bq-product-goods-data-volume">/000ml</p>
+                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                                <p class="bq-product-goods-data-review">0.00(000)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bq-product-score">
+                    <p class="bq-product-score-main">00<span>점</span></p>
+                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
+                </div>
+            </div>
+            <div class="bq-product bq-product-recommend">
+                <div class="bq-product-goods">
+                    <div class="bq-product-goods-image"></div>
+                    <div class="bq-product-goods-data">
+                        <div class="bq-product-goods-data-inner">
+                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
+                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
+                            <div class="bq-product-goods-data-etc">
+                                <p class="bq-product-goods-data-price">000,000원</p>
+                                <p class="bq-product-goods-data-volume">/000ml</p>
+                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                                <p class="bq-product-goods-data-review">0.00(000)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bq-product-score">
+                    <p class="bq-product-score-main">00<span>점</span></p>
+                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bq-compare" class="fixed-bottom tw-grid tw-place-items-end">
+        <button id="bq-compare-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#bq-offcanvas" aria-controls="bq-offcanvas" class="bq-compare-btn">비교하기</button>
+    </div>
+</div>
+<th:block th:insert="~{product_compare_offcanvas :: Offcanvas}"></th:block>
+<th:block th:insert="~{fragment/footer/main :: Footer}"></th:block>
+<script>
+    let countCategory = 6;
+    let btn = [];
+    let isCheck = [true];
+
+    for (let i = 0; i < countCategory; i++) btn[i] = $("#bq-category-btn-" + i);
+    for (let i = 1; i < countCategory; i++) isCheck[i] = false;
+
+    $(".bq-category-btn").on("click", function (event) {
+        let target = $(event.target).attr("data-bq-btn-num");
+        for (let i = 0; i < countCategory; i++) {
+            if (i+"" === target) {
+                isCheck[i] = true;
+                btn[i].css("background-color", "#567DFA");
+                btn[i].css("color", "#FFFFFF");
+            } else {
+                isCheck[i] = false;
+                btn[i].css("background-color", "");
+                btn[i].css("color", "");
+            }
+        }
+        $("#bq-recommend-title span").text($(event.target).attr("data-bq-btn-title"));
+    });
+</script>
+
+</html>

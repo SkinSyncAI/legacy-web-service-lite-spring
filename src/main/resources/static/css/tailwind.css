@@ -566,33 +566,29 @@ video {
   border-width: 0;
 }
 
-.tw-flex {
-  display: flex;
-}
-
 .tw-grid {
   display: grid;
+}
+
+.tw-place-items-end {
+  place-items: end;
 }
 
 .tw-place-items-center {
   place-items: center;
 }
 
-.tw-items-center {
-  align-items: center;
-}
-
-.tw-justify-items-center {
-  justify-items: center;
-}
-
-.tw-self-center {
-  align-self: center;
-}
-
 .tw-ordinal {
   --tw-ordinal: ordinal;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.\[p\:\2\*Vv\FFFD\FFFD\15\2\FFFD 1\FFFDr\=\FFFD\FFFD\FFFD\FFFD-\] {
+  p: *Vv���1�r=����-;
+}
+
+#bq-content-container {
+  width: 100%;
 }
 
 .bq-mt-40vh {
@@ -643,6 +639,10 @@ video {
   height: 100vh;
 }
 
+.bq-h-auto {
+  height: auto;
+}
+
 .bq-h-100p {
   height: 100%;
 }
@@ -654,53 +654,83 @@ video {
 @font-face {
   font-family: Paperlogy1Thin;
 
-  src: url("../font/paperlogy/Paperlogy-1Thin.ttf") format("truetype");
+  src: url("../font/paperlogy/woff/Paperlogy-1Thin.woff") format("woff");
 }
 
 @font-face {
   font-family: Paperlogy2ExtraLight;
 
-  src: url("../font/paperlogy/Paperlogy-2ExtraLight.ttf") format("truetype");
+  src: url("../font/paperlogy/woff/Paperlogy-2ExtraLight.woff") format("woff");
 }
 
 @font-face {
   font-family: Paperlogy3Light;
 
-  src: url("../font/paperlogy/Paperlogy-3Light.ttf") format("truetype");
+  src: url("../font/paperlogy/woff/Paperlogy-3Light.woff") format("woff");
 }
 
 @font-face {
   font-family: Paperlogy4Regular;
 
-  src: url("../font/paperlogy/Paperlogy-4Regular.ttf") format("truetype");
+  src: url("../font/paperlogy/woff/Paperlogy-4Regular.woff") format("woff");
 }
 
 @font-face {
   font-family: Paperlogy5Medium;
 
-  src: url("../font/paperlogy/Paperlogy-5Medium.ttf") format("truetype");
+  src: url("../font/paperlogy/woff/Paperlogy-5Medium.woff") format("woff");
 }
 
 @font-face {
   font-family: Paperlogy6SemiBold;
 
-  src: url("../font/paperlogy/Paperlogy-6SemiBold.ttf") format("truetype");
+  src: url("../font/paperlogy/woff/Paperlogy-6SemiBold.woff") format("woff");
 }
 
 @font-face {
   font-family: Paperlogy7Bold;
 
-  src: url("../font/paperlogy/Paperlogy-7Bold.ttf") format("truetype");
+  src: url("../font/paperlogy/woff/Paperlogy-7Bold.woff") format("woff");
 }
 
 @font-face {
   font-family: Paperlogy8Extrabold;
 
-  src: url("../font/paperlogy/Paperlogy-8ExtraBold.ttf") format("truetype");
+  src: url("../font/paperlogy/woff/Paperlogy-8ExtraBold.woff") format("woff");
 }
 
 @font-face {
   font-family: Paperlogy9Black;
 
-  src: url("../font/paperlogy/Paperlogy-9Black.ttf") format("truetype");
+  src: url("../font/paperlogy/woff/Paperlogy-9Black.woff") format("woff");
+}
+
+@font-face {
+  font-family: PretendardLight;
+
+  src: url("../font/pretendard/woff2_subset/Pretendard-Light.subset.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: PretendardRegular;
+
+  src: url("../font/pretendard/woff2_subset/Pretendard-Regular.subset.woff2") format("woff2") ;
+}
+
+@font-face {
+  font-family: PretendardMedium;
+
+  src: url("../font/pretendard/woff2_subset/Pretendard-Medium.subset.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: PretendardSemiBold;
+
+  src: url("../font/pretendard/woff2_subset/Pretendard-SemiBold.subset.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: PretendardBold;
+
+  src: url("../font/pretendard/woff2_subset/Pretendard-Bold.subset.woff2") format("woff2");
 }

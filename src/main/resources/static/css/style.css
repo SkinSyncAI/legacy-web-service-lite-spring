@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+#bq-content-container { width: 100%; }
+
 .bq-mt-40vh { margin-top: 40vh; }
 .bq-mt-1vh { margin-top: 1vh; }
 
@@ -19,16 +21,23 @@
 .bq-pos-fixed { position: fixed; }
 
 .bq-h-100vh { height: 100vh; }
+.bq-h-auto { height: auto; }
 .bq-h-100p { height: 100%; }
 
 .bq-w-100p { width: 100%; }
 
-@font-face { font-family: Paperlogy1Thin; src: url("../font/paperlogy/Paperlogy-1Thin.ttf") format("truetype"); }
-@font-face { font-family: Paperlogy2ExtraLight; src: url("../font/paperlogy/Paperlogy-2ExtraLight.ttf") format("truetype"); }
-@font-face { font-family: Paperlogy3Light; src: url("../font/paperlogy/Paperlogy-3Light.ttf") format("truetype"); }
-@font-face { font-family: Paperlogy4Regular; src: url("../font/paperlogy/Paperlogy-4Regular.ttf") format("truetype"); }
-@font-face { font-family: Paperlogy5Medium; src: url("../font/paperlogy/Paperlogy-5Medium.ttf") format("truetype"); }
-@font-face { font-family: Paperlogy6SemiBold; src: url("../font/paperlogy/Paperlogy-6SemiBold.ttf") format("truetype"); }
-@font-face { font-family: Paperlogy7Bold; src: url("../font/paperlogy/Paperlogy-7Bold.ttf") format("truetype"); }
-@font-face { font-family: Paperlogy8Extrabold; src: url("../font/paperlogy/Paperlogy-8ExtraBold.ttf") format("truetype"); }
-@font-face { font-family: Paperlogy9Black; src: url("../font/paperlogy/Paperlogy-9Black.ttf") format("truetype"); }
+@font-face { font-family: Paperlogy1Thin; src: url("../font/paperlogy/woff/Paperlogy-1Thin.woff") format("woff");  }
+@font-face { font-family: Paperlogy2ExtraLight; src: url("../font/paperlogy/woff/Paperlogy-2ExtraLight.woff") format("woff"); }
+@font-face { font-family: Paperlogy3Light; src: url("../font/paperlogy/woff/Paperlogy-3Light.woff") format("woff"); }
+@font-face { font-family: Paperlogy4Regular; src: url("../font/paperlogy/woff/Paperlogy-4Regular.woff") format("woff"); }
+@font-face { font-family: Paperlogy5Medium; src: url("../font/paperlogy/woff/Paperlogy-5Medium.woff") format("woff"); }
+@font-face { font-family: Paperlogy6SemiBold; src: url("../font/paperlogy/woff/Paperlogy-6SemiBold.woff") format("woff"); }
+@font-face { font-family: Paperlogy7Bold; src: url("../font/paperlogy/woff/Paperlogy-7Bold.woff") format("woff"); }
+@font-face { font-family: Paperlogy8Extrabold; src: url("../font/paperlogy/woff/Paperlogy-8ExtraBold.woff") format("woff"); }
+@font-face { font-family: Paperlogy9Black; src: url("../font/paperlogy/woff/Paperlogy-9Black.woff") format("woff"); }
+
+@font-face { font-family: PretendardLight; src: url("../font/pretendard/woff2_subset/Pretendard-Light.subset.woff2") format("woff2"); }
+@font-face { font-family: PretendardRegular; src: url("../font/pretendard/woff2_subset/Pretendard-Regular.subset.woff2") format("woff2") ; }
+@font-face { font-family: PretendardMedium; src: url("../font/pretendard/woff2_subset/Pretendard-Medium.subset.woff2") format("woff2"); }
+@font-face { font-family: PretendardSemiBold; src: url("../font/pretendard/woff2_subset/Pretendard-SemiBold.subset.woff2") format("woff2"); }
+@font-face { font-family: PretendardBold; src: url("../font/pretendard/woff2_subset/Pretendard-Bold.subset.woff2") format("woff2"); }

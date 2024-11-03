@@ -20,18 +20,18 @@ public class CookieComponent {
     }
 
     public void setDiagnosisSkinType (DiagnosisTestForm diagnosisTestForm, HttpServletResponse response) {
-        addCookie("diagnosis.test.q1", String.valueOf(diagnosisTestForm.getQuestion1() ? 1 : 0), 1800, response);
-        addCookie("diagnosis.test.q2", String.valueOf(diagnosisTestForm.getQuestion2() ? 1 : 0), 1800, response);
-        addCookie("diagnosis.test.q3", String.valueOf(diagnosisTestForm.getQuestion3() ? 1 : 0), 1800, response);
-        addCookie("diagnosis.test.q4", String.valueOf(diagnosisTestForm.getQuestion4() ? 1 : 0), 1800, response);
+        addCookie("diagnosis.test.q1", String.valueOf(diagnosisTestForm.getQuestion1() ? 1 : 0), 86400, response);
+        addCookie("diagnosis.test.q2", String.valueOf(diagnosisTestForm.getQuestion2() ? 1 : 0), 86400, response);
+        addCookie("diagnosis.test.q3", String.valueOf(diagnosisTestForm.getQuestion3() ? 1 : 0), 86400, response);
+        addCookie("diagnosis.test.q4", String.valueOf(diagnosisTestForm.getQuestion4() ? 1 : 0), 86400, response);
     }
 
     public DiagnosisTestForm getDiagnosisSkinType (HttpServletRequest request) {
         DiagnosisTestForm diagnosisTestForm = new DiagnosisTestForm();
-        diagnosisTestForm.setQuestion1(Boolean.valueOf(this.getCookie("diagnosis.test.q1", request)));
-        diagnosisTestForm.setQuestion2(Boolean.valueOf(this.getCookie("diagnosis.test.q2", request)));
-        diagnosisTestForm.setQuestion3(Boolean.valueOf(this.getCookie("diagnosis.test.q3", request)));
-        diagnosisTestForm.setQuestion4(Boolean.valueOf(this.getCookie("diagnosis.test.q4", request)));
+        diagnosisTestForm.setQuestion1(this.getCookie("diagnosis.test.q1", request).equals("1"));
+        diagnosisTestForm.setQuestion2(this.getCookie("diagnosis.test.q2", request).equals("1"));
+        diagnosisTestForm.setQuestion3(this.getCookie("diagnosis.test.q3", request).equals("1"));
+        diagnosisTestForm.setQuestion4(this.getCookie("diagnosis.test.q4", request).equals("1"));
 
         return diagnosisTestForm;
     }

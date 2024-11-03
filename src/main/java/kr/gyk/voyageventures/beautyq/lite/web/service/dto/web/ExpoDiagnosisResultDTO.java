@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExpoDiagnosisResultDTO {
+    private String baumannSkintype;
     private String skintype;
     private List<Integer> needs;
 }

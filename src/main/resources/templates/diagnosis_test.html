@@ -10,8 +10,8 @@
 
     #bq-header { background-color: rgba(255, 255, 255, 0.8); }
     #bq-title-container { margin-top: 4vh; height: 6vh; width: 19rem; }
-    #bq-test-progress { margin-top: 7vh; height: 4px; width: 80vw; }
-    #bq-test-container { margin-top: 25vh; }
+    #bq-test-progress { margin-top: 5vh; height: 4px; width: 80vw; }
+    #bq-test-container { margin-top: 23vh; }
     .bq-test-q-container { margin-top: 3.5vh; width: 19rem; }
     .bq-test-q-text { margin-top: 1vh; }
     .bq-test-a-row { margin-top: 2vh;}
@@ -116,7 +116,10 @@
     btnQ4O.click(() => { chQ4.prop("checked", true); checkQ4 = true; toggleButton(btnQ4O, btnQ4X); });
     btnQ4X.click(() => { chQ4.prop("checked", false); checkQ4 = true; toggleButton(btnQ4X, btnQ4O); });
 
-    btnSubmit.click(() => $("#form-submit").click());
+    btnSubmit.click(() => {
+        for (let i = 0; i < 8; i++) Cookies.set("main.tag." + i, "0", { domain: window.location.hostname, expires: 1 });
+        $("#form-submit").click();
+    });
 
     function toggleButton (btnSelect, btnDeselect) {
         btnSelect.css("background-color", "#5A81FA");
@@ -135,7 +138,7 @@
         if (checkQ4) pbValue += 25;
         $("#bq-test-progress-c").css("width", pbValue + "%");
 
-        if (pbValue > 90) {
+        if (pbValue > 99) {
             btnSubmit.css("display", "");
             $("#bq-test-container").css("margin-bottom", "18vh");
         }
