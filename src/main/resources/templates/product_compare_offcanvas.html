@@ -66,7 +66,7 @@
     .bq-offcanvas-product-score-main { margin-top: 0.2vh; margin-bottom: 0.2vh;}
     .bq-offcanvas-product-score-main span { margin-left: 1vw; }
 
-    #bq-offcanvas-close-btn { height: 6.6vh; width: 6.6vh; background-color: #FFFFFF; border-radius: 50%; position: absolute; left: 50%; transform: translate(-50%, -50%); }
+    #bq-offcanvas-close-btn { height: 4vh; width: 4vh; background-color: #FFFFFF; border-radius: 50%; position: absolute; left: 50%; transform: translate(-50%, -50%); }
     #bq-offcanvas-close-btn img { height: 20%; width: auto;}
 </style>
 
@@ -323,6 +323,10 @@
     for (let i = 1; i < oc_countCategory; i++) oc_isCheck[i] = false;
 
     $(".bq-offcanvas-category-btn").on("click", function (event) {
+        $(".bq-offcanvas-category-btn").css("pointer-events", "none");
+        setTimeout(() => {
+            $(".bq-offcanvas-category-btn").css("pointer-events", "auto")
+        }, 2000);
         let target = $(event.target).attr("data-bq-btn-num");
         for (let i = 0; i < oc_countCategory; i++) {
             if (i+"" === target) {

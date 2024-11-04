@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class APICosmeticIngredientService {
@@ -27,12 +29,12 @@ public class APICosmeticIngredientService {
         return new APICosmeticIngredientInfoDTO(cosmeticIngredient);
     }
 
-    public Boolean postAPICosmeticIngredient (APICosmeticIngredientInfoDTO apiCosmeticIngredientInfoDTO) {
+    public Boolean postAPICosmeticIngredient (String code, List<String> nameKo, List<String> nameEn) {
         try {
             CosmeticIngredient cosmeticIngredient = CosmeticIngredient.builder()
-                    .code(apiCosmeticIngredientInfoDTO.getCode())
-                    .nameKo(apiCosmeticIngredientInfoDTO.getNameKo())
-                    .nameEn(apiCosmeticIngredientInfoDTO.getNameEn())
+                    .code(code)
+                    .nameKo(nameKo)
+                    .nameEn(nameEn)
                     .build();
             cosmeticIngredientRepository.save(cosmeticIngredient);
         } catch (ConstraintViolationException | DataIntegrityViolationException e) { throw new EntityCodeDuplicatedException(); }

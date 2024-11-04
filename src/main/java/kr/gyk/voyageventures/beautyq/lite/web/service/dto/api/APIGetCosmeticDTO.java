@@ -2,6 +2,7 @@ package kr.gyk.voyageventures.beautyq.lite.web.service.dto.api;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -11,26 +12,23 @@ import java.util.List;
 @AllArgsConstructor
 public class APIGetCosmeticDTO {
     private Long id;
+
     private APICosmeticBrandInfoDTO brand;
     private String nameKo;
     private String nameEn;
     private List<APICosmeticCategoryInfoDTO> category;
     private List<APICosmeticIngredientInfoDTO> ingredient;
 
-    private String image;
-    private List<String> tag;
+    private Integer price;
+    private Integer priceDiscount;
+    private Integer shippingFee;
+    private String volume;
     private Double rating;
     private Integer countReview;
-    private Integer cost;
-    private Integer discount;
-    private String howToUse;
-    private Integer recommendSkin;
+    private Integer countPurchase;
 
-    private Integer scoreHydration;
-    private Integer scoreSoothing;
-    private Integer scoreBrightening;
-    private Integer scoreBarrier;
-    private Integer scoreMoisture;
+    private APIImageDTO imageProduct;
+    private List<APIImageDTO> imageThumbnails = new ArrayList<>();
 
     private Integer typeScoreD;
     private Integer typeScoreO;
@@ -40,4 +38,15 @@ public class APIGetCosmeticDTO {
     private Integer typeScoreN;
     private Integer typeScoreW;
     private Integer typeScoreT;
+    private List<String> keyword;
+
+    private Integer scoreHydration;
+    private Integer scoreSoothing;
+    private Integer scoreBrightening;
+    private Integer scoreBarrier;
+    private Integer scoreMoisture;
+    private List<String> ingredientKeyword;
+    private Short ingredientMatchingGood;
+    private Short ingredientMatchingBad;
+    private Short ingredientProhibit;
 }

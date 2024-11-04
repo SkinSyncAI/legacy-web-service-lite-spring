@@ -23,12 +23,13 @@
     #bq-category-content { overflow-x: scroll; -ms-overflow-style: none; }
     #bq-category-content::-webkit-scrollbar { display: none; }
     #bq-category-row { display: flex; margin-left: 2vw; }
-    .bq-category-btn { text-wrap: nowrap; height: 4.8vh; padding-left: 2vh; padding-right: 2vh; margin-left: 1vw; margin-right: 1vw; display: block; background-color: #FFFFFF; border-color: rgba(90, 129, 250, 0.7); border-width: 0.125rem; border-radius: 3vh; }
+    .bq-category-btn { text-wrap: nowrap; height: 4.8vh; padding-left: 2vh; padding-right: 2vh; margin-left: 1vw; margin-right: 1vw; display: block; background-color: #FFFFFF; }
     #bq-now { margin-top: 1.5vh; padding: 1.5vh 6%; width: 100%; background-color: rgba(90, 129, 250, 0.1); border-top-width: 0.0625rem; border-top-color: rgba(86, 125, 250, 0.5); border-bottom-width: 0.0625rem; border-bottom-color: rgba(86, 125, 250, 0.5); }
     #bq-now-title { margin-bottom: 1.5vh; }
     .bq-product { display: flex; }
     .bq-product-goods { height: 22vw; display: flex; align-content: flex-start; margin-right: auto; }
-    .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #D0FDFF; border-radius: 1rem; margin-right: 3vw; }
+    .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #D0FDFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden;}
+    .bq-product-goods-image img { height: auto; width: 100%; }
     .bq-product-goods-data { height: 22vw; display: flex; align-items: center; }
     .bq-product-goods-data-inner { display: block; width: 43vw; }
     .bq-product-goods-data-etc { margin-top: 3%; display: flex; align-content: flex-start; align-items: center; }
@@ -52,7 +53,7 @@
     <div id="bq-category">
         <div id="bq-category-content">
             <div id="bq-category-row">
-                <button id="bq-category-btn-0" data-bq-btn-num=0 data-bq-btn-title="전체" class="bq-category-btn" style="background-color: #567DFA; color: #FFFFFF; ">전체</button>
+                <button id="bq-category-btn-0" data-bq-btn-num=0 data-bq-btn-title="전체" class="bq-category-btn" style="color: #567DFA; ">전체</button>
                 <button id="bq-category-btn-1" data-bq-btn-num=1 data-bq-btn-title="수분공급" class="bq-category-btn">수분 <span>공급</span></button>
                 <button id="bq-category-btn-2" data-bq-btn-num=2 data-bq-btn-title="수분보호" class="bq-category-btn">수분 <span>보호</span></button>
                 <button id="bq-category-btn-3" data-bq-btn-num=3 data-bq-btn-title="피부장벽" class="bq-category-btn">피부 <span>장벽</span></button>
@@ -65,23 +66,23 @@
         <p id="bq-now-title"><span>Guest</span>님이 방금 보던 제품</p>
         <div class="bq-product">
             <div class="bq-product-goods">
-                <div class="bq-product-goods-image"></div>
+                <div class="bq-product-goods-image"><img th:src="${productCurrent.image}" alt=""></div>
                 <div class="bq-product-goods-data">
                     <div class="bq-product-goods-data-inner">
-                        <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
-                        <p class="bq-product-goods-data-name">Lorem Ipsum</p>
+                        <p class="bq-product-goods-data-brand" th:text="${productCurrent.brand}"></p>
+                        <p class="bq-product-goods-data-name" th:text="${productCurrent.name}"></p>
                         <div class="bq-product-goods-data-etc">
-                            <p class="bq-product-goods-data-price">000,000원</p>
-                            <p class="bq-product-goods-data-volume">/000ml</p>
+                            <p class="bq-product-goods-data-price">[[${productCurrent.priceDiscount}]]원</p>
+                            <p class="bq-product-goods-data-volume">/[[${productCurrent.volume}]]</p>
                             <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                            <p class="bq-product-goods-data-review">0.00(000)</p>
+                            <p class="bq-product-goods-data-review">[[${productCurrent.rating}]]([[${productCurrent.countReview}]])</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="bq-product-score">
-                <p class="bq-product-score-main">00<span>점</span></p>
-                <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
+                <p class="bq-product-score-main">[[${productCurrent.score}]]<span>점</span></p>
+                <p class="bq-product-score-matching">매칭도 <span th:text="${productCurrent.matching}"></span>점</p>
             </div>
         </div>
     </div>
@@ -90,142 +91,30 @@
             <p id="bq-recommend-title-text">비슷한 '<span>전체</span>' 제품</p>
         </div>
         <div id="bq-recommend-content">
-            <!-- TODO:: Ajax 처리 -->
-            <div class="bq-product bq-product-recommend">
-                <div class="bq-product-goods">
-                    <div class="bq-product-goods-image"></div>
-                    <div class="bq-product-goods-data">
-                        <div class="bq-product-goods-data-inner">
-                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
-                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
-                            <div class="bq-product-goods-data-etc">
-                                <p class="bq-product-goods-data-price">000,000원</p>
-                                <p class="bq-product-goods-data-volume">/000ml</p>
-                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                                <p class="bq-product-goods-data-review">0.00(000)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bq-product-score">
-                    <p class="bq-product-score-main">00<span>점</span></p>
-                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
-                </div>
-            </div>
-            <div class="bq-product bq-product-recommend">
-                <div class="bq-product-goods">
-                    <div class="bq-product-goods-image"></div>
-                    <div class="bq-product-goods-data">
-                        <div class="bq-product-goods-data-inner">
-                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
-                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
-                            <div class="bq-product-goods-data-etc">
-                                <p class="bq-product-goods-data-price">000,000원</p>
-                                <p class="bq-product-goods-data-volume">/000ml</p>
-                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                                <p class="bq-product-goods-data-review">0.00(000)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bq-product-score">
-                    <p class="bq-product-score-main">00<span>점</span></p>
-                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
-                </div>
-            </div>
-            <div class="bq-product bq-product-recommend">
-                <div class="bq-product-goods">
-                    <div class="bq-product-goods-image"></div>
-                    <div class="bq-product-goods-data">
-                        <div class="bq-product-goods-data-inner">
-                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
-                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
-                            <div class="bq-product-goods-data-etc">
-                                <p class="bq-product-goods-data-price">000,000원</p>
-                                <p class="bq-product-goods-data-volume">/000ml</p>
-                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                                <p class="bq-product-goods-data-review">0.00(000)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bq-product-score">
-                    <p class="bq-product-score-main">00<span>점</span></p>
-                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
-                </div>
-            </div>
-            <div class="bq-product bq-product-recommend">
-                <div class="bq-product-goods">
-                    <div class="bq-product-goods-image"></div>
-                    <div class="bq-product-goods-data">
-                        <div class="bq-product-goods-data-inner">
-                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
-                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
-                            <div class="bq-product-goods-data-etc">
-                                <p class="bq-product-goods-data-price">000,000원</p>
-                                <p class="bq-product-goods-data-volume">/000ml</p>
-                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                                <p class="bq-product-goods-data-review">0.00(000)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bq-product-score">
-                    <p class="bq-product-score-main">00<span>점</span></p>
-                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
-                </div>
-            </div>
-            <div class="bq-product bq-product-recommend">
-                <div class="bq-product-goods">
-                    <div class="bq-product-goods-image"></div>
-                    <div class="bq-product-goods-data">
-                        <div class="bq-product-goods-data-inner">
-                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
-                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
-                            <div class="bq-product-goods-data-etc">
-                                <p class="bq-product-goods-data-price">000,000원</p>
-                                <p class="bq-product-goods-data-volume">/000ml</p>
-                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                                <p class="bq-product-goods-data-review">0.00(000)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bq-product-score">
-                    <p class="bq-product-score-main">00<span>점</span></p>
-                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
-                </div>
-            </div>
-            <div class="bq-product bq-product-recommend">
-                <div class="bq-product-goods">
-                    <div class="bq-product-goods-image"></div>
-                    <div class="bq-product-goods-data">
-                        <div class="bq-product-goods-data-inner">
-                            <p class="bq-product-goods-data-brand">Lorem Ipsum</p>
-                            <p class="bq-product-goods-data-name">Lorem Ipsum</p>
-                            <div class="bq-product-goods-data-etc">
-                                <p class="bq-product-goods-data-price">000,000원</p>
-                                <p class="bq-product-goods-data-volume">/000ml</p>
-                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                                <p class="bq-product-goods-data-review">0.00(000)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bq-product-score">
-                    <p class="bq-product-score-main">00<span>점</span></p>
-                    <p class="bq-product-score-matching">매칭도 <span>00</span>점</p>
-                </div>
-            </div>
+
         </div>
     </div>
     <div id="bq-compare" class="fixed-bottom tw-grid tw-place-items-end">
-        <button id="bq-compare-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#bq-offcanvas" aria-controls="bq-offcanvas" class="bq-compare-btn">비교하기</button>
+        <button id="bq-compare-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#bq-offcanvas" aria-controls="#bq-offcanvas" class="bq-compare-btn">비교하기</button>
+    </div>
+    <div>
+        <button id="bq-ocnow-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#bq-ocnow" aria-controls="#bq-ocnow" class="bq-ocnow-btn"></button>
     </div>
 </div>
+
 <th:block th:insert="~{product_compare_offcanvas :: Offcanvas}"></th:block>
 <th:block th:insert="~{fragment/footer/main :: Footer}"></th:block>
-<script>
+
+<script th:inline="javascript">
+    $.ajax({
+        url: window.location.pathname + "/ajax/0",
+        method: "get",
+        dataType: "html",
+        success: function (data, status, xhr) {
+            $("#bq-recommend-content").html(data);
+        }
+    });
+
     let countCategory = 6;
     let btn = [];
     let isCheck = [true];
@@ -234,15 +123,25 @@
     for (let i = 1; i < countCategory; i++) isCheck[i] = false;
 
     $(".bq-category-btn").on("click", function (event) {
+        $(".bq-category-btn").css("pointer-events", "none");
+        setTimeout(() => {
+            $(".bq-category-btn").css("pointer-events", "auto")
+        }, 1000);
         let target = $(event.target).attr("data-bq-btn-num");
+        $.ajax({
+            url: window.location.pathname + "/ajax/" + target,
+            method: "get",
+            dataType: "html",
+            success: function (data, status, xhr) {
+                $("#bq-recommend-content").html(data);
+            }
+        })
         for (let i = 0; i < countCategory; i++) {
             if (i+"" === target) {
                 isCheck[i] = true;
-                btn[i].css("background-color", "#567DFA");
-                btn[i].css("color", "#FFFFFF");
+                btn[i].css("color", "#567DFA");
             } else {
                 isCheck[i] = false;
-                btn[i].css("background-color", "");
                 btn[i].css("color", "");
             }
         }

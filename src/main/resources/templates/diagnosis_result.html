@@ -13,7 +13,7 @@
     #bq-need-container { margin-top: 7vh; }
     #bq-need-content { width: 83%; margin-top: 3vh; }
     .bq-need-image-container { padding-left: 1.5vw; padding-right: 1.5vw; }
-    .bq-need-image { opacity: 0.5; width: 100%; height: auto; }
+    .bq-need-image { opacity: 0.8; width: 100%; height: auto; }
     #bq-more-container { margin-top: 7vh; }
     #bq-more-image { width: 83%; margin-top: 3vh; }
     #bq-more-btn { width: 84%; margin-top: 2vh; }
@@ -23,7 +23,8 @@
     <th:block th:insert="~{fragment/navbar/color_back :: Navbar}"></th:block>
 
     <div id="bq-title-container" class="bq-ml-auto bq-mr-auto text-center">
-        <p id="bq-title">테스트 결과 <span id="bq-title-keyword" th:text="${resultDTO.skintype}"></span>입니다</p>
+        <p id="bq-title">테스트 결과</p>
+        <p id="bq-title" ><span id="bq-title-keyword">[[${resultDTO.baumannSkintype}]], [[${resultDTO.skintype}]]</span> 입니다</p>
     </div>
 
     <div id="bq-need-container" class="bq-ml-auto bq-mr-auto text-center">

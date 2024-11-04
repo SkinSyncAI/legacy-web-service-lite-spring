@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/ingredient")
@@ -32,10 +34,12 @@ public class APICosmeticIngredientController {
     @PostMapping("")
     public ResponseEntity<Boolean> postAPICosmeticIngredient (
             @RequestParam(value = "token", required = false) String token,
-            @RequestBody APICosmeticIngredientInfoDTO apiCosmeticIngredientInfoDTO
+            @RequestParam(value = "code") String code,
+            @RequestParam(value = "nameKo") List<String> nameKo,
+            @RequestParam(value = "nameEn") List<String> nameEn
     ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
-        return new ResponseEntity<>(apiCosmeticIngredientService.postAPICosmeticIngredient(apiCosmeticIngredientInfoDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(apiCosmeticIngredientService.postAPICosmeticIngredient(code, nameKo, nameEn), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/id/{id}")

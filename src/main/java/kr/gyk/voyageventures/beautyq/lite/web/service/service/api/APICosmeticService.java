@@ -1,15 +1,9 @@
 package kr.gyk.voyageventures.beautyq.lite.web.service.service.api;
 
 import kr.gyk.voyageventures.beautyq.lite.web.service.dto.api.*;
-import kr.gyk.voyageventures.beautyq.lite.web.service.entity.Cosmetic;
-import kr.gyk.voyageventures.beautyq.lite.web.service.entity.CosmeticBrand;
-import kr.gyk.voyageventures.beautyq.lite.web.service.entity.CosmeticCategory;
-import kr.gyk.voyageventures.beautyq.lite.web.service.entity.CosmeticIngredient;
+import kr.gyk.voyageventures.beautyq.lite.web.service.entity.*;
 import kr.gyk.voyageventures.beautyq.lite.web.service.exception.EntityDataNotFoundException;
-import kr.gyk.voyageventures.beautyq.lite.web.service.repository.CosmeticBrandRepository;
-import kr.gyk.voyageventures.beautyq.lite.web.service.repository.CosmeticCategoryRepository;
-import kr.gyk.voyageventures.beautyq.lite.web.service.repository.CosmeticIngredientRepository;
-import kr.gyk.voyageventures.beautyq.lite.web.service.repository.CosmeticRepository;
+import kr.gyk.voyageventures.beautyq.lite.web.service.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +19,7 @@ public class APICosmeticService {
     private final CosmeticBrandRepository cosmeticBrandRepository;
     private final CosmeticCategoryRepository cosmeticCategoryRepository;
     private final CosmeticIngredientRepository cosmeticIngredientRepository;
+    private final ImageRepository imageRepository;
 
     private final APICosmeticBrandService apiCosmeticBrandService;
     private final APICosmeticCategoryService apiCosmeticCategoryService;
@@ -43,6 +38,9 @@ public class APICosmeticService {
         for (CosmeticIngredient ingredient : cosmetic.getIngredient())
             listIngredientDTO.add(apiCosmeticCategoryIngredientService.getAPICosmeticIngredientInfoById(ingredient.getId()));
 
+        List<APIImageDTO> listImageDTO = new ArrayList<>();
+        for (Image image : cosmetic.getImageThumbnails()) listImageDTO.add(new APIImageDTO(image));
+
         return APIGetCosmeticDTO.builder()
                 .id(cosmetic.getId())
                 .brand(brandDTO)
@@ -50,19 +48,15 @@ public class APICosmeticService {
                 .nameEn(cosmetic.getNameEn())
                 .category(listCategoryDTO)
                 .ingredient(listIngredientDTO)
-                .image(cosmetic.getImage())
-                .tag(cosmetic.getTag())
+                .price(cosmetic.getPrice())
+                .priceDiscount(cosmetic.getPriceDiscount())
+                .shippingFee(cosmetic.getShippingFee())
+                .volume(cosmetic.getVolume())
                 .rating(cosmetic.getRating())
                 .countReview(cosmetic.getCountReview())
-                .cost(cosmetic.getCost())
-                .discount(cosmetic.getDiscount())
-                .howToUse(cosmetic.getHowToUse())
-                .recommendSkin(cosmetic.getRecommendSkin())
-                .scoreHydration(cosmetic.getScoreHydration())
-                .scoreSoothing(cosmetic.getScoreSoothing())
-                .scoreBrightening(cosmetic.getScoreBrightening())
-                .scoreBarrier(cosmetic.getScoreBarrier())
-                .scoreMoisture(cosmetic.getScoreMoisture())
+                .countPurchase(cosmetic.getCountPurchase())
+                .imageProduct(new APIImageDTO(cosmetic.getImageProduct()))
+                .imageThumbnails(listImageDTO)
                 .typeScoreD(cosmetic.getTypeScoreD())
                 .typeScoreO(cosmetic.getTypeScoreO())
                 .typeScoreS(cosmetic.getTypeScoreS())
@@ -71,6 +65,16 @@ public class APICosmeticService {
                 .typeScoreN(cosmetic.getTypeScoreN())
                 .typeScoreW(cosmetic.getTypeScoreW())
                 .typeScoreT(cosmetic.getTypeScoreT())
+                .keyword(cosmetic.getKeyword())
+                .scoreHydration(cosmetic.getScoreHydration())
+                .scoreSoothing(cosmetic.getScoreSoothing())
+                .scoreBrightening(cosmetic.getScoreBrightening())
+                .scoreBarrier(cosmetic.getScoreBarrier())
+                .scoreMoisture(cosmetic.getScoreMoisture())
+                .ingredientKeyword(cosmetic.getIngredientKeyword())
+                .ingredientMatchingGood(cosmetic.getIngredientMatchingGood())
+                .ingredientMatchingBad(cosmetic.getIngredientMatchingBad())
+                .ingredientProhibit(cosmetic.getIngredientProhibit())
                 .build();
     }
 
@@ -80,25 +84,23 @@ public class APICosmeticService {
         for (Integer id : apiPostCosmeticDTO.getCategory()) listCategory.add(cosmeticCategoryRepository.findById(id).orElseThrow(EntityDataNotFoundException::new));
         for (Integer id : apiPostCosmeticDTO.getIngredient()) listIngredient.add(cosmeticIngredientRepository.findById(id).orElseThrow(EntityDataNotFoundException::new));
         CosmeticBrand cosmeticBrand = cosmeticBrandRepository.findById(apiPostCosmeticDTO.getBrand()).orElseThrow(EntityDataNotFoundException::new);
+        List<Image> listImage = new ArrayList<>();
+        for (String id : apiPostCosmeticDTO.getImageThumbnails()) listImage.add(imageRepository.save(Image.builder().url(id).build()));
         Cosmetic newCosmetic = Cosmetic.builder()
                 .brand(cosmeticBrand)
                 .nameKo(apiPostCosmeticDTO.getNameKo())
                 .nameEn(apiPostCosmeticDTO.getNameEn())
                 .category(listCategory)
                 .ingredient(listIngredient)
-                .image(apiPostCosmeticDTO.getImage())
-                .tag(apiPostCosmeticDTO.getTag())
+                .price(apiPostCosmeticDTO.getPrice())
+                .priceDiscount(apiPostCosmeticDTO.getPriceDiscount())
+                .shippingFee(apiPostCosmeticDTO.getShippingFee())
+                .volume(apiPostCosmeticDTO.getVolume())
                 .rating(apiPostCosmeticDTO.getRating())
                 .countReview(apiPostCosmeticDTO.getCountReview())
-                .cost(apiPostCosmeticDTO.getCost())
-                .discount(apiPostCosmeticDTO.getDiscount())
-                .howToUse(apiPostCosmeticDTO.getHowToUse())
-                .recommendSkin(apiPostCosmeticDTO.getRecommendSkin())
-                .scoreHydration(apiPostCosmeticDTO.getScoreHydration())
-                .scoreSoothing(apiPostCosmeticDTO.getScoreSoothing())
-                .scoreBrightening(apiPostCosmeticDTO.getScoreBrightening())
-                .scoreBarrier(apiPostCosmeticDTO.getScoreBarrier())
-                .scoreMoisture(apiPostCosmeticDTO.getScoreMoisture())
+                .countPurchase(apiPostCosmeticDTO.getCountPurchase())
+                .imageProduct(imageRepository.save(Image.builder().url(apiPostCosmeticDTO.getImageProduct()).build()))
+                .imageThumbnails(listImage)
                 .typeScoreD(apiPostCosmeticDTO.getTypeScoreD())
                 .typeScoreO(apiPostCosmeticDTO.getTypeScoreO())
                 .typeScoreS(apiPostCosmeticDTO.getTypeScoreS())
@@ -107,19 +109,21 @@ public class APICosmeticService {
                 .typeScoreN(apiPostCosmeticDTO.getTypeScoreN())
                 .typeScoreW(apiPostCosmeticDTO.getTypeScoreW())
                 .typeScoreT(apiPostCosmeticDTO.getTypeScoreT())
+                .keyword(apiPostCosmeticDTO.getKeyword())
+                .scoreHydration(apiPostCosmeticDTO.getScoreHydration())
+                .scoreSoothing(apiPostCosmeticDTO.getScoreSoothing())
+                .scoreBrightening(apiPostCosmeticDTO.getScoreBrightening())
+                .scoreBarrier(apiPostCosmeticDTO.getScoreBarrier())
+                .scoreMoisture(apiPostCosmeticDTO.getScoreMoisture())
+                .ingredientKeyword(apiPostCosmeticDTO.getIngredientKeyword())
+                .ingredientMatchingGood(apiPostCosmeticDTO.getIngredientMatchingGood())
+                .ingredientMatchingBad(apiPostCosmeticDTO.getIngredientMatchingBad())
+                .ingredientProhibit(apiPostCosmeticDTO.getIngredientProhibit())
                 .build();
         newCosmetic = cosmeticRepository.save(newCosmetic);
 
         cosmeticBrand.getCosmetic().add(newCosmetic);
         cosmeticBrandRepository.save(cosmeticBrand);
-        for (CosmeticCategory category : listCategory) {
-            category.getCosmetic().add(newCosmetic);
-            cosmeticCategoryRepository.save(category);
-        }
-        for (CosmeticIngredient ingredient : listIngredient) {
-            ingredient.getCosmetic().add(newCosmetic);
-            cosmeticIngredientRepository.save(ingredient);
-        }
 
         return true;
     }

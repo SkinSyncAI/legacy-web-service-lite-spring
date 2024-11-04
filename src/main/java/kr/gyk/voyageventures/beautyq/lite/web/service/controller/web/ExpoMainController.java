@@ -3,6 +3,7 @@ package kr.gyk.voyageventures.beautyq.lite.web.service.controller.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.gyk.voyageventures.beautyq.lite.web.service.component.CookieComponent;
+import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.CosmeticService;
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.ExpoDiagnosisService;
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.ExpoMainService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class ExpoMainController {
 
     private final ExpoMainService expoMainService;
     private final ExpoDiagnosisService expoDiagnosisService;
+    private final CosmeticService cosmeticService;
 
     @GetMapping()
     public String getExpoMain (
@@ -26,8 +28,9 @@ public class ExpoMainController {
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse
     ) throws Exception {
-        model.addAttribute("tags", expoMainService.getExpoMainTagListDTO());
+        model.addAttribute("tags", cosmeticService.getExpoMainTagListDTO());
         model.addAttribute("diagnosisResult", expoDiagnosisService.getSkinTypeResult(cookieComponent.getDiagnosisSkinType(httpServletRequest)));
+        model.addAttribute("cosmeticList", expoMainService.getExpoMainCosmeticListDTO(cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest)));
         return "main";
     }
 

@@ -4,6 +4,7 @@ import kr.gyk.voyageventures.beautyq.lite.web.service.dto.api.APICosmeticCategor
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.api.APIAuthenticationService;
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.api.APICosmeticCategoryService;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,10 +33,12 @@ public class APICosmeticCategoryController {
     @PostMapping("")
     public ResponseEntity<Boolean> postAPICosmeticCategory (
             @RequestParam(value = "token", required = false) String token,
-            @RequestBody APICosmeticCategoryInfoDTO apiCosmeticCategoryInfoDTO
-    ) throws Exception {
+            @RequestParam(value = "code") String code,
+            @RequestParam(value = "nameKo") String nameKo,
+            @RequestParam(value = "nameEn") String nameEn
+        ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
-        return new ResponseEntity<>(apiCosmeticCategoryService.postAPICosmeticCategory(apiCosmeticCategoryInfoDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(apiCosmeticCategoryService.postAPICosmeticCategory(code, nameKo, nameEn), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/id/{id}")

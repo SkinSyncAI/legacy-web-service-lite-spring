@@ -27,12 +27,12 @@ public class APICosmeticBrandService {
         return new APICosmeticBrandInfoDTO(cosmeticBrand);
     }
 
-    public Boolean postAPICosmeticBrand (APICosmeticBrandInfoDTO apiCosmeticBrandInfoDTO) {
+    public Boolean postAPICosmeticBrand (String code, String nameKo, String nameEn) {
         try {
             CosmeticBrand cosmeticBrand = CosmeticBrand.builder()
-                    .code(apiCosmeticBrandInfoDTO.getCode())
-                    .nameKo(apiCosmeticBrandInfoDTO.getNameKo())
-                    .nameEn(apiCosmeticBrandInfoDTO.getNameEn())
+                    .code(code)
+                    .nameKo(nameKo)
+                    .nameEn(nameEn)
                     .build();
             cosmeticBrandRepository.save(cosmeticBrand);
         } catch (ConstraintViolationException | DataIntegrityViolationException e) { throw new EntityCodeDuplicatedException(); }

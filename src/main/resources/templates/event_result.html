@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#D0FDFF" />
+
+<style>
+    #bq-content-container { background-image: linear-gradient(to bottom, #D0FDFF, #FFFFFF 12%); height: 100dvh;}
+
+    #bq-title-product { font-family: Paperlogy4Regular; font-size: 0.9375rem; }
+    #bq-title { font-family: Paperlogy3Light; font-size: 1.5rem; }
+    #bq-title span { font-family: Paperlogy5Medium; color: #5A81FA; }
+    #bq-score-offset { font-family: Paperlogy7Bold; font-size: 1.16125rem; color: rgba(86, 125, 250, 0.5); }
+    #bq-score { font-family: Paperlogy5Medium; font-size: 2.65rem; color: #567DFA; }
+    #bq-score span { font-family: Paperlogy6SemiBold; font-size: 1.16rem; }
+
+    #bq-title-container { margin-top: 15vh; height: 10vh; width: 100%; text-align: center;}
+    #bq-title-product { margin-bottom: 0.5vh; }
+    #bq-score-container { margin-top: 3vh; width: 35%; }
+    #bq-score { text-align: center;  }
+
+</style>
+
+<div id="bq-content-container">
+    <th:block th:insert="~{fragment/navbar/blackword_back_menu.html :: Navbar('제품 매칭 결과')}"></th:block>
+
+    <div id="bq-title-container" class="bq-ml-auto bq-mr-auto">
+        <p id="bq-title-product">Lorem Ipsum</p>
+        <p id="bq-title"><span>성공!!</span> 무료 샘플 드릴게요</p>
+    </div>
+
+    <div id="bq-score-container" class="bq-ml-auto bq-mr-auto">
+        <p id="bq-score-offset">+2</p>
+        <p id="bq-score">97<span>점</span></p>
+    </div>
+
+</div>
+<th:block th:insert="~{fragment/footer/main.html :: Footer}"></th:block>
+
+</html>

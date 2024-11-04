@@ -36,14 +36,17 @@ public class Cosmetic {
     @ManyToMany(mappedBy = "cosmetic", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<CosmeticIngredient> ingredient = new ArrayList<>();
 
-    // TODO: Analysis
+    @Column(nullable = true, unique = false)
+    private Integer price;
 
-    @Column(nullable = true, unique = false, length = 2048)
-    private String image;
+    @Column(nullable = true, unique = false)
+    private Integer priceDiscount;
 
-    @Convert(converter = StringListConverter.class)
-    @Column(nullable = true, unique = false, length = 512)
-    private List<String> tag;
+    @Column(nullable = true, unique = false)
+    private Integer shippingFee;
+
+    @Column(nullable = true, unique = false)
+    private String volume;
 
     @Column(nullable = true, unique = false)
     private Double rating;
@@ -52,34 +55,13 @@ public class Cosmetic {
     private Integer countReview;
 
     @Column(nullable = true, unique = false)
-    private Integer cost;
+    private Integer countPurchase;
 
-    @Column(nullable = true, unique = false)
-    private Integer discount;
+    @OneToOne
+    private Image imageProduct;
 
-    @Column(nullable = true, unique = false, length = 768)
-    private String howToUse;
-
-    @Column(nullable = true, unique = false)
-    private Integer recommendSkin;
-
-
-
-    @Column(nullable = true, unique = false)
-    private Integer scoreHydration;
-
-    @Column(nullable = true, unique = false)
-    private Integer scoreSoothing;
-
-    @Column(nullable = true, unique = false)
-    private Integer scoreBrightening;
-
-    @Column(nullable = true, unique = false)
-    private Integer scoreBarrier;
-
-    @Column(nullable = true, unique = false)
-    private Integer scoreMoisture;
-
+    @OneToMany
+    private List<Image> imageThumbnails = new ArrayList<>();
 
     @Column(nullable = true, unique = false)
     private Integer typeScoreD;
@@ -104,5 +86,37 @@ public class Cosmetic {
 
     @Column(nullable = true, unique = false)
     private Integer typeScoreT;
+
+    @Convert(converter = StringListConverter.class)
+    @Column(nullable = true, unique = false, length = 512)
+    private List<String> keyword;
+
+    @Column(nullable = true, unique = false)
+    private Integer scoreHydration;
+
+    @Column(nullable = true, unique = false)
+    private Integer scoreSoothing;
+
+    @Column(nullable = true, unique = false)
+    private Integer scoreBrightening;
+
+    @Column(nullable = true, unique = false)
+    private Integer scoreBarrier;
+
+    @Column(nullable = true, unique = false)
+    private Integer scoreMoisture;
+
+    @Convert(converter = StringListConverter.class)
+    @Column(nullable = true, unique = false, length = 512)
+    private List<String> ingredientKeyword;
+
+    @Column(nullable = true, unique = false)
+    private Short ingredientMatchingGood;
+
+    @Column(nullable = true, unique = false)
+    private Short ingredientMatchingBad;
+
+    @Column(nullable = true, unique = false)
+    private Short ingredientProhibit;
 
 }

@@ -5,10 +5,10 @@
 <style>
     #bq-information-bs #bq-information-bs-b a { font-family: Paperlogy4Regular; font-size: 0.8125rem; color: #B3B3B3; }
     #bq-information-t p { font-family: Paperlogy4Regular; font-size: 1.25rem; color: #000000; }
-    #bq-information-p-dp { font-family: PretendardSemiBold; font-size: 1.5rem; color: #000000; }
-    #bq-information-p-dp span { font-size: 1.25rem; }
-    #bq-information-p-op { font-family: PretendardMedium; font-size: 1.25rem; color: rgba(0, 0, 0, 0.3); text-decoration-line: line-through; }
-    #bq-information-p-op span { font-size: 1rem; }
+    #bq-information-p-dp { font-family: PretendardSemiBold; font-size: 1.6rem; color: #000000; }
+    #bq-information-p-dp span { font-size: 1.35rem; }
+    #bq-information-p-op { font-family: PretendardMedium; font-size: 1.35rem; color: rgba(0, 0, 0, 0.3); text-decoration-line: line-through; }
+    #bq-information-p-op span { font-size: 1.1rem; }
     #bq-information-p-sf { font-family: PretendardMedium; font-size: 0.78rem; color: rgba(0, 0, 0, 0.3); }
     #bq-information-r-p { font-family: PretendardRegular; font-size: 0.78rem; color: #000000; }
     #bq-information-r-p span { color: #858585; }
@@ -25,6 +25,8 @@
     #bq-compare-title button { font-family: PretendardRegular; font-size: 0.75rem; color: #343434; }
     .bq-compare-goods-brand { font-family: PretendardRegular; font-size: 0.625rem; color: rgba(0, 0, 0, 0.3); }
     .bq-compare-goods-name { font-family: PretendardRegular; font-size: 0.75rem; color: #000000; }
+    #bq-information-s p { font-family: Paperlogy4Regular; font-size: 0.78125rem; color: #587DFA; }
+    #bq-information-s p span { font-family: Paperlogy6SemiBold; }
 
     #bq-content-container { margin-bottom: 16vh; }
     #bq-thumbnail-container { margin-top: 1vh; height: 70vw; width: 100vw; position: relative; overflow: visible; }
@@ -61,7 +63,8 @@
     #bq-compare-content::-webkit-scrollbar { display: none; }
     #bq-compare-row { display: flex; margin-left: 2vw; }
     .bq-compare-col { height: 14vh; margin-left: 1vw; margin-right: 1vw;}
-    .bq-compare-goods-image { height: 8vh; width: 12vh; display: block; background-color: #D0FDFF; }
+    .bq-compare-goods-image { height: 8vh; width: 12vh; display: block; background-color: #D0FDFF; overflow: hidden; }
+    .bq-compare-goods-image img { height: auto; width: 100%; }
     .bq-compare-col p { margin-top: 0.5vh; overflow-x: hidden; text-wrap: nowrap; }
 
     #bq-footer { height: 14vh; width: 100vw; background-color: #FFFFFF; box-shadow: 0 0 12px 1px #dedede; }
@@ -75,17 +78,20 @@
     #bq-footer-btn-buy { background-color: #5A81FA; color: #FFFFFF; }
     #bq-footer-btn-like { height: 100%; }
     #bq-footer-btn-like img { height: 50%; width: auto; }
+    #bq-information-prs { height: 100%; width: 100%; display: flex; }
+    #bq-information-pr { height: 100%; width: 65%; }
+    #bq-information-s { text-align: end; margin-left: auto; padding-top: 10%;}
 </style>
 
 <th:block th:insert="~{fragment/navbar/whiteword_back_menu :: Navbar('제품 상세')}"></th:block>
 <div id="bq-content-container">
     <div id="bq-thumbnail-container">
-        <img id="bq-thumbnail-img-1" class="bq-thumbnail-img bq-h-auto bq-w-100p" src="/image/product/1/thumbnail/1.svg" alt="Thumbnail">
+        <img id="bq-thumbnail-img-1" class="bq-thumbnail-img bq-h-auto bq-w-100p" th:src="${product.imageThumbnails.get(0)}" alt="Thumbnail">
     </div>
     <div id="bq-information" class="bq-ml-auto bq-mr-auto">
         <div id="bq-information-bs">
             <div id="bq-information-bs-b" class="bq-mr-auto">
-                <a>에스트라</a>
+                <a th:text="${product.brand}"></a>
             </div>
             <div id="bq-information-share">
                 <button class="bq-information-share-btn"><img id="bq-information-kakaotalk-img" src="/image/product/kakaotalk.svg" alt="kakaotalk"></button>
@@ -93,22 +99,29 @@
             </div>
         </div>
         <div id="bq-information-t" >
-            <p>아토베리어365 하이드로 수딩크림</p>
+            <p th:text="${product.name}"></p>
         </div>
-        <div id="bq-information-p" class="bq-information-line">
-            <p id="bq-information-p-left">
-                <span id="bq-information-p-dp">26,400<span>원</span></span>
-                <span id="bq-information-p-op">33,000<span>원</span></span>
-            </p>
-            <p id="bq-information-p-sf">배송비 3,000원</p>
-        </div>
-        <div id="bq-information-r" class="bq-information-line">
-            <p id="bq-information-r-p">구매 <span>(320)</span></p>
-            <div id="bq-information-r-star">
-                <img id="bq-information-star-bg" src="/image/product/star_bg.svg" alt="">
-                <!-- <img id="bq-information-star-blue" src="/image/product/star_blue.svg" alt=""> -->
+        <div id="bq-information-prs">
+            <div id="bq-information-pr">
+                <div id="bq-information-p" class="bq-information-line">
+                    <p id="bq-information-p-left">
+                        <span id="bq-information-p-dp">[[${product.priceDiscount}]]<span>원</span></span>
+                        <span id="bq-information-p-op">[[${product.price}]]<span>원</span></span>
+                    </p>
+                </div>
+                <div id="bq-information-r" class="bq-information-line">
+                    <p id="bq-information-r-p">구매 <span>([[${product.countPurchase}]])</span></p>
+                    <div id="bq-information-r-star">
+                        <img id="bq-information-star-bg" src="/image/product/star_bg.svg" alt="">
+                        <!-- <img id="bq-information-star-blue" src="/image/product/star_blue.svg" alt=""> -->
+                    </div>
+                    <p id="bq-information-r-r">리뷰 [[${product.rating}]] <span>([[${product.countReview}]])</span></p>
+                </div>
             </div>
-            <p id="bq-information-r-r">리뷰 4.7 <span>(260)</span></p>
+            <div id="bq-information-s">
+                <p><span>95</span>점 <span>높은 매칭도</span></p>
+                <p><span>Guest</span>님께 특별할인!</p>
+            </div>
         </div>
     </div>
     <div id="bq-ingredient" class="bq-ml-auto bq-mr-auto text-center">
@@ -116,10 +129,10 @@
             <p id="bq-ingredient-title"><span>Guest</span> 님과 성분 매칭</p>
             <p id="bq-ingredient-gb">
                 <img id="bq-ingredient-good-img" src="/image/product/ingredient_good.svg" alt="Good">
-                <span>5</span>
+                <span th:text="${product.ingredientMatchingGood}"></span>
                 <img id="bq-ingredient-div-img" src="/image/product/ingredient_divider.svg" alt="/">
                 <img id="bq-ingredient-bad-img" src="/image/product/ingredient_bad.svg" alt="Bad">
-                <span>1</span>
+                <span th:text="${product.ingredientMatchingBad}"></span>
             </p>
             <a id="bq-ingredient-more">
                 <span>자세히보기</span>
@@ -131,7 +144,11 @@
     <div id="bq-compare">
         <div id="bq-compare-title" class="bq-ml-auto bq-mr-auto">
             <p>비슷한 추천 제품</p>
-            <button onclick="location.href='/expo/product/1/compare'">
+            <button th:if="${event}" onclick="location.href='/expo/event/pick';">
+                비교해보기
+                <img id="bq-compare-more" src="/image/product/compare_more.svg" alt="More">
+            </button>
+            <button th:unless="${event}" th:onclick="|location.href='/expo/product/${product.id}/compare';|">
                 비교해보기
                 <img id="bq-compare-more" src="/image/product/compare_more.svg" alt="More">
             </button>
@@ -139,35 +156,10 @@
         <div id="bq-compare-content">
             <div id="bq-compare-row">
 
-                <div class="bq-compare-col">
-                    <div class="bq-compare-goods-image"></div>
-                    <p class="bq-compare-goods-brand">Lorem Ipsum</p>
-                    <p class="bq-compare-goods-name">Lorem Ipsum</p>
-                </div>
-                <div class="bq-compare-col">
-                    <div class="bq-compare-goods-image"></div>
-                    <p class="bq-compare-goods-brand">Lorem Ipsum</p>
-                    <p class="bq-compare-goods-name">Lorem Ipsum</p>
-                </div>
-                <div class="bq-compare-col">
-                    <div class="bq-compare-goods-image"></div>
-                    <p class="bq-compare-goods-brand">Lorem Ipsum</p>
-                    <p class="bq-compare-goods-name">Lorem Ipsum</p>
-                </div>
-                <div class="bq-compare-col">
-                    <div class="bq-compare-goods-image"></div>
-                    <p class="bq-compare-goods-brand">Lorem Ipsum</p>
-                    <p class="bq-compare-goods-name">Lorem Ipsum</p>
-                </div>
-                <div class="bq-compare-col">
-                    <div class="bq-compare-goods-image"></div>
-                    <p class="bq-compare-goods-brand">Lorem Ipsum</p>
-                    <p class="bq-compare-goods-name">Lorem Ipsum</p>
-                </div>
-                <div class="bq-compare-col">
-                    <div class="bq-compare-goods-image"></div>
-                    <p class="bq-compare-goods-brand">Lorem Ipsum</p>
-                    <p class="bq-compare-goods-name">Lorem Ipsum</p>
+                <div th:each="pItem:${productSim.cosmeticList}" class="bq-compare-col" th:onclick="|location.href='/expo/product/${pItem.id}';|">
+                    <div class="bq-compare-goods-image"><img th:src="${pItem.image}" alt=""></div>
+                    <p class="bq-compare-goods-brand" th:text="${pItem.brand}"></p>
+                    <p class="bq-compare-goods-name" th:text="${pItem.name}"></p>
                 </div>
 
             </div>
@@ -192,3 +184,5 @@
 </nav>
 
 </html>
+
+<!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); -->

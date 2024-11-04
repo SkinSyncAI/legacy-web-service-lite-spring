@@ -27,12 +27,12 @@ public class APICosmeticCategoryService {
         return new APICosmeticCategoryInfoDTO(cosmeticCategory);
     }
 
-    public Boolean postAPICosmeticCategory (APICosmeticCategoryInfoDTO apiCosmeticCategoryInfoDTO) {
+    public Boolean postAPICosmeticCategory (String code, String nameKo, String nameEn) {
         try {
             CosmeticCategory cosmeticCategory = CosmeticCategory.builder()
-                    .code(apiCosmeticCategoryInfoDTO.getCode())
-                    .nameKo(apiCosmeticCategoryInfoDTO.getNameKo())
-                    .nameEn(apiCosmeticCategoryInfoDTO.getNameEn())
+                    .code(code)
+                    .nameKo(nameKo)
+                    .nameEn(nameEn)
                     .build();
             cosmeticCategoryRepository.save(cosmeticCategory);
         } catch (ConstraintViolationException | DataIntegrityViolationException e) { throw new EntityCodeDuplicatedException(); }

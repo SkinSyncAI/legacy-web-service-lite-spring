@@ -32,10 +32,12 @@ public class APICosmeticBrandController {
     @PostMapping("")
     public ResponseEntity<Boolean> postAPICosmeticBrand (
             @RequestParam(value = "token", required = false) String token,
-            @RequestBody APICosmeticBrandInfoDTO apiCosmeticBrandInfoDTO
+            @RequestParam(value = "code") String code,
+            @RequestParam(value = "nameKo") String nameKo,
+            @RequestParam(value = "nameEn") String nameEn
     ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
-        return new ResponseEntity<>(apiCosmeticBrandService.postAPICosmeticBrand(apiCosmeticBrandInfoDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(apiCosmeticBrandService.postAPICosmeticBrand(code, nameKo, nameEn), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/id/{id}")
