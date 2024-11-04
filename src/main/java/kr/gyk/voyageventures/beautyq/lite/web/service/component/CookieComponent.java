@@ -29,6 +29,10 @@ public class CookieComponent {
         addCookie("diagnosis.test.q4", String.valueOf(diagnosisTestForm.getQuestion4() ? 1 : 0), 86400, response);
     }
 
+    public void setEvent (Boolean value, HttpServletResponse response) {
+        addCookie("event", value ? "1" : "0", 86400, response);
+    }
+
     public Boolean getEvent (HttpServletRequest request) {
         return this.getCookie("event", request).equals("1");
     }

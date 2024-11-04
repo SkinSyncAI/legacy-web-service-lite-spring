@@ -3,6 +3,7 @@ package kr.gyk.voyageventures.beautyq.lite.web.service.controller.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.gyk.voyageventures.beautyq.lite.web.service.component.CookieComponent;
+import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.CosmeticService;
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.ExpoProductService;
 import lombok.RequiredArgsConstructor;
 import org.codehaus.groovy.classgen.asm.MopWriter;
@@ -28,7 +29,8 @@ public class ExpoProductController {
             @PathVariable(name="id") Long id
     ) throws Exception {
         model.addAttribute("product", expoProductService.getCosmeticDetailDTO(id));
-        model.addAttribute("productSim", expoProductService.getCosmeticListSimilarDTO(cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest)));
+        model.addAttribute("productScore", expoProductService.getCosmeticScore(id, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest)));
+        model.addAttribute("productSim", expoProductService.getCosmeticListSimilarDTO(id, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest)));
         model.addAttribute("event", cookieComponent.getEvent(httpServletRequest));
         return "product";
     }

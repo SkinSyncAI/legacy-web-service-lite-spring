@@ -28,7 +28,7 @@
     #bq-now-title { margin-bottom: 1.5vh; }
     .bq-product { display: flex; }
     .bq-product-goods { height: 22vw; display: flex; align-content: flex-start; margin-right: auto; }
-    .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #D0FDFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden;}
+    .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden;}
     .bq-product-goods-image img { height: auto; width: 100%; }
     .bq-product-goods-data { height: 22vw; display: flex; align-items: center; }
     .bq-product-goods-data-inner { display: block; width: 43vw; }
@@ -126,7 +126,7 @@
         $(".bq-category-btn").css("pointer-events", "none");
         setTimeout(() => {
             $(".bq-category-btn").css("pointer-events", "auto")
-        }, 1000);
+        }, 500);
         let target = $(event.target).attr("data-bq-btn-num");
         $.ajax({
             url: window.location.pathname + "/ajax/" + target,

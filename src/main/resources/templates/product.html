@@ -63,7 +63,7 @@
     #bq-compare-content::-webkit-scrollbar { display: none; }
     #bq-compare-row { display: flex; margin-left: 2vw; }
     .bq-compare-col { height: 14vh; margin-left: 1vw; margin-right: 1vw;}
-    .bq-compare-goods-image { height: 8vh; width: 12vh; display: block; background-color: #D0FDFF; overflow: hidden; }
+    .bq-compare-goods-image { height: 8vh; width: 12vh; display: block; background-color: #FFFFFF; overflow: hidden; }
     .bq-compare-goods-image img { height: auto; width: 100%; }
     .bq-compare-col p { margin-top: 0.5vh; overflow-x: hidden; text-wrap: nowrap; }
 
@@ -81,6 +81,8 @@
     #bq-information-prs { height: 100%; width: 100%; display: flex; }
     #bq-information-pr { height: 100%; width: 65%; }
     #bq-information-s { text-align: end; margin-left: auto; padding-top: 10%;}
+
+    .bq-navbar { background-image: linear-gradient(to bottom, #868686, rgba(255, 255, 255, 0) 80%); }
 </style>
 
 <th:block th:insert="~{fragment/navbar/whiteword_back_menu :: Navbar('제품 상세')}"></th:block>
@@ -119,7 +121,7 @@
                 </div>
             </div>
             <div id="bq-information-s">
-                <p><span>95</span>점 <span>높은 매칭도</span></p>
+                <p><span th:text="${productScore}"></span>점 <span>높은 매칭도</span></p>
                 <p><span>Guest</span>님께 특별할인!</p>
             </div>
         </div>
@@ -144,7 +146,7 @@
     <div id="bq-compare">
         <div id="bq-compare-title" class="bq-ml-auto bq-mr-auto">
             <p>비슷한 추천 제품</p>
-            <button th:if="${event}" onclick="location.href='/expo/event/pick';">
+            <button th:if="${event}" th:onclick="|location.href='/expo/event/${product.id}/pick';|">
                 비교해보기
                 <img id="bq-compare-more" src="/image/product/compare_more.svg" alt="More">
             </button>

@@ -46,7 +46,7 @@
     #bq-product-more-img { height: 100%; width: auto; }
     #bq-product-content { margin-top: 2vh; margin-bottom: 14vh; }
     .bq-product-goods { margin-bottom: 2vh; height: 22vw; display: flex; align-content: flex-start; }
-    .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #D0FDFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden; }
+    .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden; }
     .bq-product-goods-image img { height: 100%; width: 100%; }
     .bq-product-goods-data { height: 22vw; width: auto; display: flex; align-items: center; }
     .bq-product-goods-data-inner { display: block; width: 63vw; }
@@ -120,7 +120,7 @@
 
         <div id="bq-product-content">
 
-            <div th:each="product:${cosmeticList.cosmeticList}" class="bq-product-goods" th:onclick="|location.href='/expo/product/${product.id}';|">
+            <div th:each="product:${cosmeticList.cosmeticList}" class="bq-product-goods" th:onclick="|location.href='/expo/search/product/${product.id}';|">
                 <div class="bq-product-goods-image"><img th:src="${product.image}" alt=""></div>
                 <div class="bq-product-goods-data">
                     <div class="bq-product-goods-data-inner">

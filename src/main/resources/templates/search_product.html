@@ -30,7 +30,7 @@
 
     #bq-product-image { height: 100%; width: 45%; padding: 5% 6%; }
     #bq-product-content { height:100%; width: 55%; padding-top: 5%; padding-bottom: 5%; padding-right: 5%; overflow: hidden; }
-    #bq-product-image img { height: 100%; width: 100%; object-fit: cover; }
+    #bq-product-image img { width: 100%; object-fit: cover; }
     #bq-product-like { height: 2.6vh; width: auto; }
     #bq-product-content div { width: 100%; display: flex; justify-content: end; }
     #bq-score-title { margin-top: 1.5vh; }
@@ -39,21 +39,21 @@
     #bq-score-tag { height: 4vh; width: 76vw; background-color: #EFF3FF; border-radius: 1.4vh; display: inline-flex; justify-content: space-evenly; }
 </style>
 
-<th:block th:insert="~{fragment/navbar/blackword_back_menu :: Navbar('제품 매칭 결과')}"></th:block>
 <div id="bq-content-container" class="bq-w-100p">
+    <th:block th:insert="~{fragment/navbar/blackword_back_menu :: Navbar('제품 매칭 결과')}"></th:block>
 
     <div id="bq-title">
         <p><span>매우 잘 맞아요!</span> 구매를 추천드려요 :)</p>
     </div>
 
     <div id="bq-product" class="bq-ml-auto bq-mr-auto">
-        <div id="bq-product-image"><img src="/pImage/p1_t0.png" alt=""></div>
+        <div id="bq-product-image"><img th:src="${product.image}" alt=""></div>
         <div id="bq-product-content">
             <div><img id="bq-product-like" src="/image/search_product/like.svg" alt="like"></div>
-            <p id="bq-product-brand">Lorem Ipsum</p>
-            <p id="bq-product-name">Lorem Ipsum</p>
-            <p id="bq-product-score">95<span>점</span></p>
-            <div><p id="bq-product-detail">자세히보기</p></div>
+            <p id="bq-product-brand" th:text="${product.brand}"></p>
+            <p id="bq-product-name" th:text="${product.name}"></p>
+            <p id="bq-product-score">[[${product.score}]]<span>점</span></p>
+            <div th:onclick="|location.href='/expo/product/${product.id}';|"><p id="bq-product-detail">자세히보기</p></div>
         </div>
     </div>
 
@@ -65,29 +65,32 @@
             <canvas id="bq-score-chart-radar"></canvas>
         </div>
         <div id="bq-score-tag">
-            <p class="align-self-center"># 민감피부</p>
-            <p class="align-self-center"># 속건조</p>
-            <p class="align-self-center"># 수분크림</p>
-            <p class="align-self-center"># 수분영양소</p>
+            <p th:each="keyword:${product.keyword}" class="align-self-center"># [[${keyword}]]</p>
         </div>
     </div>
 
     <div id="bq-description" class="bq-ml-auto bq-mr-auto">
-        <p>이 제품은 <span>민감 속건조 수분크림</span>이에요.</p>
-        <p>무너진 피부장벽 회복 기대할 수 있어요.</p>
+        <p>이 제품은 <span th:text="${product.descKeyword}"></span>이에요.</p>
+        <p th:text="${product.descLine}"></p>
     </div>
 
 </div>
 <th:block th:insert="~{fragment/footer/main :: Footer}"></th:block>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+<script th:inline="javascript">
     const ctx = $("#bq-score-chart-radar")
 
     const data = {
         labels: ['수분 공급', '피부 진정', '피부 미백', '피부 장벽', '수분 보호'],
         datasets: [{
-            data: [78, 82, 54, 63, 99],
+            data: [
+                [[${product.scoreHydration}]],
+                [[${product.scoreSoothing}]],
+                [[${product.scoreBrightening}]],
+                [[${product.scoreBarrier}]],
+                [[${product.scoreMoisture}]]
+            ],
             fill: true,
             backgroundColor: 'rgba(90,129,250,0.8)',
             borderColor: '#5A81FA',
