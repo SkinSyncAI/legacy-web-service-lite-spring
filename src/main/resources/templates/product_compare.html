@@ -11,22 +11,27 @@
     .bq-product-goods-data-price { font-family: PretendardMedium; font-size: 0.8rem; color: #000000; }
     .bq-product-goods-data-volume { font-family: PretendardRegular; font-size: 0.6rem; color: rgba(0, 0, 0, 0.5); }
     .bq-product-goods-data-review { font-family: PretendardRegular; font-size: 0.68rem; color: #000000; }
-    .bq-product-score-main { font-family: Paperlogy5Medium; font-size: 2.215rem; color: #567DFA; }
-    .bq-product-score-main span { font-size: 0.75rem; }
-    .bq-product-score-matching { font-family: Paperlogy5Medium; font-size: 0.78rem; color: rgba(86, 125, 250, 0.9); }
-    .bq-product-score-matching span { font-family: Paperlogy7Bold; color: #567DFA; }
+    .bq-product-score-main { font-family: Paperlogy5Medium; font-size: 1.5rem; color: #567DFA; }
+    .bq-product-score-main span { font-size: 0.78rem; }
+    .bq-product-score-matching { font-family: Paperlogy5Medium; font-size: 0.78rem; color: rgba(86, 125, 250, 0.8); }
+    .bq-product-score-matching span { font-family: Paperlogy7Bold; color: rgba(86, 125, 250, 0.8); }
     #bq-recommend-title { font-family: Paperlogy4Regular; font-size: 0.8125rem; color: #000000; }
     #bq-recommend-title span { font-family: Paperlogy5Medium; }
     #bq-compare-btn { font-family: Paperlogy5Medium; font-size: 0.9rem; color: #FFFFFF; }
+    #bq-top-title { font-family: Paperlogy5Medium; font-size: 0.8124rem; color: #567DFA; }
+    #bq-top-title span { font-family: Paperlogy6SemiBold; }
 
+    #bq-top-title-container { padding-left: 6vw; padding-right: 6vw; border-bottom-color: rgba(90, 129, 250, 0.5); border-bottom-width: 0.03125rem;  }
     #bq-category { margin-top: 2vh; width: 100vw; }
     #bq-category-content { overflow-x: scroll; -ms-overflow-style: none; }
     #bq-category-content::-webkit-scrollbar { display: none; }
     #bq-category-row { display: flex; margin-left: 2vw; }
     .bq-category-btn { text-wrap: nowrap; height: 4.8vh; padding-left: 2vh; padding-right: 2vh; margin-left: 1vw; margin-right: 1vw; display: block; background-color: #FFFFFF; }
-    #bq-now { margin-top: 1.5vh; padding: 1.5vh 6%; width: 100%; background-color: rgba(90, 129, 250, 0.1); border-top-width: 0.0625rem; border-top-color: rgba(86, 125, 250, 0.5); border-bottom-width: 0.0625rem; border-bottom-color: rgba(86, 125, 250, 0.5); }
-    #bq-now-title { margin-bottom: 1.5vh; }
+    #bq-top { margin-top: 1.5vh; padding-top: 1.5vh; padding-bottom: 1.5vh; width: 100%; background-color: rgba(90, 129, 250, 0.1); border-top-width: 0.0625rem; border-top-color: rgba(86, 125, 250, 0.5); border-bottom-width: 0.0625rem; border-bottom-color: rgba(86, 125, 250, 0.5); }
+    #bq-top-title { margin-bottom: 1.5vh; }
+    #bq-top-content { margin-top: 1.5vh; }
     .bq-product { display: flex; }
+    .bq-product-top { padding: 1.5vh 6%; }
     .bq-product-goods { height: 22vw; display: flex; align-content: flex-start; margin-right: auto; }
     .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden;}
     .bq-product-goods-image img { height: auto; width: 100%; }
@@ -37,7 +42,7 @@
     .bq-product-goods-data-star { margin-left: 3%; height: 0.68rem; width: 0.68rem; }
     .bq-product-goods-data-review { margin-left: 0.5%; }
     .bq-product-goods-data-name { overflow-x: hidden; }
-    .bq-product-score { text-align: right; }
+    .bq-product-score { margin-top: 2.3vh; text-align: right; }
     .bq-product-score-main { margin-top: 0.2vh; margin-bottom: 0.2vh;}
     .bq-product-score-main span { margin-left: 1vw; }
     #bq-recommend { margin-bottom: 15vh; }
@@ -46,6 +51,12 @@
 
     #bq-compare { height: 4.4vh; margin-bottom: 12.5vh; margin-left: auto; margin-right: 3.5vw; }
     #bq-compare-btn { height: 100%; padding-left: 2vh; padding-right: 2vh; background-color: #567DFA; border-radius: 3vh; }
+
+    #bq-ocnow-btn-container { margin-left: 9vw; margin-bottom: 9vh; height: 5.6vh; width: 4.4vh; }
+    #bq-ocnow-btn { height: 100%; width: 100%; border-radius: 2.2vh; background-color: #FFFFFF; display: flex; }
+    #bq-ocnow-btn img { margin-top: 30%; }
+
+    #bq-footer {z-index: 2000;}
 </style>
 
 <th:block th:insert="~{fragment/navbar/blackword_back_menu :: Navbar('비슷한 추천 제품')}"></th:block>
@@ -62,28 +73,12 @@
             </div>
         </div>
     </div>
-    <div id="bq-now">
-        <p id="bq-now-title"><span>Guest</span>님이 방금 보던 제품</p>
-        <div class="bq-product">
-            <div class="bq-product-goods">
-                <div class="bq-product-goods-image"><img th:src="${productCurrent.image}" alt=""></div>
-                <div class="bq-product-goods-data">
-                    <div class="bq-product-goods-data-inner">
-                        <p class="bq-product-goods-data-brand" th:text="${productCurrent.brand}"></p>
-                        <p class="bq-product-goods-data-name" th:text="${productCurrent.name}"></p>
-                        <div class="bq-product-goods-data-etc">
-                            <p class="bq-product-goods-data-price">[[${productCurrent.priceDiscount}]]원</p>
-                            <p class="bq-product-goods-data-volume">/[[${productCurrent.volume}]]</p>
-                            <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                            <p class="bq-product-goods-data-review">[[${productCurrent.rating}]]([[${productCurrent.countReview}]])</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bq-product-score">
-                <p class="bq-product-score-main">[[${productCurrent.score}]]<span>점</span></p>
-                <p class="bq-product-score-matching">매칭도 <span th:text="${productCurrent.matching}"></span>점</p>
-            </div>
+    <div id="bq-top">
+        <div id="bq-top-title-container">
+            <p id="bq-top-title">'<span>전체</span>' 더 좋은 제품</p>
+        </div>
+        <div id="bq-top-content">
+            <!-- Content -->
         </div>
     </div>
     <div id="bq-recommend">
@@ -91,19 +86,21 @@
             <p id="bq-recommend-title-text">비슷한 '<span>전체</span>' 제품</p>
         </div>
         <div id="bq-recommend-content">
-
+            <!-- Content -->
         </div>
     </div>
-    <div id="bq-compare" class="fixed-bottom tw-grid tw-place-items-end">
+    <div id="bq-compare" class="fixed-bottom tw-grid tw-place-items-end" style="z-index: 2100;">
         <button id="bq-compare-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#bq-offcanvas" aria-controls="#bq-offcanvas" class="bq-compare-btn">비교하기</button>
     </div>
-    <div>
-        <button id="bq-ocnow-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#bq-ocnow" aria-controls="#bq-ocnow" class="bq-ocnow-btn"></button>
+    <div id="bq-ocnow-btn-container" class="fixed-bottom" style="z-index: 2100;">
+        <button id="bq-ocnow-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#bq-ocnow" aria-controls="#bq-ocnow" class="bq-ocnow-btn">
+            <img class="bq-ml-auto bq-mr-auto" src="/image/product_compare/btn_ocnow.svg" alt="^">
+        </button>
     </div>
 </div>
-
-<th:block th:insert="~{product_compare_offcanvas :: Offcanvas}"></th:block>
 <th:block th:insert="~{fragment/footer/main :: Footer}"></th:block>
+<th:block th:insert="~{product_compare_ocnow :: OffcanvasNow}"></th:block>
+<th:block th:insert="~{product_compare_offcanvas :: Offcanvas}"></th:block>
 
 <script th:inline="javascript">
     $.ajax({
@@ -111,7 +108,8 @@
         method: "get",
         dataType: "html",
         success: function (data, status, xhr) {
-            $("#bq-recommend-content").html(data);
+            $("#bq-top-content").html($("#bq-top-content").html(data).find("#bq-top-content"));
+            $("#bq-recommend-content").html($("#bq-recommend-content").html(data).find("#bq-recommend-content"));
         }
     });
 
@@ -124,18 +122,16 @@
 
     $(".bq-category-btn").on("click", function (event) {
         $(".bq-category-btn").css("pointer-events", "none");
-        setTimeout(() => {
-            $(".bq-category-btn").css("pointer-events", "auto")
-        }, 500);
         let target = $(event.target).attr("data-bq-btn-num");
         $.ajax({
             url: window.location.pathname + "/ajax/" + target,
             method: "get",
             dataType: "html",
             success: function (data, status, xhr) {
-                $("#bq-recommend-content").html(data);
+                $("#bq-top-content").html($("#bq-top-content").html(data).find("#bq-top-content"));
+                $("#bq-recommend-content").html($("#bq-recommend-content").html(data).find("#bq-recommend-content"));
             }
-        })
+        });
         for (let i = 0; i < countCategory; i++) {
             if (i+"" === target) {
                 isCheck[i] = true;
@@ -146,6 +142,30 @@
             }
         }
         $("#bq-recommend-title span").text($(event.target).attr("data-bq-btn-title"));
+        $("#bq-top-title span").text($(event.target).attr("data-bq-btn-title"));
+        setTimeout(() => {
+            $(".bq-category-btn").css("pointer-events", "auto")
+        }, 2000);
+    });
+
+    $("#bq-compare-btn").click(() => {
+        $("#bq-compare").css("z-index", -10);
+        $("#bq-ocnow-btn-container").css("z-index", -10);
+    });
+
+    $("#bq-ocnow-btn").click(() => {
+        $("#bq-compare").css("z-index", -10);
+        $("#bq-ocnow-btn-container").css("z-index", -10);
+    });
+
+    $("#bq-offcanvas-close-btn").click(() => {
+        $("#bq-compare").css("z-index", 2100);
+        $("#bq-ocnow-btn-container").css("z-index", 2100);
+    });
+
+    $("#bq-ocnow-close-btn").click(() => {
+        $("#bq-compare").css("z-index", 2100);
+        $("#bq-ocnow-btn-container").css("z-index", 2100);
     });
 </script>
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="OffcanvasNow">
+
+    <style>
+        #bq-ocnow { height: 33.5vh; }
+        #bq-ocnow-title-text { font-family: Paperlogy4Regular; font-size: 0.8125rem; color: #567DFA; }
+        #bq-ocnow-title-text span { font-family: Paperlogy6SemiBold; }
+        #bq-ocnow-title { margin-top: 1vh; margin-left: 6vw; margin-right: 6vw; padding-bottom: 2vh; padding-left: 0; padding-right: 0; border-bottom-width: 0.03125rem; border-bottom-color: rgba(90, 129, 250, 0.5); }
+        #bq-ocnow-body { margin-bottom: 12.4vh; padding: 0 0; overflow-y: scroll; -ms-overflow-style: none; }
+        #bq-ocnow-body::-webkit-scrollbar { display: none;}
+        #bq-ocnow-close-btn { height: 4.4vh; width: 4.4vh; background-color: #FFFFFF; border-radius: 50%; position: absolute; left: 9vw; transform: translateY(-50%); }
+        #bq-ocnow-close-btn img { height: 20%; width: auto;}
+        #bq-ocnow-product { margin-top: 2vh; margin-bottom: 2vh; width: 88%; }
+
+    </style>
+
+    <div class="offcanvas offcanvas-bottom" data-bs-backdrop="static" tabindex="-1" id="bq-ocnow">
+        <button id="bq-ocnow-close-btn" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+            <img src="/image/product_compare/btn_close.svg" class="bq-ml-auto bq-mr-auto" alt="X">
+        </button>
+        <div id="bq-ocnow-title" class="offcanvas-header">
+            <p id="bq-ocnow-title-text"><span>Guest</span>님이 방금 보던 제품</p>
+        </div>
+        <div id="bq-ocnow-body" class="offcanvas-body small">
+            <div id="bq-ocnow-product" class="bq-product bq-ml-auto bq-mr-auto">
+                <div class="bq-product-goods">
+                    <div class="bq-product-goods-image"><img th:src="${productCurrent.image}" alt=""></div>
+                    <div class="bq-product-goods-data">
+                        <div class="bq-product-goods-data-inner">
+                            <p class="bq-product-goods-data-brand" th:text="${productCurrent.brand}"></p>
+                            <p class="bq-product-goods-data-name" th:text="${productCurrent.name}"></p>
+                            <div class="bq-product-goods-data-etc">
+                                <p class="bq-product-goods-data-price">[[${productCurrent.priceDiscount}]]원</p>
+                                <p class="bq-product-goods-data-volume">/[[${productCurrent.volume}]]</p>
+                                <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                                <p class="bq-product-goods-data-review">[[${productCurrent.rating}]]([[${productCurrent.countReview}]])</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bq-product-score">
+                    <p class="bq-product-score-main">[[${productCurrent.score}]]<span>점</span></p>
+                    <p class="bq-product-score-matching">매칭도 <span th:text="${productCurrent.matching}"></span>점</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>

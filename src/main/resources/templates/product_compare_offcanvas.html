@@ -23,7 +23,7 @@
     #bq-offcanvas { height: 93vh; border-top-left-radius: 5vh; border-top-right-radius: 5vh;  }
     #bq-offcanvas-title { margin-top: 1.8vh; margin-left: 6vw; margin-right: 6vw; padding-bottom: 3vh; border-bottom-width: 0.03125rem; border-bottom-color: rgba(0, 0, 0, 0.15); }
     #bq-offcanvas-chart-radar-container { height: 30vh; width: 30vh; }
-    #bq-offcanvas-body { padding: 0 0; overflow-y: scroll; -ms-overflow-style: none; }
+    #bq-offcanvas-body { margin-bottom: 12.4vh; padding: 0 0; overflow-y: scroll; -ms-overflow-style: none; }
     #bq-offcanvas-body::-webkit-scrollbar { display: none;}
 
     #bq-offcanvas-select { width: 100vw; }
@@ -70,7 +70,7 @@
     #bq-offcanvas-close-btn img { height: 20%; width: auto;}
 </style>
 
-<div class="offcanvas offcanvas-bottom" tabindex="-1" id="bq-offcanvas">
+<div class="offcanvas offcanvas-bottom" data-bs-backdrop="static" tabindex="-1" id="bq-offcanvas">
     <button id="bq-offcanvas-close-btn" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
         <img src="/image/product_compare/btn_close.svg" class="bq-ml-auto bq-mr-auto" alt="X">
     </button>
@@ -265,9 +265,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = $("#bq-offcanvas-chart-radar")
 
-    const data = {
+    let data = {
         labels: ['수분 공급', '피부 진정', '피부 미백', '피부 장벽', '수분 보호'],
         datasets: [{
             data: [78, 82, 54, 63, 99],
@@ -278,32 +277,16 @@
         }]
     };
 
-    new Chart(ctx, {
+    new Chart($("#bq-offcanvas-chart-radar"), {
         type: "radar",
         data: data,
         options: {
-            elements: {
-                line: {
-                    borderWidth: 2
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
+            elements: { line: { borderWidth: 2 } },
+            plugins: { legend: { display: false } },
             scales: {
                 r: {
-                    ticks: {
-                        stepSize: 50,
-                        display: false,
-                    },
-                    pointLabels: {
-                        font: {
-                            size: 13,
-                            family: "PretendardLight"
-                        }
-                    },
+                    ticks: { stepSize: 50, display: false },
+                    pointLabels: { font: { size: 13, family: "PretendardLight" } },
                     suggestedMin: 0,
                     suggestedMax: 100,
                     min: 0,
@@ -311,7 +294,7 @@
                 }
             }
         }
-    })
+    });
 </script>
 
 <script>
