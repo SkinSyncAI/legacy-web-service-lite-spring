@@ -73,6 +73,41 @@ public class CosmeticService {
                 .build();
     }
 
+    public CosmeticMatchingListDTO getCosmeticMatchingListAll (
+            List<Long> cosmeticIdList,
+            DiagnosisTestForm diagnosisTestForm, MainTagForm mainTagForm, Integer scoringRandomValue
+    ) throws Exception {
+        List<Cosmetic> cosmeticList = new ArrayList<>();
+        for (Long id : cosmeticIdList) cosmeticList.add(cosmeticRepository.findById(id).orElseThrow(EntityDataNotFoundException::new));
+
+        int [][] stUser = {{25, 25, 25, 25}, {25, 25, 25, 25}};
+        stUser[diagnosisTestForm.getQuestion1() ? 0 : 1][0] += 50;
+        stUser[diagnosisTestForm.getQuestion2() ? 0 : 1][1] += 50;
+        stUser[diagnosisTestForm.getQuestion3() ? 0 : 1][2] += 50;
+        stUser[diagnosisTestForm.getQuestion4() ? 0 : 1][3] += 50;
+
+        Set<String> tagUser = new HashSet<>();
+        ExpoMainTagListDTO tagList = this.getExpoMainTagListDTO();
+        if (mainTagForm.getTag0()) tagUser.add(tagList.getLine1().get(0).getName());
+        if (mainTagForm.getTag1()) tagUser.add(tagList.getLine1().get(1).getName());
+        if (mainTagForm.getTag2()) tagUser.add(tagList.getLine1().get(2).getName());
+        if (mainTagForm.getTag3()) tagUser.add(tagList.getLine1().get(3).getName());
+        if (mainTagForm.getTag4()) tagUser.add(tagList.getLine2().get(0).getName());
+        if (mainTagForm.getTag5()) tagUser.add(tagList.getLine2().get(1).getName());
+        if (mainTagForm.getTag6()) tagUser.add(tagList.getLine2().get(2).getName());
+        if (mainTagForm.getTag7()) tagUser.add(tagList.getLine2().get(3).getName());
+
+        int scoreError = scoringRandomValue;
+
+        List<CosmeticMatchingListElementDTO> listDTO = new ArrayList<>();
+        for (Cosmetic cosmetic : cosmeticList) listDTO.add(this.getCosmeticMatchingListElement(cosmetic, stUser, tagUser, scoreError));
+
+        return CosmeticMatchingListDTO.builder()
+                .count((long) listDTO.size())
+                .cosmeticList(listDTO)
+                .build();
+    }
+
     public CosmeticMatchingListElementDTO getCosmeticMatchingListElement (
             Cosmetic cosmetic,
             DiagnosisTestForm diagnosisTestForm, MainTagForm mainTagForm, Integer scoringRandomValue
@@ -121,6 +156,7 @@ public class CosmeticService {
 
         return CosmeticMatchingListElementDTO.builder()
                 .id(cosmetic.getId())
+                .name(cosmetic.getNameKo())
                 .scoreMatching((short) score)
                 .scoreAll(scoreAll)
                 .scoreHydration(scoreHydration)

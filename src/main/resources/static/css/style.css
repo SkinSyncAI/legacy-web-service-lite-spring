@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+body { color: #343434; }
+
 #bq-content-container { width: 100%; }
 
 .bq-mt-40vh { margin-top: 40vh; }
