@@ -3,7 +3,6 @@ package kr.gyk.voyageventures.beautyq.lite.web.service.entity;
 import jakarta.persistence.*;
 import kr.gyk.voyageventures.beautyq.lite.web.service.utils.StringListConverter;
 import lombok.*;
-import org.codehaus.groovy.vmplugin.v8.CacheableCallSite;
 
 import java.util.ArrayList;
 import java.util.List;

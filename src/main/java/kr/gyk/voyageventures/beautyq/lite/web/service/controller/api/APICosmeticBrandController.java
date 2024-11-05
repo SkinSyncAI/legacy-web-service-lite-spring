@@ -32,9 +32,9 @@ public class APICosmeticBrandController {
     @PostMapping("")
     public ResponseEntity<Boolean> postAPICosmeticBrand (
             @RequestParam(value = "token", required = false) String token,
-            @RequestParam(value = "code") String code,
+            @RequestParam(value = "code", required = false) String code,
             @RequestParam(value = "nameKo") String nameKo,
-            @RequestParam(value = "nameEn") String nameEn
+            @RequestParam(value = "nameEn", required = false) String nameEn
     ) throws Exception {
         apiAuthenticationService.verifyAuthToken(token);
         return new ResponseEntity<>(apiCosmeticBrandService.postAPICosmeticBrand(code, nameKo, nameEn), HttpStatus.CREATED);

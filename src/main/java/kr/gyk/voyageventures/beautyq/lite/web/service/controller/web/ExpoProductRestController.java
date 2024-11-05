@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/expo/product")
@@ -25,8 +27,10 @@ public class ExpoProductRestController {
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse,
             @PathVariable("id") Long id,
-            @RequestBody CosmeticCompareAjaxJsonRequestDTO requestDTO
+            @RequestParam(name="tag") Integer tag,
+            @RequestParam(name="productId") List<Long> productId
     ) throws Exception {
+        CosmeticCompareAjaxJsonRequestDTO requestDTO = CosmeticCompareAjaxJsonRequestDTO.builder().tag(tag).productId(productId).build();
         return new ResponseEntity<>(
                 expoProductService.getExpoProductCompareOffcanvasAjaxJson(id, requestDTO, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest)),
                 HttpStatus.OK

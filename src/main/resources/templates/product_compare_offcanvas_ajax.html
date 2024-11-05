@@ -6,16 +6,16 @@
     <div class="bq-offcanvas-chart-hbar-line bq-offcanvas-chart-hbar-line-first">
         <div class="bq-offcanvas-chart-hbar-line-title"><p th:text="${productGraphCurrent.name}"></p></div>
         <div class="bq-offcanvas-chart-hbar-line-content">
-            <div class="bq-offcanvas-chart-hbar-line-bar" style="width: 0%;"></div>
-            <p style="left: 0%;">0</p>
+            <div class="bq-offcanvas-chart-hbar-line-bar" th:style="|height: 3px; background-color: rgba(86, 125, 250); width: calc(${productGraphCurrent.score}% * 0.8);|"></div>
+            <p th:style="|left: calc(${productGraphCurrent.score}% * 0.8 + 2%);|" th:text="${productGraphCurrent.score}"></p>
         </div>
     </div>
 
     <div th:each="product:${productGraph}" class="bq-offcanvas-chart-hbar-line">
-        <div class="bq-offcanvas-chart-hbar-line-title"><p>Lorem Ipsum Lorem Ipsum</p></div>
+        <div class="bq-offcanvas-chart-hbar-line-title"><p th:text="${product.name}"></p></div>
         <div class="bq-offcanvas-chart-hbar-line-content">
-            <div class="bq-offcanvas-chart-hbar-line-bar" style="opacity: 0.5; width: 0%;"></div>
-            <p style="left: 0%;">0</p>
+            <div class="bq-offcanvas-chart-hbar-line-bar" th:style="|width: calc(${product.score}% * 0.8);|"></div>
+            <p th:style="|left: calc(${product.score} * 0.8 + 2)%;|" th:text="${product.score}"></p>
         </div>
     </div>
 

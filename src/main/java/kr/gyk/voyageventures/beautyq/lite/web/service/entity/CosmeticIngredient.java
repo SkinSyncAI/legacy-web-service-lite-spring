@@ -20,7 +20,7 @@ public class CosmeticIngredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 64)
+    @Column(nullable = true, unique = true, length = 64)
     private String code;
 
     @Convert(converter = StringListConverter.class)

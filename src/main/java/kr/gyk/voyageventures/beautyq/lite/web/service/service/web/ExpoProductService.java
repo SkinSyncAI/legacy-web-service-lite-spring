@@ -127,7 +127,6 @@ public class ExpoProductService {
             DiagnosisTestForm diagnosisTestForm, MainTagForm mainTagForm, Integer scoringRandomValue
     ) throws Exception {
         List<Long> idList = new ArrayList<>();
-        idList.add(id);
         idList.addAll(requestDTO.getProductId());
 
         return cosmeticService.getCosmeticMatchingListAll(idList, diagnosisTestForm, mainTagForm, scoringRandomValue);

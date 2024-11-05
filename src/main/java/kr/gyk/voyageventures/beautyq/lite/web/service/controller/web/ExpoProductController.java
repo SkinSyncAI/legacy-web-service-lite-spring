@@ -11,6 +11,7 @@ import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.CosmeticServic
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.ExpoProductService;
 import lombok.RequiredArgsConstructor;
 import org.codehaus.groovy.classgen.asm.MopWriter;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,7 @@ public class ExpoProductController {
             @PathVariable(name="id") Long id
     ) throws Exception {
         model.addAttribute("productCurrent", expoProductService.getCosmeticScoreListDTOCurrent(id, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest)));
+        model.addAttribute("offcanvas_productSim", expoProductService.getCosmeticScoreListDTOSimilar(id, (short) 0, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest)));
 
         return "product_compare";
     }
@@ -78,12 +80,31 @@ public class ExpoProductController {
             Model model,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse,
-            @PathVariable("id") Long id,
-            @RequestBody CosmeticCompareAjaxJsonRequestDTO requestDTO
+            @PathVariable(name="id") Long id,
+            @RequestParam(name="tag") Integer tag,
+            @RequestParam(name="productId") List<Long> productId
     ) throws Exception {
+        CosmeticCompareAjaxJsonRequestDTO requestDTO = CosmeticCompareAjaxJsonRequestDTO.builder().tag(tag).productId(productId).build();
+
         CosmeticMatchingListDTO graphDTO = expoProductService.getExpoProductCompareOffcanvasAjaxHtmlGraph(id, requestDTO, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest));
-        model.addAttribute("productGraphCurrent", graphDTO.getCosmeticList().getFirst());
-        model.addAttribute("productGraph", graphDTO.getCount() > 1 ? graphDTO.getCosmeticList().stream().skip(1).toList() : new ArrayList<>());
+
+        List<CosmeticCompareAjaxGraphDTO> destDTO = new ArrayList<>();
+        for (var src : graphDTO.getCosmeticList()) {
+            CosmeticCompareAjaxGraphDTO newDTO = new CosmeticCompareAjaxGraphDTO();
+            newDTO.setId(src.getId());
+            newDTO.setName(src.getName());
+            if (requestDTO.getTag() == 0) newDTO.setScore(src.getScoreAll());
+            else if (requestDTO.getTag() == 1) newDTO.setScore(src.getScoreHydration());
+            else if (requestDTO.getTag() == 2) newDTO.setScore(src.getScoreMoisture());
+            else if (requestDTO.getTag() == 3) newDTO.setScore(src.getScoreBarrier());
+            else if (requestDTO.getTag() == 4) newDTO.setScore(src.getScoreSoothing());
+            else if (requestDTO.getTag() == 5) newDTO.setScore(src.getScoreBrightening());
+            destDTO.add(newDTO);
+        }
+
+        model.addAttribute("productGraphCurrent", destDTO.getFirst());
+        model.addAttribute("productGraph", destDTO.size() > 1 ? destDTO.stream().skip(1).toList() : new ArrayList<>());
+
         model.addAttribute("productCompare", expoProductService.getExpoProductCompareOffcanvasAjaxHtmlCompare(graphDTO));
 
         return "product_compare_offcanvas_ajax";

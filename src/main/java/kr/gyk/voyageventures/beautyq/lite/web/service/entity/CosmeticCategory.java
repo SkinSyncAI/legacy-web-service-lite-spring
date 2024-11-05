@@ -19,7 +19,7 @@ public class CosmeticCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 64)
+    @Column(nullable = true, unique = true, length = 64)
     private String code;
 
     @Column(nullable = true, unique = false, length = 128)
