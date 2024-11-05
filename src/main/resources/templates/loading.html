@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<meta name="theme-color" content="#D0FDFF" />
+
+<style>
+    body { background-image: linear-gradient(to bottom, #D0FDFF, #FFFFFF 60%); }
+    #bq-container-logo { position: fixed; top: 0; }
+</style>
+
+<div id="bq-container" class="bq-h-100vh bq-w-100p">
+    <div id="bq-container-logo" class="container text-center" style="margin-top: 40vh;">
+        <div class="row">
+            <div class="col">
+                <img id="bq-brand-logo" class="bq-ml-auto bq-mr-auto" src="/image/loading/logo.svg" alt="BeautyQ">
+                <img id="bq-brand-logo-text" class="bq-ml-auto bq-mr-auto bq-mt-5p" src="/image/loading/logo_text.svg" alt="BeautyQ">
+                <img id="bq-description" class="bq-ml-auto bq-mr-auto bq-mt-5p" src="/image/loading/description.svg" alt="description" style="display: none;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        setTimeout(() => {
+            $("#bq-brand-logo-text").fadeOut(600);
+            setTimeout(() => {
+                let logoPos = 40;
+                for (let i = 0; i < 250; i++) {
+                    setTimeout(() => {
+                        logoPos -= 0.012;
+                        $("#bq-container-logo").css("margin-top", logoPos + "vh");
+                    }, i);
+                }
+                setTimeout(() => {
+                    $("#bq-brand-logo").fadeTo(200, 0.4);
+                    $("#bq-description").fadeIn(1000);
+                    setTimeout(() => {
+                        location.href = "/expo/intro";
+                    }, 1200);
+                }, 1100);
+            }, 700);
+        }, 2000);
+    });
+</script>
+
+</html>

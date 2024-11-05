@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#D0FDFF" />
+
+<style>
+    #bq-content-container { background-image: linear-gradient(to bottom, #D0FDFF, #FFFFFF 12%); height: 100dvh;}
+
+    #bq-title-container p { font-family: Paperlogy3Light; font-size: 1.5rem; }
+    #bq-title-container p span {font-family: Paperlogy5Medium; color: #5A81FA; }
+    #bq-description p { font-family: Paperlogy3Light; color: #FFFFFF; }
+
+    #bq-title-container { margin-top: 12vh; height: 10vh; width: 20rem;}
+    #bq-gb { margin-top: 8vh; }
+    .bq-gb-row { width: 100%; display: inline-flex; justify-content: space-evenly; }
+
+    #bq-description { margin-top: 8vh; height: 9vh; width: 82vw; background-color: #5A81FA; border-radius: 4.5vh; position: relative; }
+    #bq-description p { width: 80vw; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+</style>
+
+<div id="bq-content-container">
+    <th:block th:insert="~{fragment/navbar/color :: Navbar}"></th:block>
+
+    <div id="bq-title-container" class="bq-ml-auto bq-mr-auto">
+        <p>더 높은 매칭도의 화장품을 찾으면</p>
+        <p><span>무료 샘플</span>과 <span>할인</span>혜택을 드려요!</p>
+    </div>
+
+    <div id="bq-gb" th:onclick="|location.href='/expo/event/${id}/result';|">
+        <div class="bq-gb-row">
+            <div><img src="/image/event_pick/gift_p.svg" alt="GiftBox Pink"></div>
+        </div>
+        <div class="bq-gb-row">
+            <div><img src="/image/event_pick/gift_y.svg" alt="GiftBox Yellow"></div>
+            <div><img src="/image/event_pick/gift_b.svg" alt="GiftBox Blue"></div>
+        </div>
+    </div>
+
+    <div id="bq-description" class="bq-ml-auto bq-mr-auto">
+        <p>랜덤 박스 클릭하고 화장품 받기<p>
+    </div>
+
+</div>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="VoyageVentures BeautyQ Lite">
+
+    <title>BeautyQ</title>
+
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap.5.3.3.min.css" rel="stylesheet">
+    <link href="/css/tailwind.css" rel="stylesheet">
+
+    <link rel="preload" href="/font/paperlogy/woff/Paperlogy-3Light.woff" as="font" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" href="/font/paperlogy/woff/Paperlogy-4Regular.woff" as="font" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" href="/font/paperlogy/woff/Paperlogy-5Medium.woff" as="font" type="font/woff" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+</head>
+<body class="fade">
+
+    <style>
+        body { opacity: 1; transition-duration: 1s; transition-property: opacity; color: #343434; font-size: 16px; }
+        body.fade { opacity: 0; }
+    </style>
+
+    <th:block layout:fragment="Content"></th:block>
+
+    <script src="/js/bootstrap.5.3.3.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.setTimeout(() => {
+                document.body.classList.remove('fade');
+            });
+        });
+    </script>
+</body>
+</html>
+
