@@ -47,7 +47,7 @@ public class ExpoEventService {
                     .scoreDelta((short) 0)
                     .build();
 
-        long low = 0, high = listDTO.size() - 1, mid = 1;
+        long low = 1, high = listDTO.size() - 1, mid = 1;
         while (low <= high) {
             mid = (high - low) / 2;
             if (listDTO.get((int) mid).getScoreMatching() < listDTO.get(Math.toIntExact(source.getId())).getScoreMatching()) high = mid - 1;
