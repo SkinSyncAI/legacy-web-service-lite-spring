@@ -3,17 +3,17 @@ package kr.gyk.voyageventures.beautyq.lite.web.service.controller.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.gyk.voyageventures.beautyq.lite.web.service.component.CookieComponent;
+import kr.gyk.voyageventures.beautyq.lite.web.service.component.ScoringComponent;
 import kr.gyk.voyageventures.beautyq.lite.web.service.dto.web.*;
+import kr.gyk.voyageventures.beautyq.lite.web.service.form.DiagnosisTestForm;
+import kr.gyk.voyageventures.beautyq.lite.web.service.form.MainTagForm;
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.CosmeticService;
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.ExpoProductService;
 import lombok.RequiredArgsConstructor;
 import org.codehaus.groovy.classgen.asm.MopWriter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,4 +71,21 @@ public class ExpoProductController {
         return "product_compare_ajax";
     }
 
+    /** Offcanvas */
+
+    @GetMapping("/{id}/compare/offcanvas/ajax/html")
+    public String getExpoProductCompareOffcanvasAjaxHtml (
+            Model model,
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse,
+            @PathVariable("id") Long id,
+            @RequestBody CosmeticCompareAjaxJsonRequestDTO requestDTO
+    ) throws Exception {
+        CosmeticMatchingListDTO graphDTO = expoProductService.getExpoProductCompareOffcanvasAjaxHtmlGraph(id, requestDTO, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest));
+        model.addAttribute("productGraphCurrent", graphDTO.getCosmeticList().getFirst());
+        model.addAttribute("productGraph", graphDTO.getCount() > 1 ? graphDTO.getCosmeticList().stream().skip(1).toList() : new ArrayList<>());
+        model.addAttribute("productCompare", expoProductService.getExpoProductCompareOffcanvasAjaxHtmlCompare(graphDTO));
+
+        return "product_compare_offcanvas_ajax";
+    }
 }

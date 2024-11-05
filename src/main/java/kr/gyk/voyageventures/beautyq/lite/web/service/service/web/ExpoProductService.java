@@ -121,4 +121,44 @@ public class ExpoProductService {
                 .build();
     }
 
+    public CosmeticMatchingListDTO getExpoProductCompareOffcanvasAjaxHtmlGraph (
+            Long id,
+            CosmeticCompareAjaxJsonRequestDTO requestDTO,
+            DiagnosisTestForm diagnosisTestForm, MainTagForm mainTagForm, Integer scoringRandomValue
+    ) throws Exception {
+        List<Long> idList = new ArrayList<>();
+        idList.add(id);
+        idList.addAll(requestDTO.getProductId());
+
+        return cosmeticService.getCosmeticMatchingListAll(idList, diagnosisTestForm, mainTagForm, scoringRandomValue);
+    }
+
+    public CosmeticScoreListDTO getExpoProductCompareOffcanvasAjaxHtmlCompare (
+            CosmeticMatchingListDTO cosmeticMatchingListDTO
+    ) throws Exception {
+        List<CosmeticScoreListElementDTO> listCosmeticDTO = new ArrayList<>();
+        for (CosmeticMatchingListElementDTO item : cosmeticMatchingListDTO.getCosmeticList())
+            listCosmeticDTO.add(new CosmeticScoreListElementDTO(cosmeticRepository.findById(item.getId()).orElseThrow(EntityDataNotFoundException::new), item.getScoreAll(), item.getScoreMatching()));
+
+        return CosmeticScoreListDTO.builder()
+                .count((long) listCosmeticDTO.size())
+                .cosmeticList(listCosmeticDTO)
+                .build();
+    }
+
+    public CosmeticCompareAjaxJsonResponseDTO getExpoProductCompareOffcanvasAjaxJson (
+            Long id,
+            CosmeticCompareAjaxJsonRequestDTO requestDTO,
+            DiagnosisTestForm diagnosisTestForm, MainTagForm mainTagForm, Integer scoringRandomValue
+    ) throws Exception {
+        CosmeticMatchingListDTO cosmeticMatchingListDTO = this.getExpoProductCompareOffcanvasAjaxHtmlGraph(id, requestDTO, diagnosisTestForm, mainTagForm, scoringRandomValue);
+        List<CosmeticMatchingListElementDTO> listCompareDTO = cosmeticMatchingListDTO.getCount() > 1 ? cosmeticMatchingListDTO.getCosmeticList().stream().skip(1).toList() : new ArrayList<>();
+
+        return CosmeticCompareAjaxJsonResponseDTO.builder()
+                .cosmeticCurrent(cosmeticMatchingListDTO.getCosmeticList().getFirst())
+                .cosmeticCompare(listCompareDTO)
+                .countCosmeticCompare((long) listCompareDTO.size())
+                .build();
+    }
+
 }

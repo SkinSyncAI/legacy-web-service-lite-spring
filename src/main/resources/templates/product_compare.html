@@ -121,31 +121,26 @@
     for (let i = 1; i < countCategory; i++) isCheck[i] = false;
 
     $(".bq-category-btn").on("click", function (event) {
-        $(".bq-category-btn").css("pointer-events", "none");
-        let target = $(event.target).attr("data-bq-btn-num");
-        $.ajax({
-            url: window.location.pathname + "/ajax/" + target,
-            method: "get",
-            dataType: "html",
-            success: function (data, status, xhr) {
-                $("#bq-top-content").html($("#bq-top-content").html(data).find("#bq-top-content"));
-                $("#bq-recommend-content").html($("#bq-recommend-content").html(data).find("#bq-recommend-content"));
-            }
-        });
-        for (let i = 0; i < countCategory; i++) {
-            if (i+"" === target) {
-                isCheck[i] = true;
-                btn[i].css("color", "#567DFA");
-            } else {
+        let target = $(this).attr("data-bq-btn-num")
+        if (target !== undefined) {
+            for (let i = 0; i < countCategory; i++) {
                 isCheck[i] = false;
                 btn[i].css("color", "");
             }
+            isCheck[target] = true;
+            btn[target].css("color", "#567DFA");
+            $("#bq-recommend-title span").text($(this).attr("data-bq-btn-title"));
+            $("#bq-top-title span").text($(this).attr("data-bq-btn-title"));
+            $.ajax({
+                url: window.location.pathname + "/ajax/" + target,
+                method: "get",
+                dataType: "html",
+                success: function (data, status, xhr) {
+                    $("#bq-top-content").html($("#bq-top-content").html(data).find("#bq-top-content"));
+                    $("#bq-recommend-content").html($("#bq-recommend-content").html(data).find("#bq-recommend-content"));
+                }
+            });
         }
-        $("#bq-recommend-title span").text($(event.target).attr("data-bq-btn-title"));
-        $("#bq-top-title span").text($(event.target).attr("data-bq-btn-title"));
-        setTimeout(() => {
-            $(".bq-category-btn").css("pointer-events", "auto")
-        }, 2000);
     });
 
     $("#bq-compare-btn").click(() => {

@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CosmeticMatchingListElementDTO {
     private Long id;
+    private String name;
 
     private Short scoreMatching;
 
