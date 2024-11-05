@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<style>
+    #bq-title { font-family: Paperlogy3Light; font-size: 1.5rem; }
+    .bq-test-q-num { font-family: Paperlogy4Regular; font-size: 1.1875rem; }
+    .bq-test-q-text { font-family: Paperlogy3Light; font-size: 1rem; }
+    .bq-test-a-btn { font-family: Paperlogy5Medium; font-size: 1.375rem; }
+
+    #bq-header { background-color: rgba(255, 255, 255, 0.8); }
+    #bq-title-container { margin-top: 4vh; height: 6vh; width: 19rem; }
+    #bq-test-progress { margin-top: 5vh; height: 4px; width: 80vw; }
+    #bq-test-container { margin-top: 23vh; }
+    .bq-test-q-container { margin-top: 3.5vh; width: 19rem; }
+    .bq-test-q-text { margin-top: 1vh; }
+    .bq-test-a-row { margin-top: 2vh;}
+    .bq-test-a-col { padding-left: 2vw; padding-right: 2vw; }
+    .bq-test-a-btn { color: #5A81FA; border-radius: 3vh; width: 100%; height: 6.2vh; border-color: #5A81FA; border-width: 1px; }
+    .bq-test-a-btn-1 { background-color: rgba(200, 227, 255, 0.3); }
+    .bq-test-a-btn-2 { background-color: rgba(255, 246, 166, 0.3); }
+    .bq-test-a-btn-3 { background-color: rgba(196, 255, 203, 0.3); }
+    .bq-test-a-btn-4 { background-color: rgba(255, 217, 251, 0.3); }
+    #bq-btn-test-submit { width: 83vw; margin-bottom: 2vh; }
+</style>
+
+<div id="bq-content-container" class="bq-h-100p bq-w-100p">
+    <div id="bq-header" class="fixed-top">
+        <th:block th:insert="~{fragment/navbar/color_back :: Navbar}"></th:block>
+        <div id="bq-test-progress" class="progress bq-ml-auto bq-mr-auto" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div id="bq-test-progress-c" class="progress-bar" style="width: 0"></div>
+        </div>
+        <div id="bq-title-container" class="bq-ml-auto bq-mr-auto">
+            <p id="bq-title">바우만 피부타입 TEST</p>
+        </div>
+    </div>
+
+    <div id="bq-test-container">
+        <div class="bq-test-q-container bq-ml-auto bq-mr-auto">
+            <p class="bq-test-q-num">Q1</p>
+            <p class="bq-test-q-text">세안 후 피부가 당기는 느낌이 드나요?</p>
+            <div class=" bq-test-a-row row">
+                <div class="col bq-test-a-col"><button id="bq-test-a-btn-1-O" class="bq-test-a-btn bq-test-a-btn-1">O</button></div>
+                <div class="col bq-test-a-col"><button id="bq-test-a-btn-1-X" class="bq-test-a-btn bq-test-a-btn-1">X</button></div>
+            </div>
+        </div>
+
+        <div class="bq-test-q-container bq-ml-auto bq-mr-auto">
+            <p class="bq-test-q-num">Q2</p>
+            <p class="bq-test-q-text">주기적으로 트러블이 올라오나요?</p>
+            <div class="bq-test-a-row row">
+                <div class="col bq-test-a-col"><button id="bq-test-a-btn-2-O" class="bq-test-a-btn bq-test-a-btn-2">O</button></div>
+                <div class="col bq-test-a-col"><button id="bq-test-a-btn-2-X" class="bq-test-a-btn bq-test-a-btn-2">X</button></div>
+            </div>
+        </div>
+
+        <div class="bq-test-q-container bq-ml-auto bq-mr-auto">
+            <p class="bq-test-q-num">Q3</p>
+            <p class="bq-test-q-text">상처가 아물면서 색소침착이 생기나요?</p>
+            <div class="bq-test-a-row row">
+                <div class="col bq-test-a-col"><button id="bq-test-a-btn-3-O" class="bq-test-a-btn bq-test-a-btn-3">O</button></div>
+                <div class="col bq-test-a-col"><button id="bq-test-a-btn-3-X" class="bq-test-a-btn bq-test-a-btn-3">X</button></div>
+            </div>
+        </div>
+
+        <div class="bq-test-q-container bq-ml-auto bq-mr-auto">
+            <p class="bq-test-q-num">Q4</p>
+            <p class="bq-test-q-text">피부가 얇고 자국이 오래가나요?</p>
+            <div class="bq-test-a-row row">
+                <div class="col bq-test-a-col"><button id="bq-test-a-btn-4-O" class="bq-test-a-btn bq-test-a-btn-4">O</button></div>
+                <div class="col bq-test-a-col"><button id="bq-test-a-btn-4-X" class="bq-test-a-btn bq-test-a-btn-4">X</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bq-btn-test-submit" class="bq-ml-auto bq-mr-auto fixed-bottom" style="display: none; opacity: 0.95;">
+        <a id="bq-a-btn-next"><img id="bq-btn-next" class="bq-ml-auto bq-mr-auto" src="/image/diagnosis_test/btn_next.png" alt="내 피부타입 알아보기"></a>
+    </div>
+</div>
+
+<form class="tw-sr-only" th:action="@{/expo/diagnosis/test}" th:object="${diagnosisTestForm}" method="post">
+    <div class="form-check">
+        <label for="form-q-1"></label>
+        <input th:field="*{question1}" class="form-check-input" type="checkbox" name="form-q-1" id="form-q-1">
+    </div>
+    <div class="form-check">
+        <label for="form-q-2"></label>
+        <input th:field="*{question2}" class="form-check-input" type="checkbox" name="form-q-2" id="form-q-2">
+    </div>
+    <div class="form-check">
+        <label for="form-q-3"></label>
+        <input th:field="*{question3}" class="form-check-input" type="checkbox" name="form-q-3" id="form-q-3">
+    </div>
+    <div class="form-check">
+        <label for="form-q-4"></label>
+        <input th:field="*{question4}" class="form-check-input" type="checkbox" name="form-q-4" id="form-q-4">
+    </div>
+    <button id="form-submit" class="btn btn-primary btn-sm" type="submit"></button>
+</form>
+
+<script>
+    let checkQ1 = false, checkQ2 = false, checkQ3 = false, checkQ4 = false;
+    let btnQ1O = $("#bq-test-a-btn-1-O"), btnQ1X = $("#bq-test-a-btn-1-X");
+    let btnQ2O = $("#bq-test-a-btn-2-O"), btnQ2X = $("#bq-test-a-btn-2-X");
+    let btnQ3O = $("#bq-test-a-btn-3-O"), btnQ3X = $("#bq-test-a-btn-3-X");
+    let btnQ4O = $("#bq-test-a-btn-4-O"), btnQ4X = $("#bq-test-a-btn-4-X");
+    let cbQ1 = $("#form-q-1"), cbQ2 = $("#form-q-2"), cbQ3 = $("#form-q-3"), chQ4 = $("#form-q-4");
+    let btnSubmit = $("#bq-btn-test-submit");
+
+    btnQ1O.click(() => { cbQ1.prop("checked", true); checkQ1 = true; toggleButton(btnQ1O, btnQ1X); });
+    btnQ1X.click(() => { cbQ1.prop("checked", false); checkQ1 = true; toggleButton(btnQ1X, btnQ1O); });
+    btnQ2O.click(() => { cbQ2.prop("checked", true); checkQ2 = true; toggleButton(btnQ2O, btnQ2X); });
+    btnQ2X.click(() => { cbQ2.prop("checked", false); checkQ2 = true; toggleButton(btnQ2X, btnQ2O); });
+    btnQ3O.click(() => { cbQ3.prop("checked", true); checkQ3 = true; toggleButton(btnQ3O, btnQ3X); });
+    btnQ3X.click(() => { cbQ3.prop("checked", false); checkQ3 = true; toggleButton(btnQ3X, btnQ3O); });
+    btnQ4O.click(() => { chQ4.prop("checked", true); checkQ4 = true; toggleButton(btnQ4O, btnQ4X); });
+    btnQ4X.click(() => { chQ4.prop("checked", false); checkQ4 = true; toggleButton(btnQ4X, btnQ4O); });
+
+    btnSubmit.click(() => {
+        for (let i = 0; i < 8; i++) Cookies.set("main.tag." + i, "0", { domain: window.location.hostname, expires: 1 });
+        $("#form-submit").click();
+    });
+
+    function toggleButton (btnSelect, btnDeselect) {
+        btnSelect.css("background-color", "#5A81FA");
+        btnSelect.css("color", "#EFF7FF");
+        btnDeselect.css("background-color", "");
+        btnDeselect.css("color", "");
+
+        refreshProgress();
+    }
+
+    function refreshProgress () {
+        let pbValue = 0;
+        if (checkQ1) pbValue += 25;
+        if (checkQ2) pbValue += 25;
+        if (checkQ3) pbValue += 25;
+        if (checkQ4) pbValue += 25;
+        $("#bq-test-progress-c").css("width", pbValue + "%");
+
+        if (pbValue > 99) {
+            btnSubmit.css("display", "");
+            $("#bq-test-container").css("margin-bottom", "18vh");
+        }
+    }
+
+
+</script>

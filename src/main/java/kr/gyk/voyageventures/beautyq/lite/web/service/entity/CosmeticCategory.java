@@ -17,15 +17,18 @@ public class CosmeticCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(nullable = false, unique = false, length = 64)
+    @Column(nullable = false, unique = true, length = 64)
+    private String code;
+
+    @Column(nullable = true, unique = false, length = 128)
     private String nameKo;
 
-    @Column(nullable = false, unique = false, length = 64)
+    @Column(nullable = true, unique = false, length = 128)
     private String nameEn;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Cosmetic> cosmetic = new ArrayList<>();
 
 }

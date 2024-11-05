@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<style>
+    #bq-information-bs #bq-information-bs-b a { font-family: Paperlogy4Regular; font-size: 0.8125rem; color: #B3B3B3; }
+    #bq-information-t p { font-family: Paperlogy4Regular; font-size: 1.25rem; color: #000000; }
+    #bq-information-p-dp { font-family: PretendardSemiBold; font-size: 1.6rem; color: #000000; }
+    #bq-information-p-dp span { font-size: 1.35rem; }
+    #bq-information-p-op { font-family: PretendardMedium; font-size: 1.35rem; color: rgba(0, 0, 0, 0.3); text-decoration-line: line-through; }
+    #bq-information-p-op span { font-size: 1.1rem; }
+    #bq-information-p-sf { font-family: PretendardMedium; font-size: 0.78rem; color: rgba(0, 0, 0, 0.3); }
+    #bq-information-r-p { font-family: PretendardRegular; font-size: 0.78rem; color: #000000; }
+    #bq-information-r-p span { color: #858585; }
+    #bq-information-r-r { font-family: PretendardRegular; font-size: 0.78rem; color: #000000; }
+    #bq-information-r-r span { color: #858585; }
+    #bq-ingredient-inner p { font-size: 0.95rem; color: #000000; }
+    #bq-ingredient-title { font-family: Paperlogy4Regular; }
+    #bq-ingredient-title span { font-family: Paperlogy5Medium; }
+    #bq-ingredient-gb span { font-family: Paperlogy6SemiBold; font-size: 0.8125rem; color: #5A81FA; }
+    #bq-ingredient-more { font-family: PretendardRegular; font-size: 0.75rem; }
+    .bq-footer-btn { font-family: Paperlogy5Medium; font-size: 0.94rem; }
+    #bq-footer-btn-like span { font-family: PretendardRegular; font-size: 0.69rem; color: rgba(52, 52, 52, 0.5); }
+    #bq-compare-title p { font-family: Paperlogy4Regular; font-size: 0.8125rem; color: #000000; }
+    #bq-compare-title button { font-family: PretendardRegular; font-size: 0.75rem; color: #343434; }
+    .bq-compare-goods-brand { font-family: PretendardRegular; font-size: 0.625rem; color: rgba(0, 0, 0, 0.3); }
+    .bq-compare-goods-name { font-family: PretendardRegular; font-size: 0.75rem; color: #000000; }
+    #bq-information-s p { font-family: Paperlogy4Regular; font-size: 0.78125rem; color: #587DFA; }
+    #bq-information-s p span { font-family: Paperlogy6SemiBold; }
+
+    #bq-content-container { margin-bottom: 16vh; }
+    #bq-thumbnail-container { margin-top: 1vh; height: 70vw; width: 100vw; position: relative; overflow: visible; }
+    .bq-thumbnail-img { height: auto; width: 100%; object-fit: cover; position: absolute; top: 100%; transform: translateY(-100%); }
+    #bq-information { margin-top: 2vh;  width: 88%; }
+    #bq-information-bs { display: flex; }
+    #bq-information-share { display: flex; }
+    .bq-information-share-btn { height: 100%; }
+    #bq-information-p { display: flex; }
+    #bq-information-p-left { margin-right: auto; }
+    #bq-information-p-sf { margin-top: 0.7rem; }
+    #bq-information-r { display: flex; }
+    #bq-information-r-star { display: flex; }
+    .bq-information-share-btn { margin-right: 2vw; }
+    #bq-information-r-p { margin-right: 3vw; }
+    #bq-information-r-star { margin-right: 1vw; }
+    #bq-information-p-dp { margin-right: 1vw; }
+    .bq-information-line { margin-top: 1.2vh; }
+    #bq-ingredient { margin-top: 2vh; height: 7vh; width: 88%; background-color: rgba(90, 129, 250, 0.1); border-color: rgb(90, 129, 250); border-width: 0.18rem; border-radius: 1.8vh; position: relative; }
+    #bq-ingredient-inner { display: flex; height: 1.2rem; width: 76vw; margin-left: 6vw; margin-right: 6vw; position: absolute; top: 50%; transform: translateY(-50%); }
+    #bq-ingredient-title { margin-right: 2vw; }
+    #bq-ingredient-gb { display: flex; margin-right: auto; }
+    #bq-ingredient-gb img { margin-right: 1vw; }
+    #bq-ingredient-div-img { margin-left: 2vw; margin-right: 2vw; }
+    #bq-ingredient-more { display: flex; }
+    #bq-ingredient-more span { margin-right: 1vw; }
+
+    #bq-compare { margin-top: 2vh; border-top-color: rgba(0, 0, 0, 0.15); border-top-width: 0.03125rem; border-bottom-color: rgba(0, 0, 0, 0.15); border-bottom-width: 0.03125rem; }
+    #bq-compare-title { margin-top: 1.5vh; margin-bottom: 1.5vh; width: 88%; display: flex; }
+    #bq-compare-title p { margin-right: auto; }
+    #bq-compare-title button { display: flex; }
+    #bq-compare-title button img { margin-left: 2vw; }
+    #bq-compare-content { overflow-x: scroll; -ms-overflow-style: none; }
+    #bq-compare-content::-webkit-scrollbar { display: none; }
+    #bq-compare-row { display: flex; margin-left: 2vw; }
+    .bq-compare-col { height: 14vh; margin-left: 1vw; margin-right: 1vw;}
+    .bq-compare-goods-image { height: 8vh; width: 12vh; display: block; background-color: #FFFFFF; overflow: hidden; }
+    .bq-compare-goods-image img { height: auto; width: 100%; }
+    .bq-compare-col p { margin-top: 0.5vh; overflow-x: hidden; text-wrap: nowrap; }
+
+    #bq-footer { height: 14vh; width: 100vw; background-color: #FFFFFF; box-shadow: 0 0 12px 1px #dedede; }
+    #bq-footer-row { width: 84%; height: 10vh; padding-top: 3vh; display: flex; margin-left: 8%; margin-right: 8%; }
+    .bq-footer-col { padding-left: 0; padding-right: 0; height: 6vh; }
+    #bq-footer-col-like { margin-right: auto; }
+    #bq-footer-col-cart { margin-right: 2.4%; }
+    #bq-footer-img-like { height: 3.3vh; width: auto; }
+    .bq-footer-btn { height: 100%; width: 34vw; border-color: rgb(90, 129, 250); border-width: 0.18rem; border-radius: 1.8vh; }
+    #bq-footer-btn-cart { background-color: #EFF3FF; color: #303030; }
+    #bq-footer-btn-buy { background-color: #5A81FA; color: #FFFFFF; }
+    #bq-footer-btn-like { height: 100%; }
+    #bq-footer-btn-like img { height: 50%; width: auto; }
+    #bq-information-prs { height: 100%; width: 100%; display: flex; }
+    #bq-information-pr { height: 100%; width: 65%; }
+    #bq-information-s { text-align: end; margin-left: auto; padding-top: 10%;}
+
+    .bq-navbar { background-image: linear-gradient(to bottom, #868686, rgba(255, 255, 255, 0) 80%); }
+</style>
+
+<th:block th:insert="~{fragment/navbar/whiteword_back_menu :: Navbar('제품 상세')}"></th:block>
+<div id="bq-content-container">
+    <div id="bq-thumbnail-container">
+        <img id="bq-thumbnail-img-1" class="bq-thumbnail-img bq-h-auto bq-w-100p" th:src="${product.imageThumbnails.get(0)}" alt="Thumbnail">
+    </div>
+    <div id="bq-information" class="bq-ml-auto bq-mr-auto">
+        <div id="bq-information-bs">
+            <div id="bq-information-bs-b" class="bq-mr-auto">
+                <a th:text="${product.brand}"></a>
+            </div>
+            <div id="bq-information-share">
+                <button class="bq-information-share-btn"><img id="bq-information-kakaotalk-img" src="/image/product/kakaotalk.svg" alt="kakaotalk"></button>
+                <button class="bq-information-share-btn"><img id="bq-information-share-img" src="/image/product/share.svg" alt="share"></button>
+            </div>
+        </div>
+        <div id="bq-information-t" >
+            <p th:text="${product.name}"></p>
+        </div>
+        <div id="bq-information-prs">
+            <div id="bq-information-pr">
+                <div id="bq-information-p" class="bq-information-line">
+                    <p id="bq-information-p-left">
+                        <span id="bq-information-p-dp">[[${product.priceDiscount}]]<span>원</span></span>
+                        <span id="bq-information-p-op">[[${product.price}]]<span>원</span></span>
+                    </p>
+                </div>
+                <div id="bq-information-r" class="bq-information-line">
+                    <p id="bq-information-r-p">구매 <span>([[${product.countPurchase}]])</span></p>
+                    <div id="bq-information-r-star">
+                        <img id="bq-information-star-bg" src="/image/product/star_bg.svg" alt="">
+                        <!-- <img id="bq-information-star-blue" src="/image/product/star_blue.svg" alt=""> -->
+                    </div>
+                    <p id="bq-information-r-r">리뷰 [[${product.rating}]] <span>([[${product.countReview}]])</span></p>
+                </div>
+            </div>
+            <div id="bq-information-s">
+                <p><span th:text="${productScore}"></span>점 <span>높은 매칭도</span></p>
+                <p><span>Guest</span>님께 특별할인!</p>
+            </div>
+        </div>
+    </div>
+    <div id="bq-ingredient" class="bq-ml-auto bq-mr-auto text-center">
+        <div id="bq-ingredient-inner" class="text-center">
+            <p id="bq-ingredient-title"><span>Guest</span> 님과 성분 매칭</p>
+            <p id="bq-ingredient-gb">
+                <img id="bq-ingredient-good-img" src="/image/product/ingredient_good.svg" alt="Good">
+                <span th:text="${product.ingredientMatchingGood}"></span>
+                <img id="bq-ingredient-div-img" src="/image/product/ingredient_divider.svg" alt="/">
+                <img id="bq-ingredient-bad-img" src="/image/product/ingredient_bad.svg" alt="Bad">
+                <span th:text="${product.ingredientMatchingBad}"></span>
+            </p>
+            <a id="bq-ingredient-more">
+                <span>자세히보기</span>
+                <img id="bq-ingredient-more-img" src="/image/product/ingredient_more.svg" alt="More">
+            </a>
+        </div>
+    </div>
+
+    <div id="bq-compare">
+        <div id="bq-compare-title" class="bq-ml-auto bq-mr-auto">
+            <p>비슷한 추천 제품</p>
+            <button th:if="${event}" th:onclick="|location.href='/expo/event/${product.id}/pick';|">
+                비교해보기
+                <img id="bq-compare-more" src="/image/product/compare_more.svg" alt="More">
+            </button>
+            <button th:unless="${event}" th:onclick="|location.href='/expo/product/${product.id}/compare';|">
+                비교해보기
+                <img id="bq-compare-more" src="/image/product/compare_more.svg" alt="More">
+            </button>
+        </div>
+        <div id="bq-compare-content">
+            <div id="bq-compare-row">
+
+                <div th:each="pItem:${productSim.cosmeticList}" class="bq-compare-col" th:onclick="|location.href='/expo/product/${pItem.id}';|">
+                    <div class="bq-compare-goods-image"><img th:src="${pItem.image}" alt=""></div>
+                    <p class="bq-compare-goods-brand" th:text="${pItem.brand}"></p>
+                    <p class="bq-compare-goods-name" th:text="${pItem.name}"></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<nav id="bq-footer" class="fixed-bottom">
+    <div id="bq-footer-row" class="bq-ml-auto bq-mr-auto">
+        <div id="bq-footer-col-like" class="bq-footer-col">
+            <button id="bq-footer-btn-like" class="bq-ml-auto bq-mr-auto">
+                <img id="bq-footer-img-like" class="bq-footer-img bq-m-auto" src="/image/product/footer_like.svg" alt="like">
+                <span>좋아요</span>
+            </button>
+        </div>
+        <div id="bq-footer-col-cart" class="bq-footer-col">
+            <button id="bq-footer-btn-cart" class="bq-footer-btn">장바구니</button>
+        </div>
+        <div id="bq-footer-col-buy" class="bq-footer-col">
+            <button id="bq-footer-btn-buy" class="bq-footer-btn">바로구매</button>
+        </div>
+    </div>
+</nav>
+
+</html>
+
+<!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); -->

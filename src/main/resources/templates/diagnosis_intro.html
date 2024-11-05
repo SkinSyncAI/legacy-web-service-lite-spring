@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<style>
+    body { width: 100%; height: 100vh; }
+
+    #bq-title { font-family: Paperlogy3Light; font-size: 1.5rem; }
+    #bq-title-user {font-family: Paperlogy5Medium; font-size: 1.5rem; }
+
+    #bq-title-container { margin-top: 11vh; height: 10vh; width: 16rem;}
+    #bq-image-container { margin-top: 5vh; height: 32vh;}
+    #bq-a-btn-next { margin-top: 0; height: 10vh;}
+    #bq-description { margin-top: 0; height: 10vh; }
+</style>
+
+<div id="bq-content-container">
+    <th:block th:insert="~{fragment/navbar/color :: Navbar}"></th:block>
+
+    <div id="bq-title-container" class="bq-ml-auto bq-mr-auto">
+        <p id="bq-title"><span id="bq-title-user">Guest</span> 님의 피부타입을</p>
+        <p id="bq-title">진단하러 가볼까요?</p>
+    </div>
+    <div id="bq-image-container">
+        <img id="bq-image" class="bq-ml-auto bq-mr-auto" src="/image/diagnosis_intro/skintype.svg" alt="SkinType">
+    </div>
+    <a id="bq-a-btn-next" href="/expo/diagnosis/test"><img id="bq-btn-next" class="bq-ml-auto bq-mr-auto" src="/image/diagnosis_intro/btn_next.png" alt="내 피부타입 알아보기"></a>
+    <img id="bq-description" class="bq-ml-auto bq-mr-auto" src="/image/diagnosis_intro/description.svg" alt="Beta 사진 찍고 피부 타입 확인하기">
+
+</div>
+
+</html>

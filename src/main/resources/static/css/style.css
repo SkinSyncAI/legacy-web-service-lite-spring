@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#bq-content-container { width: 100%; }
+
+.bq-mt-40vh { margin-top: 40vh; }
+.bq-mt-1vh { margin-top: 1vh; }
+
+.bq-m-auto { margin: auto; }
+.bq-ml-auto { margin-left: auto; }
+.bq-mr-auto { margin-right: auto; }
+.bq-mt-auto { margin-top: auto; }
+.bq-mb-auto { margin-bottom: auto; }
+
+.bq-mt-5p { margin-top: 5%; }
+.bq-mt-10p { margin-top: 10%; }
+
+.bq-mt-5vh { margin-top: 5vh; }
+
+.bq-pos-fixed { position: fixed; }
+
+.bq-h-100vh { height: 100vh; }
+.bq-h-auto { height: auto; }
+.bq-h-100p { height: 100%; }
+
+.bq-w-100p { width: 100%; }
+
+@font-face { font-family: Paperlogy1Thin; src: url("../font/paperlogy/woff/Paperlogy-1Thin.woff") format("woff");  }
+@font-face { font-family: Paperlogy2ExtraLight; src: url("../font/paperlogy/woff/Paperlogy-2ExtraLight.woff") format("woff"); }
+@font-face { font-family: Paperlogy3Light; src: url("../font/paperlogy/woff/Paperlogy-3Light.woff") format("woff"); }
+@font-face { font-family: Paperlogy4Regular; src: url("../font/paperlogy/woff/Paperlogy-4Regular.woff") format("woff"); }
+@font-face { font-family: Paperlogy5Medium; src: url("../font/paperlogy/woff/Paperlogy-5Medium.woff") format("woff"); }
+@font-face { font-family: Paperlogy6SemiBold; src: url("../font/paperlogy/woff/Paperlogy-6SemiBold.woff") format("woff"); }
+@font-face { font-family: Paperlogy7Bold; src: url("../font/paperlogy/woff/Paperlogy-7Bold.woff") format("woff"); }
+@font-face { font-family: Paperlogy8Extrabold; src: url("../font/paperlogy/woff/Paperlogy-8ExtraBold.woff") format("woff"); }
+@font-face { font-family: Paperlogy9Black; src: url("../font/paperlogy/woff/Paperlogy-9Black.woff") format("woff"); }
+
+@font-face { font-family: PretendardLight; src: url("../font/pretendard/woff2_subset/Pretendard-Light.subset.woff2") format("woff2"); }
+@font-face { font-family: PretendardRegular; src: url("../font/pretendard/woff2_subset/Pretendard-Regular.subset.woff2") format("woff2") ; }
+@font-face { font-family: PretendardMedium; src: url("../font/pretendard/woff2_subset/Pretendard-Medium.subset.woff2") format("woff2"); }
+@font-face { font-family: PretendardSemiBold; src: url("../font/pretendard/woff2_subset/Pretendard-SemiBold.subset.woff2") format("woff2"); }
+@font-face { font-family: PretendardBold; src: url("../font/pretendard/woff2_subset/Pretendard-Bold.subset.woff2") format("woff2"); }
