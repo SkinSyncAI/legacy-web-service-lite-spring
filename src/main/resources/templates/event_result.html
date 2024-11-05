@@ -24,21 +24,21 @@
     #bq-score-image img { height: 100%; object-fit: cover; }
 </style>
 
-<div id="bq-content-container" th:onclick="|location.href='/expo/search/product/${id}';|">
+<div id="bq-content-container" th:onclick="|location.href='/expo/search/product/${product.id}';|">
     <th:block th:insert="~{fragment/navbar/blackword_back_menu.html :: Navbar('제품 매칭 결과')}"></th:block>
 
     <div id="bq-title-container" class="bq-ml-auto bq-mr-auto">
-        <p id="bq-title-product">Lorem Ipsum</p>
+        <p id="bq-title-product" th:text="${product.name}"></p>
         <p id="bq-title"><span>성공!!</span> 무료 샘플 드릴게요</p>
     </div>
 
     <div id="bq-score-container" class="bq-ml-auto bq-mr-auto">
-        <p id="bq-score-offset">+2</p>
-        <p id="bq-score">97<span>점</span></p>
+        <p id="bq-score-offset">+[[${product.scoreDelta}]]</p>
+        <p id="bq-score">[[${product.score}]]<span>점</span></p>
     </div>
 
     <div id="bq-score-image" class="bq-ml-auto bq-mr-auto">
-        <img src="/pImage/p1.png" alt="Product">
+        <img th:src="${product.image}" alt="Product">
     </div>
 
 </div>
