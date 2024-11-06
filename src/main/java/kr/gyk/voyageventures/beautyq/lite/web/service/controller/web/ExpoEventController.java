@@ -40,9 +40,8 @@ public class ExpoEventController {
         EventCosmeticResultDTO eventCosmeticResultDTO = expoEventService.getExpoEventResult(id, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest));
         model.addAttribute("product", eventCosmeticResultDTO);
 
-        if (eventCosmeticResultDTO.getId() == id.longValue()) return "event_result_fail";
-
         cookieComponent.setEvent(false, httpServletResponse);
+        if (eventCosmeticResultDTO.getId() == id.longValue()) return "event_result_fail";
         return "event_result";
     }
 

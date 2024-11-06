@@ -9,6 +9,7 @@ import kr.gyk.voyageventures.beautyq.lite.web.service.form.DiagnosisTestForm;
 import kr.gyk.voyageventures.beautyq.lite.web.service.form.MainTagForm;
 import kr.gyk.voyageventures.beautyq.lite.web.service.repository.CosmeticRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.transform.ToListResultTransformer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,19 +39,25 @@ public class ExpoEventService {
             }
         });
 
-        long low = 0, high = listDTO.size() - 1, mid = 1;
-        while (low <= high) {
-            mid = (high - low) / 2;
-            if (listDTO.get((int) mid).getScoreMatching() < listDTO.get(Math.toIntExact(source.getId())).getScoreMatching()) high = mid - 1;
-            else if (listDTO.get((int) mid).getScoreMatching() > listDTO.get(Math.toIntExact(source.getId())).getScoreMatching()) low = mid + 1;
-            else break;
-        }
+        long mid;
+        for (mid = 0; mid < listDTO.size(); mid++) if (id == listDTO.get((int) mid).getId().longValue()) break;
 
         long delta = mid - 1;
         if (delta < 0) delta = 0;
-        for (; delta > 0; delta--) if (source.getScoreMatching().longValue() < listDTO.get((int) delta).getScoreMatching().longValue()) break;
+        for (; delta >= 0; delta--) if (source.getScoreMatching().longValue() < listDTO.get((int) delta).getScoreMatching().longValue()) break;
 
-        Cosmetic cosmeticResult = cosmeticRepository.findById(listDTO.get((int) (delta == 0 ? mid : delta)).getId()).orElseThrow(EntityDataNotFoundException::new);
+        if (delta < 0){
+            Cosmetic cosmeticResult = cosmeticRepository.findById(id).orElseThrow(EntityDataNotFoundException::new);
+            return EventCosmeticResultDTO.builder()
+                    .id(id)
+                    .name(cosmeticResult.getNameKo())
+                    .image(cosmeticResult.getImageProduct().getUrl())
+                    .score(listDTO.get((int) mid).getScoreMatching())
+                    .scoreDelta((short) 0)
+                    .build();
+        }
+
+        Cosmetic cosmeticResult = cosmeticRepository.findById(listDTO.get((int) delta).getId()).orElseThrow(EntityDataNotFoundException::new);
 
         return EventCosmeticResultDTO.builder()
                 .id(listDTO.get((int) delta).getId())
