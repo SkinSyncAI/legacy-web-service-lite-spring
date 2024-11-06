@@ -65,7 +65,9 @@
             <canvas id="bq-score-chart-radar"></canvas>
         </div>
         <div id="bq-score-tag">
-            <p th:each="keyword:${product.keyword}" class="align-self-center"># [[${keyword}]]</p>
+            <th:block th:each="keyword, keywordStat:${product.keyword}">
+                <p th:if="${keywordStat.count} < 6" class="align-self-center"># [[${keyword}]]</p>
+            </th:block>
         </div>
     </div>
 

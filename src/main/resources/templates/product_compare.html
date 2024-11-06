@@ -133,6 +133,8 @@
         success: function (data, status, xhr) {
             $("#bq-top-content").html($("#bq-top-content").html(data).find("#bq-top-content"));
             $("#bq-recommend-content").html($("#bq-recommend-content").html(data).find("#bq-recommend-content"));
+            if ($(data).find("#bq-top-null").data("bq-top-null") === 1) $("#bq-top").css("display", "none");
+            else $("#bq-top").css("display", "");
         }
     });
 
@@ -161,6 +163,8 @@
                 success: function (data, status, xhr) {
                     $("#bq-top-content").html($("#bq-top-content").html(data).find("#bq-top-content"));
                     $("#bq-recommend-content").html($("#bq-recommend-content").html(data).find("#bq-recommend-content"));
+                    if ($(data).find("#bq-top-null").data("bq-top-null") === 1) $("#bq-top").css("display", "none");
+                    else $("#bq-top").css("display", "");
                 }
             });
         }

@@ -41,6 +41,13 @@
 
     <script src="/js/bootstrap.5.3.3.bundle.min.js"></script>
     <script>
+        function setComma (str) {
+            return String(str).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
+        $(".bq-number-comma").each(function () {
+            $(this).text($(this).text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             window.setTimeout(() => {
                 document.body.classList.remove('fade');
