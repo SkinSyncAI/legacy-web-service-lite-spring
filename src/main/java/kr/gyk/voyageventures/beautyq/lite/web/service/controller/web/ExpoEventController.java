@@ -3,6 +3,7 @@ package kr.gyk.voyageventures.beautyq.lite.web.service.controller.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.gyk.voyageventures.beautyq.lite.web.service.component.CookieComponent;
+import kr.gyk.voyageventures.beautyq.lite.web.service.dto.web.EventCosmeticResultDTO;
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.ExpoEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,11 @@ public class ExpoEventController {
             HttpServletResponse httpServletResponse,
             @PathVariable(name="id") Long id
     ) throws Exception {
-        model.addAttribute("product", expoEventService.getExpoEventResult(id, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest)));
+        EventCosmeticResultDTO eventCosmeticResultDTO = expoEventService.getExpoEventResult(id, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest));
+        model.addAttribute("product", eventCosmeticResultDTO);
+
+        if (eventCosmeticResultDTO.getId() == id.longValue()) return "event_result_fail";
+
         cookieComponent.setEvent(false, httpServletResponse);
         return "event_result";
     }

@@ -47,7 +47,7 @@ public class ExpoProductService {
         cosmeticMatchingListElementDTOList.sort(new Comparator<CosmeticMatchingListElementDTO>() {
             @Override
             public int compare(CosmeticMatchingListElementDTO o1, CosmeticMatchingListElementDTO o2) {
-                return o1.getScoreMatching() - o2.getScoreMatching();
+                return o2.getScoreMatching() - o1.getScoreMatching();
             }
         });
         List<Long> cosmeticList = new ArrayList<>();
@@ -83,13 +83,13 @@ public class ExpoProductService {
         cosmeticMatchingList.sort(new Comparator<CosmeticMatchingListElementDTO>() {
             @Override
             public int compare(CosmeticMatchingListElementDTO o1, CosmeticMatchingListElementDTO o2) {
-                if (tag == 0) return o1.getScoreAll() - o2.getScoreAll();
-                else if (tag == 1) return o1.getScoreHydration() - o2.getScoreHydration();
-                else if (tag == 2) return o1.getScoreMoisture() - o2.getScoreMoisture();
-                else if (tag == 3) return o1.getScoreBarrier() - o2.getScoreBarrier();
-                else if (tag == 4) return o1.getScoreSoothing() - o2.getScoreSoothing();
-                else if (tag == 5) return o1.getScoreBrightening() - o2.getScoreBrightening();
-                return o1.getScoreMatching() - o2.getScoreMatching();
+                if (tag == 0) return o2.getScoreAll() - o1.getScoreAll();
+                else if (tag == 1) return o2.getScoreHydration() - o1.getScoreHydration();
+                else if (tag == 2) return o2.getScoreMoisture() - o1.getScoreMoisture();
+                else if (tag == 3) return o2.getScoreBarrier() - o1.getScoreBarrier();
+                else if (tag == 4) return o2.getScoreSoothing() - o1.getScoreSoothing();
+                else if (tag == 5) return o2.getScoreBrightening() - o1.getScoreBrightening();
+                return o2.getScoreMatching() - o1.getScoreMatching();
             }
         });
 

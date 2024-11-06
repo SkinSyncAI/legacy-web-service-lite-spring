@@ -23,7 +23,7 @@ public class ExpoMainService {
         cosmeticMatchingListElementDTOList.sort(new Comparator<CosmeticMatchingListElementDTO>() {
             @Override
             public int compare(CosmeticMatchingListElementDTO o1, CosmeticMatchingListElementDTO o2) {
-                return o1.getScoreMatching() - o2.getScoreMatching();
+                return o2.getScoreMatching() - o1.getScoreMatching();
             }
         });
         List<Long> cosmeticList = new ArrayList<>();

@@ -15,7 +15,7 @@
         <div class="bq-offcanvas-chart-hbar-line-title"><p th:text="${product.name}"></p></div>
         <div class="bq-offcanvas-chart-hbar-line-content">
             <div class="bq-offcanvas-chart-hbar-line-bar" th:style="|width: calc(${product.score}% * 0.8);|"></div>
-            <p th:style="|left: calc(${product.score} * 0.8 + 2)%;|" th:text="${product.score}"></p>
+            <p th:style="|left: calc(${product.score}% * 0.8 + 2)%;|" th:text="${product.score}"></p>
         </div>
     </div>
 
