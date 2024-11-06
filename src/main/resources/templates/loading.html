@@ -7,7 +7,7 @@
 <style>
     #bq-branding { font-family: PretendardMedium; font-size: 0.7rem; color: rgba(52, 52, 52, 0.3); }
 
-    body { background-image: linear-gradient(to bottom, #D0FDFF, #FFFFFF 60%); }
+    body { height: 100dvh; background-image: linear-gradient(to bottom, #D0FDFF, #FFFFFF 60%); }
 
     #bq-container-logo { }
     #bq-branding { margin-bottom: 4vh; text-align: center; }
@@ -23,9 +23,8 @@
             </div>
         </div>
     </div>
-
-    <p id="bq-branding" class="fixed-bottom">Made by Voyageventures</p>
 </div>
+<p id="bq-branding" class="fixed-bottom">Made by Voyageventures</p>
 
 <script>
     $(document).ready(function () {
@@ -43,7 +42,7 @@
                     $("#bq-brand-logo").fadeTo(200, 0.4);
                     $("#bq-description").fadeIn(1000);
                     setTimeout(() => {
-                        location.href = "/expo/intro";
+                       location.href = "/expo/intro";
                     }, 1200);
                 }, 1100);
             }, 700);
