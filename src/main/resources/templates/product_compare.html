@@ -22,7 +22,7 @@
     #bq-top-title span { font-family: Paperlogy6SemiBold; }
 
     #bq-top-title-container { padding-left: 6vw; padding-right: 6vw; border-bottom-color: rgba(90, 129, 250, 0.5); border-bottom-width: 0.03125rem;  }
-    #bq-category { margin-top: 2vh; width: 100vw; }
+    #bq-category { margin-top: 2vh; width: 100%; }
     #bq-category-content { overflow-x: scroll; -ms-overflow-style: none; }
     #bq-category-content::-webkit-scrollbar { display: none; }
     #bq-category-row { display: flex; margin-left: 2vw; }
@@ -30,24 +30,45 @@
     #bq-top { margin-top: 1.5vh; padding-top: 1.5vh; padding-bottom: 1.5vh; width: 100%; background-color: rgba(90, 129, 250, 0.1); border-top-width: 0.0625rem; border-top-color: rgba(86, 125, 250, 0.5); border-bottom-width: 0.0625rem; border-bottom-color: rgba(86, 125, 250, 0.5); }
     #bq-top-title { margin-bottom: 1.5vh; }
     #bq-top-content { margin-top: 1.5vh; }
-    .bq-product { display: flex; }
-    .bq-product-top { padding: 1.5vh 6%; }
-    .bq-product-goods { height: 22vw; display: flex; align-content: flex-start; margin-right: auto; }
-    .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden;}
-    .bq-product-goods-image img { height: auto; width: 100%; }
-    .bq-product-goods-data { height: 22vw; display: flex; align-items: center; }
-    .bq-product-goods-data-inner { display: block; width: 43vw; }
-    .bq-product-goods-data-etc { margin-top: 3%; display: flex; align-content: flex-start; align-items: center; }
-    .bq-product-goods-data-volume { margin-left: 1%; }
-    .bq-product-goods-data-star { margin-left: 3%; height: 0.68rem; width: 0.68rem; }
-    .bq-product-goods-data-review { margin-left: 0.5%; }
-    .bq-product-goods-data-name { overflow-x: hidden; }
-    .bq-product-score { margin-top: 2.3vh; text-align: right; }
-    .bq-product-score-main { margin-top: 0.2vh; margin-bottom: 0.2vh;}
-    .bq-product-score-main span { margin-left: 1vw; }
     #bq-recommend { margin-bottom: 15vh; }
     #bq-recommend-title { padding: 1.5vh 6%; border-bottom-color: rgba(0, 0, 0, 0.15); border-bottom-width: 0.03125rem; }
     .bq-product-recommend { padding: 1.5vh 6%; border-bottom-color: rgba(0, 0, 0, 0.15); border-bottom-width: 0.03125rem; }
+    
+    @media (max-width:479px) {
+        .bq-product { display: flex; }
+        .bq-product-top { padding: 1.5vh 6%; }
+        .bq-product-goods { height: 22%; display: flex; align-content: flex-start; margin-right: auto; }
+        .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden;}
+        .bq-product-goods-image img { height: auto; width: 100%; }
+        .bq-product-goods-data { height: 22vw; display: flex; align-items: center; }
+        .bq-product-goods-data-inner { display: block; width: 43vw; }
+        .bq-product-goods-data-etc { margin-top: 3%; display: flex; align-content: flex-start; align-items: center; }
+        .bq-product-goods-data-volume { margin-left: 1%; }
+        .bq-product-goods-data-star { margin-left: 3%; height: 0.68rem; width: 0.68rem; }
+        .bq-product-goods-data-review { margin-left: 0.5%; }
+        .bq-product-goods-data-name { overflow-x: hidden; }
+        .bq-product-score { margin-top: 2.3vh; text-align: right; }
+        .bq-product-score-main { margin-top: 0.2vh; margin-bottom: 0.2vh;}
+        .bq-product-score-main span { margin-left: 1vw; }
+    }
+
+    @media (min-width:480px) {
+        .bq-product { display: flex; }
+        .bq-product-top { padding: 1.5vh 6%; }
+        .bq-product-goods { height: 106px; display: flex; align-content: flex-start; margin-right: auto; }
+        .bq-product-goods-image { height: 106px; width: 106px; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden;}
+        .bq-product-goods-image img { height: auto; width: 100%; }
+        .bq-product-goods-data { height: 106px; display: flex; align-items: center; }
+        .bq-product-goods-data-inner { display: block; width: 210px; }
+        .bq-product-goods-data-etc { margin-top: 3%; display: flex; align-content: flex-start; align-items: center; }
+        .bq-product-goods-data-volume { margin-left: 1%; }
+        .bq-product-goods-data-star { margin-left: 3%; height: 0.68rem; width: 0.68rem; }
+        .bq-product-goods-data-review { margin-left: 0.5%; }
+        .bq-product-goods-data-name { overflow-x: hidden; }
+        .bq-product-score { margin-top: 2.3vh; text-align: right; }
+        .bq-product-score-main { margin-top: 0.2vh; margin-bottom: 0.2vh;}
+        .bq-product-score-main span { margin-left: 1vw; }
+    }
 
     #bq-compare { height: 4.4vh; margin-bottom: 12.5vh; margin-left: auto; margin-right: 3.5vw; }
     #bq-compare-btn { height: 100%; padding-left: 2vh; padding-right: 2vh; background-color: #567DFA; border-radius: 3vh; }
@@ -89,6 +110,8 @@
             <!-- Content -->
         </div>
     </div>
+</div>
+<div class="fixed-bottom">
     <div id="bq-compare" class="fixed-bottom tw-grid tw-place-items-end" style="z-index: 2100;">
         <button id="bq-compare-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#bq-offcanvas" aria-controls="#bq-offcanvas" class="bq-compare-btn">비교하기</button>
     </div>
@@ -97,10 +120,10 @@
             <img class="bq-ml-auto bq-mr-auto" src="/image/product_compare/btn_ocnow.svg" alt="^">
         </button>
     </div>
+    <th:block th:insert="~{fragment/footer/main :: Footer}"></th:block>
+    <th:block th:insert="~{product_compare_ocnow :: OffcanvasNow}"></th:block>
+    <th:block th:insert="~{product_compare_offcanvas :: Offcanvas}"></th:block>
 </div>
-<th:block th:insert="~{fragment/footer/main :: Footer}"></th:block>
-<th:block th:insert="~{product_compare_ocnow :: OffcanvasNow}"></th:block>
-<th:block th:insert="~{product_compare_offcanvas :: Offcanvas}"></th:block>
 
 <script th:inline="javascript">
     $.ajax({

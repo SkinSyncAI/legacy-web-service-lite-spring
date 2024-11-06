@@ -10,8 +10,8 @@
 
     #bq-header { background-color: rgba(255, 255, 255, 0.8); }
     #bq-title-container { margin-top: 4vh; height: 6vh; width: 19rem; }
-    #bq-test-progress { margin-top: 5vh; height: 4px; width: 80vw; }
-    #bq-test-container { margin-top: 23vh; }
+    #bq-test-progress { margin-top: 5vh; height: 4px; width: 80%; }
+    #bq-test-container { margin-top: 4vh; }
     .bq-test-q-container { margin-top: 3.5vh; width: 19rem; }
     .bq-test-q-text { margin-top: 1vh; }
     .bq-test-a-row { margin-top: 2vh;}
@@ -21,11 +21,11 @@
     .bq-test-a-btn-2 { background-color: rgba(255, 246, 166, 0.3); }
     .bq-test-a-btn-3 { background-color: rgba(196, 255, 203, 0.3); }
     .bq-test-a-btn-4 { background-color: rgba(255, 217, 251, 0.3); }
-    #bq-btn-test-submit { width: 83vw; margin-bottom: 2vh; }
+    #bq-btn-test-submit { width: 83%; margin-bottom: 2vh; }
 </style>
 
 <div id="bq-content-container" class="bq-h-100p bq-w-100p">
-    <div id="bq-header" class="fixed-top">
+    <div id="bq-header" class="sticky-top">
         <th:block th:insert="~{fragment/navbar/color_back :: Navbar}"></th:block>
         <div id="bq-test-progress" class="progress bq-ml-auto bq-mr-auto" role="progressbar" aria-valuemin="0" aria-valuemax="100">
             <div id="bq-test-progress-c" class="progress-bar" style="width: 0"></div>
@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <div id="bq-btn-test-submit" class="bq-ml-auto bq-mr-auto fixed-bottom" style="display: none; opacity: 0.95;">
+    <div id="bq-btn-test-submit" class="bq-ml-auto bq-mr-auto sticky-bottom" style="display: none; opacity: 0.95;">
         <a id="bq-a-btn-next"><img id="bq-btn-next" class="bq-ml-auto bq-mr-auto" src="/image/diagnosis_test/btn_next.png" alt="내 피부타입 알아보기"></a>
     </div>
 </div>

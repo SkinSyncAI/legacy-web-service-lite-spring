@@ -5,7 +5,7 @@
 
     <div id="bq-top-content">
 
-        <div th:unless="${productTop} == null" class="bq-product bq-product-top">
+        <div th:unless="${productTop} == null" class="bq-product bq-product-top" th:onclick="|location.href='/expo/product/${productTop.id}';|">
             <div class="bq-product-goods">
                 <div class="bq-product-goods-image"><img th:src="${productTop.image}" alt=""></div>
                 <div class="bq-product-goods-data">
@@ -31,7 +31,7 @@
 
     <div id="bq-recommend-content">
 
-        <div th:each="product:${productSim.cosmeticList}" class="bq-product bq-product-recommend">
+        <div th:each="product:${productSim.cosmeticList}" class="bq-product bq-product-recommend" th:onclick="|location.href='/expo/product/${product.id}';|">
             <div class="bq-product-goods">
                 <div class="bq-product-goods-image"><img th:src="${product.image}" alt=""></div>
                 <div class="bq-product-goods-data">
