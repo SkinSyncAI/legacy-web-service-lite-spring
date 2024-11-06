@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<style>
+    #bq-frame-caption { font-family: Paperlogy3Light; font-size: 0.875rem; color: #FFFFFF; }
+
+    body { background-color: #545454; }
+    #bq-caption { width: 90vw; display: flex; justify-content: right; }
+    #bq-frame-caption { width: 100%; text-align: center; position: fixed; top: 22%; }
+    #bq-frame { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    #bq-capture-btn { position: fixed; top: 80%; left: 50%; transform: translateX(-50%); }
+</style>
+
+<th:block th:insert="~{fragment/navbar/whiteword_back_camera :: Navbar('제품 매칭 검색')}"></th:block>
+<!--<video id="videoInput"></video>-->
+<div id="bq-content-container">
+    <div id="bq-caption" class="bq-ml-auto bq-mr-auto">
+        <img id="bq-caption-img" class="bq-caption-img" src="/image/search_camera/caption.svg" alt="AI 피부진단">
+    </div>
+
+    <p id="bq-frame-caption">제품을 사각형 안에 정면으로 위치시켜 주세요.</p>
+    <img id="bq-frame" src="/image/search_camera/frame.svg" alt="">
+
+    <button id="bq-capture-btn">
+        <img id="bq-capture-btn-img" src="/image/search_camera/capture.svg" alt="촬영">
+    </button>
+</div>
+
+
+</html>

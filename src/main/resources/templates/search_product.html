@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#D0FDFF" />
+
+<style>
+    #bq-content-container { background-image: linear-gradient(to bottom, #D0FDFF, #FFFFFF 12%); }
+
+    #bq-title p { font-family: Paperlogy4Regular; font-size: 1.09375rem; color: #5A81FA; }
+    #bq-title p span { font-family: Paperlogy6SemiBold; }
+    #bq-product-brand {font-family: PretendardRegular; font-size: 0.8rem; color: rgba(0, 0, 0, 0.3); }
+    #bq-product-name { font-family: PretendardRegular; font-size: 0.84375rem; color: #000000; }
+    #bq-product-score { font-family: Paperlogy5Medium; font-size: 4.125rem; color: #567DFA; }
+    #bq-product-score span { font-family: Paperlogy6SemiBold; font-size: 1.3125rem; }
+    #bq-product-detail { font-family: PretendardRegular; font-size: 0.75rem; color: #343434; }
+    #bq-score-title p { font-family: Paperlogy3Light; font-size: 0.9375rem; color: #343434; }
+    #bq-score-title p span { font-family: Paperlogy5Medium; }
+    #bq-score-tag p { font-family: Paperlogy6SemiBold; font-size: 0.75rem; color: #5A81FA; }
+    #bq-description p { font-family: Paperlogy3Light; font-size: 1.1875rem; color: #343434; }
+    #bq-description p span { font-family: Paperlogy5Medium; }
+
+    #bq-title { margin-top: 3vh; width: 100%; }
+    #bq-title p {text-align: center;}
+
+    #bq-product { margin-top: 3vh; height: 23%; width: 88%; border-radius: 2vh; border-width: 0.1rem; border-color: #5A81FA; background-color: rgba(90, 129, 250, 0.1); display: flex; }
+    #bq-score { margin-top: 3vh; height: 32vh; width: 88%; border-radius: 2vh; border-width: 0.1rem; border-color: rgba(52, 52, 52, 0.2); text-align: center; }
+    #bq-description { margin-top: 3vh; margin-bottom: 14%; padding: 3vh 6vw; width: 88%; border-radius: 2vh; border-width: 0.1rem; border-color: rgba(52, 52, 52, 0.2); overflow: hidden; }
+
+    #bq-product-image { height: 100%; width: 45%; padding: 5% 6%; }
+    #bq-product-content { height:100%; width: 55%; padding-top: 5%; padding-bottom: 5%; padding-right: 5%; overflow: hidden; }
+    #bq-product-image img { width: 100%; object-fit: cover; }
+    #bq-product-like { height: 2.6vh; width: auto; }
+    #bq-product-content div { width: 100%; display: flex; justify-content: end; }
+    #bq-score-title { margin-top: 1.5vh; }
+    #bq-score-title p { text-align: center; }
+    #bq-score-chart-radar-container { height: 22vh; width: 22vh; }
+    #bq-score-tag { height: 4vh; width: 88%; background-color: #EFF3FF; border-radius: 1.4vh; display: inline-flex; justify-content: space-evenly; }
+</style>
+
+<div id="bq-content-container" class="bq-w-100p">
+    <th:block th:insert="~{fragment/navbar/blackword_back_menu :: Navbar('제품 매칭 결과')}"></th:block>
+
+    <div id="bq-title">
+        <p><span>매우 잘 맞아요!</span> 구매를 추천드려요 :)</p>
+    </div>
+
+    <div id="bq-product" class="bq-ml-auto bq-mr-auto">
+        <div id="bq-product-image"><img th:src="${product.image}" alt=""></div>
+        <div id="bq-product-content">
+            <div><img id="bq-product-like" src="/image/search_product/like.svg" alt="like"></div>
+            <p id="bq-product-brand" th:text="${product.brand}"></p>
+            <p id="bq-product-name" th:text="${product.name}"></p>
+            <p id="bq-product-score">[[${product.score}]]<span>점</span></p>
+            <div th:onclick="|location.href='/expo/product/${product.id}';|"><p id="bq-product-detail">자세히보기</p></div>
+        </div>
+    </div>
+
+    <div id="bq-score" class="bq-ml-auto bq-mr-auto">
+        <div id="bq-score-title">
+            <p><span>Guest님</span>이 찾으신 화장품, <span>이런 기능</span>이 있어요!</p>
+        </div>
+        <div id="bq-score-chart-radar-container" class="bq-ml-auto bq-mr-auto">
+            <canvas id="bq-score-chart-radar"></canvas>
+        </div>
+        <div id="bq-score-tag">
+            <th:block th:each="keyword, keywordStat:${product.keyword}">
+                <p th:if="${keywordStat.count} < 6" class="align-self-center"># [[${keyword}]]</p>
+            </th:block>
+        </div>
+    </div>
+
+    <div id="bq-description" class="bq-ml-auto bq-mr-auto">
+        <p>이 제품은 <span th:text="${product.descKeyword}"></span>이에요.</p>
+        <p th:text="${product.descLine}"></p>
+    </div>
+
+</div>
+<th:block th:insert="~{fragment/footer/main :: Footer}"></th:block>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script th:inline="javascript">
+    const ctx = $("#bq-score-chart-radar")
+
+    const data = {
+        labels: ['수분 공급', '피부 진정', '피부 미백', '피부 장벽', '수분 보호'],
+        datasets: [{
+            data: [
+                [[${product.scoreHydration}]],
+                [[${product.scoreSoothing}]],
+                [[${product.scoreBrightening}]],
+                [[${product.scoreBarrier}]],
+                [[${product.scoreMoisture}]]
+            ],
+            fill: true,
+            backgroundColor: 'rgba(90,129,250,0.8)',
+            borderColor: '#5A81FA',
+            pointStyle: false
+        }]
+    };
+
+    new Chart(ctx, {
+        type: "radar",
+        data: data,
+        options: {
+            elements: {
+                line: {
+                    borderWidth: 2
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                r: {
+                    ticks: {
+                        stepSize: 50,
+                        display: false,
+                    },
+                    pointLabels: {
+                        font: {
+                            size: 13,
+                            family: "PretendardLight",
+                            color: "#567DFA"
+                        }
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    })
+</script>

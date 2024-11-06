@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="Footer">
+    <style>
+        #bq-footer { height: 11vh; width: 100%; background-color: #FFFFFF; box-shadow: 0 0 5vh 2vh rgba(150, 150, 150, 0.2);}
+        #bq-footer-row { width: 90%; height: 85%; }
+        .bq-footer-col { padding-left: 0; padding-right: 0;}
+        .bq-footer-img { height: 3.3vh; width: auto; }
+    </style>
+
+    <nav id="bq-footer" class="sticky-bottom">
+        <div id="bq-footer-row" class="row bq-ml-auto bq-mr-auto">
+            <div class="bq-footer-col col tw-grid tw-place-items-center">
+                <a>
+                    <img id="bq-footer-img-like" class="bq-footer-img bq-m-auto" src="/image/footer/like.svg" alt="like">
+                </a>
+            </div>
+            <div class="bq-footer-col col tw-grid tw-place-items-center">
+                <a href="/expo/main">
+                    <img id="bq-footer-img-home" class="bq-footer-img bq-m-auto" src="/image/footer/home.svg" alt="home">
+                </a>
+            </div>
+            <div class="bq-footer-col col tw-grid tw-place-items-center">
+                <a>
+                    <img id="bq-footer-img-mypage" class="bq-footer-img bq-m-auto" src="/image/footer/mypage.svg" alt="mypage">
+                </a>
+            </div>
+        </div>
+    </nav>
+</th:block>
+
+</html>

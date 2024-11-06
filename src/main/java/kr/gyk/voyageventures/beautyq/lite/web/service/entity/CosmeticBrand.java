@@ -19,13 +19,16 @@ public class CosmeticBrand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = false, length = 128)
+    @Column(nullable = true, unique = true, length = 64)
+    private String code;
+
+    @Column(nullable = true, unique = false, length = 128)
     private String nameKo;
 
-    @Column(nullable = false, unique = false, length = 128)
+    @Column(nullable = true, unique = false, length = 128)
     private String nameEn;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cosmetic> cosmetic = new ArrayList<>();
 
 }

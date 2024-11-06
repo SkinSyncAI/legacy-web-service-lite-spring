@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div>
+    <div id="bq-top-null" class="tw-sr-only" th:attr="data-bq-top-null=${isTopNull}"></div>
+
+    <div id="bq-top-content">
+
+        <div th:unless="${productTop} == null" class="bq-product bq-product-top" th:onclick="|location.href='/expo/product/${productTop.id}';|">
+            <div class="bq-product-goods">
+                <div class="bq-product-goods-image"><img th:src="${productTop.image}" alt=""></div>
+                <div class="bq-product-goods-data">
+                    <div class="bq-product-goods-data-inner">
+                        <p class="bq-product-goods-data-brand" th:text="${productTop.brand}"></p>
+                        <p class="bq-product-goods-data-name" th:text="${productTop.name}"></p>
+                        <div class="bq-product-goods-data-etc">
+                            <p class="bq-product-goods-data-price bq-number-comma">[[${productTop.priceDiscount}]]원</p>
+                            <p class="bq-product-goods-data-volume">/[[${productTop.volume}]]</p>
+                            <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                            <p class="bq-product-goods-data-review">[[${productTop.rating}]](<span class="bq-number-comma">[[${productTop.countReview}]]</span>)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bq-product-score">
+                <p class="bq-product-score-main">[[${productTop.score}]]<span>점</span></p>
+                <p class="bq-product-score-matching">매칭도 <span th:text="${productTop.matching}"></span>점</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="bq-recommend-content">
+
+        <div th:each="product:${productSim.cosmeticList}" class="bq-product bq-product-recommend" th:onclick="|location.href='/expo/product/${product.id}';|">
+            <div class="bq-product-goods">
+                <div class="bq-product-goods-image"><img th:src="${product.image}" alt=""></div>
+                <div class="bq-product-goods-data">
+                    <div class="bq-product-goods-data-inner">
+                        <p class="bq-product-goods-data-brand" th:text="${product.brand}"></p>
+                        <p class="bq-product-goods-data-name" th:text="${product.name}"></p>
+                        <div class="bq-product-goods-data-etc">
+                            <p class="bq-product-goods-data-price"><span class="bq-number-comma">[[${product.priceDiscount}]]</span>원</p>
+                            <p class="bq-product-goods-data-volume">/[[${product.volume}]]</p>
+                            <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
+                            <p class="bq-product-goods-data-review">[[${product.rating}]](<span class="bq-number-comma">[[${product.countReview}]]</span>)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bq-product-score">
+                <p class="bq-product-score-main">[[${product.score}]]<span>점</span></p>
+                <p class="bq-product-score-matching">매칭도 <span th:text="${product.matching}"></span>점</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $(".bq-number-comma").each(function () {
+        $(this).text($(this).text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    });
+</script>
+
+</html>
