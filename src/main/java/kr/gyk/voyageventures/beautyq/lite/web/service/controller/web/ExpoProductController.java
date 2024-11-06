@@ -27,6 +27,7 @@ import java.util.List;
 public class ExpoProductController {
     private final CookieComponent cookieComponent;
     private final ExpoProductService expoProductService;
+    private final CosmeticService cosmeticService;
 
     @GetMapping("/{id}")
     public String getExpoProduct (
@@ -64,9 +65,19 @@ public class ExpoProductController {
             @PathVariable(name="tag") Short tag
     ) throws Exception {
         CosmeticScoreListDTO cosmeticListDTO = expoProductService.getCosmeticScoreListDTOSimilar(id, tag, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest));
-        CosmeticScoreListElementDTO firstDTO = cosmeticListDTO.getCount() > 1 ? cosmeticListDTO.getCosmeticList().getFirst() : null;
-        List<CosmeticScoreListElementDTO> newListElementDTO = cosmeticListDTO.getCount() > 1 ? cosmeticListDTO.getCosmeticList().stream().skip(1).toList() : new ArrayList<>();
+        CosmeticScoreListElementDTO cosmeticCurrent = expoProductService.getCosmeticScoreListDTOCurrent(id, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest));
 
+        CosmeticScoreListElementDTO firstDTO = null;
+        List<CosmeticScoreListElementDTO> newListElementDTO = new ArrayList<>();
+
+        if (cosmeticListDTO.getCount() > 1 && cosmeticListDTO.getCosmeticList().getFirst().getMatching() > cosmeticCurrent.getMatching()) {
+            firstDTO = cosmeticListDTO.getCosmeticList().getFirst();
+            newListElementDTO = cosmeticListDTO.getCosmeticList().stream().skip(1).toList();
+        } else if (cosmeticListDTO.getCount() > 1) {
+            newListElementDTO = cosmeticListDTO.getCosmeticList();
+        }
+
+        model.addAttribute("isTopNull", firstDTO == null ? 1 : 0);
         model.addAttribute("productTop", firstDTO);
         model.addAttribute("productSim", CosmeticScoreListDTO.builder().count((long) newListElementDTO.size()).cosmeticList(newListElementDTO).build());
 

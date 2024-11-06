@@ -9,6 +9,7 @@ import kr.gyk.voyageventures.beautyq.lite.web.service.form.DiagnosisTestForm;
 import kr.gyk.voyageventures.beautyq.lite.web.service.form.MainTagForm;
 import kr.gyk.voyageventures.beautyq.lite.web.service.repository.CosmeticRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.transform.ToListResultTransformer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,35 +35,36 @@ public class ExpoEventService {
         listDTO.sort(new Comparator<CosmeticMatchingListElementDTO>() {
             @Override
             public int compare(CosmeticMatchingListElementDTO o1, CosmeticMatchingListElementDTO o2) {
-                return o1.getScoreMatching() - o2.getScoreMatching();
+                return o2.getScoreMatching() - o1.getScoreMatching();
             }
         });
 
-        if (source.getId().longValue() == listDTO.getFirst().getId().longValue())
+        long mid;
+        for (mid = 0; mid < listDTO.size(); mid++) if (id == listDTO.get((int) mid).getId().longValue()) break;
+
+        long delta = mid - 1;
+        if (delta < 0) delta = 0;
+        for (; delta >= 0; delta--) if (source.getScoreMatching().longValue() < listDTO.get((int) delta).getScoreMatching().longValue()) break;
+
+        if (delta < 0){
+            Cosmetic cosmeticResult = cosmeticRepository.findById(id).orElseThrow(EntityDataNotFoundException::new);
             return EventCosmeticResultDTO.builder()
                     .id(id)
-                    .name(cosmetic.getNameKo())
-                    .image(cosmetic.getImageProduct().getUrl())
-                    .score(listDTO.getFirst().getScoreMatching())
+                    .name(cosmeticResult.getNameKo())
+                    .image(cosmeticResult.getImageProduct().getUrl())
+                    .score(listDTO.get((int) mid).getScoreMatching())
                     .scoreDelta((short) 0)
                     .build();
-
-        long low = 0, high = listDTO.size() - 1, mid = 1;
-        while (low <= high) {
-            mid = (high - low) / 2;
-            if (listDTO.get((int) mid).getScoreMatching() < listDTO.get(Math.toIntExact(source.getId())).getScoreMatching()) high = mid - 1;
-            else if (listDTO.get((int) mid).getScoreMatching() > listDTO.get(Math.toIntExact(source.getId())).getScoreMatching()) low = mid + 1;
-            else break;
         }
 
-        Cosmetic cosmeticResult = cosmeticRepository.findById(listDTO.get((int) (mid - 1)).getId()).orElseThrow(EntityDataNotFoundException::new);
+        Cosmetic cosmeticResult = cosmeticRepository.findById(listDTO.get((int) delta).getId()).orElseThrow(EntityDataNotFoundException::new);
 
         return EventCosmeticResultDTO.builder()
-                .id(listDTO.get((int) (mid - 1)).getId())
+                .id(listDTO.get((int) delta).getId())
                 .name(cosmeticResult.getNameKo())
                 .image(cosmeticResult.getImageProduct().getUrl())
-                .score(listDTO.get((int) (mid - 1)).getScoreMatching())
-                .scoreDelta((short) (listDTO.get((int) (mid - 1)).getScoreMatching() - listDTO.get((int) mid).getScoreMatching()))
+                .score(listDTO.get((int) delta).getScoreMatching())
+                .scoreDelta((short) (listDTO.get((int) delta).getScoreMatching() - listDTO.get((int) mid).getScoreMatching()))
                 .build();
     }
 }

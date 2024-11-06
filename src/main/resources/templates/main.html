@@ -17,8 +17,8 @@
 
     #bq-ads { margin-top: 2vh; }
 
-    #bq-isearch { height: 19vw; width: 19vw; margin-bottom: 12.5vh; margin-left: auto; margin-right: 3.5vw; }
-    #bq-isearch-img { height: 19vw; width: auto; }
+    #bq-isearch { height: 19%; width: 19%; margin-bottom: 3vh; margin-left: auto; margin-right: 3.5vw; }
+    #bq-isearch-img { height: 100%; width: auto; }
 
     #bq-search { width: 88%; height: 5vh; margin-top: 1vh; }
     #bq-search-form-row { height: 100%; width: 100%; }
@@ -33,28 +33,34 @@
     .bq-tag-row { height: 4.8vh; display: flex; flex-wrap: nowrap; margin-right: 6vw;}
     #bq-tag-btn-plus { height: 100%; width: auto; }
     .bq-tag-btn-img { height: 40%; width: auto; }
-    .bq-tag-btn { margin-left: 1vw; margin-right: 1vw; height: 100%; width: 22vw; background-color: #FFFFFF; border-color: rgba(90, 129, 250, 0.7); border-width: 0.125rem; border-radius: 3vh;}
+    .bq-tag-btn { margin-left: 1vw; margin-right: 1vw; height: 100%; width: 30%; background-color: #FFFFFF; border-color: rgba(90, 129, 250, 0.7); border-width: 0.125rem; border-radius: 3vh;}
     #bq-tag-row-2 { margin-top: 1.2vh; margin-left: 0.1vw;}
     #bq-result { display: flex; justify-content: center; margin-top: 4vh; height: 16vh; width: 88%; background-color: rgba(90, 129, 250, 0.1); border-color: rgb(90, 129, 250); border-width: 0.18rem; border-radius: 1.5vh; box-shadow: 0 4px 6px 2px #cccccc }
     #bq-result-inner { display: block; }
     .bq-result-line { margin-top: 0.5vh;}
-    #bq-product { margin-top: 4vh; width: 88vw; }
+    #bq-product { margin-top: 4vh; width: 88%; }
     #bq-product-title { display: flex; height: 2.5vh; justify-content: flex-start; }
     #bq-product-title-text-container { width: 100%; display: flex; justify-content: center; }
     #bq-product-title-text { width: 100%; display: block; margin-right: auto; }
     #bq-product-more { height: 100%; width: auto; }
     #bq-product-more-img { height: 100%; width: auto; }
-    #bq-product-content { margin-top: 2vh; margin-bottom: 14vh; }
-    .bq-product-goods { margin-bottom: 2vh; height: 22vw; display: flex; align-content: flex-start; }
-    .bq-product-goods-image { height: 22vw; width: 22vw; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden; }
+    #bq-product-content { margin-top: 2vh; }
+    .bq-product-goods { margin-bottom: 2vh; height: 22%; display: flex; align-content: flex-start; }
+    @media (max-width:479px) {
+        .bq-product-goods-image { height: 120%; width: 34%; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden; }
+    }
+    @media (min-width:480px) {
+        .bq-product-goods-image { height: 80%; width: 38%; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden; }
+    }
     .bq-product-goods-image img { height: 100%; width: 100%; }
-    .bq-product-goods-data { height: 22vw; width: auto; display: flex; align-items: center; }
-    .bq-product-goods-data-inner { display: block; width: 63vw; }
+    .bq-product-goods-data { height: 100%; width: 90%; margin-top: 4%; display: flex; align-items: center; }
+    .bq-product-goods-data-inner { display: block; }
     .bq-product-goods-data-etc { margin-top: 3%; display: flex; align-content: flex-start; align-items: center; }
     .bq-product-goods-data-volume { margin-left: 1%; }
     .bq-product-goods-data-star { margin-left: 3%; height: 0.68rem; width: 0.68rem; }
     .bq-product-goods-data-review { margin-left: 0.5%; }
     .bq-product-goods-data-name { overflow-x: hidden; }
+    .bq-product-goods-data-price { text-wrap: nowrap; width: auto; }
 </style>
 
 <th:block th:insert="~{fragment/navbar/color_menu :: Navbar}"></th:block>
@@ -64,7 +70,7 @@
     </div>
     <div id="bq-search" class="bq-ml-auto bq-mr-auto">
         <label for="form-search"></label>
-        <div id="bq-search-form-row" class="row bq-ml-auto bq-mr-auto">
+        <div id="bq-search-form-row" class="row bq-ml-auto bq-mr-auto" onclick="location.href='/expo/search/text';">
             <div class="bq-search-form-col col"><input class="form-control" type="search" name="form-search" id="form-search" placeholder="'지성 피부에게 좋은 스킨' 검색해보세요!"></div>
             <div class="bq-search-form-col col-2"><button id="bq-search-btn" type="submit"><img id="bq-search-img" src="/image/main/search.svg" alt="Search"></button></div>
         </div>
@@ -127,10 +133,10 @@
                         <p class="bq-product-goods-data-brand" th:text="${product.brand}"></p>
                         <p class="bq-product-goods-data-name" th:text="${product.name}"></p>
                         <div class="bq-product-goods-data-etc">
-                            <p class="bq-product-goods-data-price">[[${product.priceDiscount}]]원</p>
+                            <p class="bq-product-goods-data-price"><span class="bq-number-comma">[[${product.priceDiscount}]]</span>원</p>
                             <p class="bq-product-goods-data-volume">/[[${product.volume}]]</p>
                             <img class="bq-product-goods-data-star" src="/image/main/product_star.svg" alt="Star">
-                            <p class="bq-product-goods-data-review">[[${product.rating}]]([[${product.countReview}]])</p>
+                            <p class="bq-product-goods-data-review">[[${product.rating}]](<span class="bq-number-comma">[[${product.countReview}]]</span>)</p>
                         </div>
                     </div>
                 </div>
@@ -139,16 +145,19 @@
         </div>
 
     </div>
-
-    <div id="bq-isearch" class="fixed-bottom tw-grid tw-place-items-end">
+</div>
+<div class="sticky-bottom">
+    <div id="bq-isearch" class="sticky-bottom tw-grid tw-place-items-end">
         <a href="/expo/search/camera">
             <img id="bq-isearch-img" src="/image/main/image_search.png" alt="ISearch">
         </a>
     </div>
+    <th:block th:insert="~{fragment/footer/main :: Footer}"></th:block>
 </div>
-<th:block th:insert="~{fragment/footer/main :: Footer}"></th:block>
 
 <script th:inline="javascript">
+
+
     [# th:each="item:${tags.line1}"]
         let btn[[${item.id}]] = $("#bq-tag-btn-[[${item.id}]]");
         let isClicked[[${item.id}]] = false;

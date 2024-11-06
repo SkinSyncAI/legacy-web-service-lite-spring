@@ -7,12 +7,13 @@
 <style>
     #bq-branding { font-family: PretendardMedium; font-size: 0.7rem; color: rgba(52, 52, 52, 0.3); }
 
-    body { background-image: linear-gradient(to bottom, #D0FDFF, #FFFFFF 60%); }
-    #bq-container-logo { position: fixed; top: 0; }
-    #bq-branding { margin-bottom: 4vh;text-align: center; }
+    body { height: 100dvh; background-image: linear-gradient(to bottom, #D0FDFF, #FFFFFF 60%); }
+
+    #bq-container-logo { }
+    #bq-branding { margin-bottom: 4vh; text-align: center; }
 </style>
 
-<div id="bq-container" class="bq-h-100vh bq-w-100p">
+<div id="bq-container" class="bq-h-100p bq-w-100p">
     <div id="bq-container-logo" class="container text-center" style="margin-top: 40vh;">
         <div class="row">
             <div class="col">
@@ -41,7 +42,7 @@
                     $("#bq-brand-logo").fadeTo(200, 0.4);
                     $("#bq-description").fadeIn(1000);
                     setTimeout(() => {
-                        location.href = "/expo/intro";
+                       location.href = "/expo/intro";
                     }, 1200);
                 }, 1100);
             }, 700);
