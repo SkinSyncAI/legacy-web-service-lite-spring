@@ -38,16 +38,7 @@ public class ExpoEventService {
             }
         });
 
-        if (source.getId().longValue() == listDTO.getFirst().getId().longValue())
-            return EventCosmeticResultDTO.builder()
-                    .id(id)
-                    .name(cosmetic.getNameKo())
-                    .image(cosmetic.getImageProduct().getUrl())
-                    .score(listDTO.getFirst().getScoreMatching())
-                    .scoreDelta((short) 0)
-                    .build();
-
-        long low = 1, high = listDTO.size() - 1, mid = 1;
+        long low = 0, high = listDTO.size() - 1, mid = 1;
         while (low <= high) {
             mid = (high - low) / 2;
             if (listDTO.get((int) mid).getScoreMatching() < listDTO.get(Math.toIntExact(source.getId())).getScoreMatching()) high = mid - 1;
@@ -55,14 +46,18 @@ public class ExpoEventService {
             else break;
         }
 
-        Cosmetic cosmeticResult = cosmeticRepository.findById(listDTO.get((int) (mid - 1)).getId()).orElseThrow(EntityDataNotFoundException::new);
+        long delta = mid - 1;
+        if (delta < 0) delta = 0;
+        for (; delta > 0; delta--) if (source.getScoreMatching().longValue() < listDTO.get((int) delta).getScoreMatching().longValue()) break;
+
+        Cosmetic cosmeticResult = cosmeticRepository.findById(listDTO.get((int) (delta == 0 ? mid : delta)).getId()).orElseThrow(EntityDataNotFoundException::new);
 
         return EventCosmeticResultDTO.builder()
-                .id(listDTO.get((int) (mid - 1)).getId())
+                .id(listDTO.get((int) delta).getId())
                 .name(cosmeticResult.getNameKo())
                 .image(cosmeticResult.getImageProduct().getUrl())
-                .score(listDTO.get((int) (mid - 1)).getScoreMatching())
-                .scoreDelta((short) (listDTO.get((int) (mid - 1)).getScoreMatching() - listDTO.get((int) mid).getScoreMatching()))
+                .score(listDTO.get((int) delta).getScoreMatching())
+                .scoreDelta((short) (listDTO.get((int) delta).getScoreMatching() - listDTO.get((int) mid).getScoreMatching()))
                 .build();
     }
 }

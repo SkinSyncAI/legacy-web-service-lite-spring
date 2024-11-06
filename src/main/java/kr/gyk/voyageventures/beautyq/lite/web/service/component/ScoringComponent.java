@@ -21,7 +21,7 @@ public class ScoringComponent {
 
         int scoreTotal = (int) Math.floor(Math.floor(scoreMatching * 0.09) * 10 + scoreTag - scoreIngredient + scoreError);
         if (scoreTotal > 100) scoreTotal = 100;
-        if (scoreTotal <= 70) scoreTotal += 16;
+        if (scoreTotal <= 70) scoreTotal += 20;
 
         return scoreTotal;
     }
