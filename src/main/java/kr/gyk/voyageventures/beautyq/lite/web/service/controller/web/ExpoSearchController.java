@@ -19,7 +19,7 @@ public class ExpoSearchController {
     private final CookieComponent cookieComponent;
 
     @GetMapping("/camera")
-    public String getExpoCameraSearch (
+    public String getExpoSearchCamera (
             Model model,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse
@@ -36,6 +36,15 @@ public class ExpoSearchController {
     ) throws Exception {
         model.addAttribute("product", expoSearchService.getSearchProductDTO(id, cookieComponent.getDiagnosisSkinType(httpServletRequest), cookieComponent.getMainTag(httpServletRequest), cookieComponent.getScoringRandom(httpServletRequest)));
         return "search_product";
+    }
+
+    @GetMapping("/text")
+    public String getExpoSearchText (
+        Model model,
+        HttpServletRequest httpServletRequest,
+        HttpServletResponse httpServletResponse
+    ) throws Exception {
+        return "search_text";
     }
 
 }

@@ -60,7 +60,7 @@
     .bq-product-goods-data-star { margin-left: 3%; height: 0.68rem; width: 0.68rem; }
     .bq-product-goods-data-review { margin-left: 0.5%; }
     .bq-product-goods-data-name { overflow-x: hidden; }
-    .bq-product-goods-data-price { text-wrap: nowrap; width: 38%; }
+    .bq-product-goods-data-price { text-wrap: nowrap; width: auto; }
 </style>
 
 <th:block th:insert="~{fragment/navbar/color_menu :: Navbar}"></th:block>
@@ -70,7 +70,7 @@
     </div>
     <div id="bq-search" class="bq-ml-auto bq-mr-auto">
         <label for="form-search"></label>
-        <div id="bq-search-form-row" class="row bq-ml-auto bq-mr-auto">
+        <div id="bq-search-form-row" class="row bq-ml-auto bq-mr-auto" onclick="location.href='/expo/search/text';">
             <div class="bq-search-form-col col"><input class="form-control" type="search" name="form-search" id="form-search" placeholder="'지성 피부에게 좋은 스킨' 검색해보세요!"></div>
             <div class="bq-search-form-col col-2"><button id="bq-search-btn" type="submit"><img id="bq-search-img" src="/image/main/search.svg" alt="Search"></button></div>
         </div>
@@ -133,10 +133,10 @@
                         <p class="bq-product-goods-data-brand" th:text="${product.brand}"></p>
                         <p class="bq-product-goods-data-name" th:text="${product.name}"></p>
                         <div class="bq-product-goods-data-etc">
-                            <p class="bq-product-goods-data-price">[[${product.priceDiscount}]]원</p>
+                            <p class="bq-product-goods-data-price"><span class="bq-number-comma">[[${product.priceDiscount}]]</span>원</p>
                             <p class="bq-product-goods-data-volume">/[[${product.volume}]]</p>
                             <img class="bq-product-goods-data-star" src="/image/main/product_star.svg" alt="Star">
-                            <p class="bq-product-goods-data-review">[[${product.rating}]]([[${product.countReview}]])</p>
+                            <p class="bq-product-goods-data-review">[[${product.rating}]](<span class="bq-number-comma">[[${product.countReview}]]</span>)</p>
                         </div>
                     </div>
                 </div>
@@ -156,6 +156,8 @@
 </div>
 
 <script th:inline="javascript">
+
+
     [# th:each="item:${tags.line1}"]
         let btn[[${item.id}]] = $("#bq-tag-btn-[[${item.id}]]");
         let isClicked[[${item.id}]] = false;

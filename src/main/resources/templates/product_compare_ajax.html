@@ -14,10 +14,10 @@
                         <p class="bq-product-goods-data-brand" th:text="${productTop.brand}"></p>
                         <p class="bq-product-goods-data-name" th:text="${productTop.name}"></p>
                         <div class="bq-product-goods-data-etc">
-                            <p class="bq-product-goods-data-price">[[${productTop.priceDiscount}]]원</p>
+                            <p class="bq-product-goods-data-price bq-number-comma">[[${productTop.priceDiscount}]]원</p>
                             <p class="bq-product-goods-data-volume">/[[${productTop.volume}]]</p>
                             <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                            <p class="bq-product-goods-data-review">[[${productTop.rating}]]([[${productTop.countReview}]])</p>
+                            <p class="bq-product-goods-data-review">[[${productTop.rating}]](<span class="bq-number-comma">[[${productTop.countReview}]]</span>)</p>
                         </div>
                     </div>
                 </div>
@@ -40,10 +40,10 @@
                         <p class="bq-product-goods-data-brand" th:text="${product.brand}"></p>
                         <p class="bq-product-goods-data-name" th:text="${product.name}"></p>
                         <div class="bq-product-goods-data-etc">
-                            <p class="bq-product-goods-data-price">[[${product.priceDiscount}]]원</p>
+                            <p class="bq-product-goods-data-price"><span class="bq-number-comma">[[${product.priceDiscount}]]</span>원</p>
                             <p class="bq-product-goods-data-volume">/[[${product.volume}]]</p>
                             <img class="bq-product-goods-data-star" src="/image/product/star_blue.svg" alt="Rating">
-                            <p class="bq-product-goods-data-review">[[${product.rating}]]([[${product.countReview}]])</p>
+                            <p class="bq-product-goods-data-review">[[${product.rating}]](<span class="bq-number-comma">[[${product.countReview}]]</span>)</p>
                         </div>
                     </div>
                 </div>
@@ -57,5 +57,11 @@
     </div>
 
 </div>
+
+<script>
+    $(".bq-number-comma").each(function () {
+        $(this).text($(this).text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    });
+</script>
 
 </html>

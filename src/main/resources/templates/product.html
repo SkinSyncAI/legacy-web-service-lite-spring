@@ -27,6 +27,7 @@
     .bq-compare-goods-name { font-family: PretendardRegular; font-size: 0.75rem; color: #000000; }
     #bq-information-s p { font-family: Paperlogy4Regular; font-size: 0.78125rem; color: #587DFA; }
     #bq-information-s p span { font-family: Paperlogy6SemiBold; }
+    .bq-event-img-qm { font-family: Paperlogy6SemiBold; font-size: 1.5rem; color: #343434; }
 
     #bq-content-container { margin-bottom: 5vh; }
     #bq-thumbnail-container { margin-top: 1vh; height: 40vh; width: 100%; position: relative; overflow: visible; }
@@ -62,9 +63,9 @@
     #bq-compare-content { overflow-x: scroll; -ms-overflow-style: none; }
     #bq-compare-content::-webkit-scrollbar { display: none; }
     #bq-compare-row { display: flex; margin-left: 2vw; }
-    .bq-compare-col { height: 14vh; margin-left: 1vw; margin-right: 1vw;}
+    .bq-compare-col { height: 14vh; width: 28%; margin-left: 1vw; margin-right: 1vw;}
     .bq-compare-goods-image { height: 8vh; width: 12vh; display: block; background-color: #FFFFFF; overflow: hidden; }
-    .bq-compare-goods-image img { height: auto; width: 100%; }
+    .bq-compare-goods-image img { height: auto; width: 100%; object-fit: cover; }
     .bq-compare-col p { margin-top: 0.5vh; overflow-x: hidden; text-wrap: nowrap; }
 
     #bq-footer { height: 14vh; width: 100%; background-color: #FFFFFF; box-shadow: 0 0 12px 1px #dedede; }
@@ -77,12 +78,14 @@
     #bq-footer-btn-cart { width: 160px; background-color: #EFF3FF; color: #303030; }
     #bq-footer-btn-buy { width: 160px; background-color: #5A81FA; color: #FFFFFF; }
     #bq-footer-btn-like { height: 100%; }
-    #bq-footer-btn-like img { height: 50%; width: auto; }
+    #bq-footer-btn-like img { height: 50%; width: 100%; }
     #bq-information-prs { height: 100%; width: 100%; display: flex; }
     #bq-information-pr { height: 100%; width: 65%; }
     #bq-information-s { text-align: end; margin-left: auto; padding-top: 10%;}
-
     .bq-navbar { background-image: linear-gradient(to bottom, #868686, rgba(255, 255, 255, 0) 80%); }
+
+    .bq-compare-goods-image { position: relative;}
+    .bq-event-img-qm { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 </style>
 
 <th:block th:insert="~{fragment/navbar/whiteword_back_menu :: Navbar('제품 상세')}"></th:block>
@@ -107,17 +110,18 @@
             <div id="bq-information-pr">
                 <div id="bq-information-p" class="bq-information-line">
                     <p id="bq-information-p-left">
-                        <span id="bq-information-p-dp">[[${product.priceDiscount}]]<span>원</span></span>
-                        <span id="bq-information-p-op">[[${product.price}]]<span>원</span></span>
+                        <span id="bq-information-p-dp" class="bq-number-comma">[[${product.priceDiscount}]]<span>원</span></span>
+
+                        <span id="bq-information-p-op" class="bq-number-comma">[[${product.price}]]<span>원</span></span>
                     </p>
                 </div>
                 <div id="bq-information-r" class="bq-information-line">
-                    <p id="bq-information-r-p">구매 <span>([[${product.countPurchase}]])</span></p>
+                    <p id="bq-information-r-p">구매 <span class="bq-number-comma">([[${product.countPurchase}]])</span></p>
                     <div id="bq-information-r-star">
                         <img id="bq-information-star-bg" src="/image/product/star_bg.svg" alt="">
                         <!-- <img id="bq-information-star-blue" src="/image/product/star_blue.svg" alt=""> -->
                     </div>
-                    <p id="bq-information-r-r">리뷰 [[${product.rating}]] <span>([[${product.countReview}]])</span></p>
+                    <p id="bq-information-r-r">리뷰 [[${product.rating}]] <span class="bq-number-comma">([[${product.countReview}]])</span></p>
                 </div>
             </div>
             <div id="bq-information-s">
@@ -158,11 +162,23 @@
         <div id="bq-compare-content">
             <div id="bq-compare-row">
 
-                <div th:each="pItem:${productSim.cosmeticList}" class="bq-compare-col" th:onclick="|location.href='/expo/product/${pItem.id}';|">
-                    <div class="bq-compare-goods-image"><img th:src="${pItem.image}" alt=""></div>
-                    <p class="bq-compare-goods-brand" th:text="${pItem.brand}"></p>
-                    <p class="bq-compare-goods-name" th:text="${pItem.name}"></p>
-                </div>
+                <th:block th:if="${event}">
+                    <div th:each="pItem:${productSim.cosmeticList}" class="bq-compare-col">
+                        <div class="bq-compare-goods-image">
+                            <p class="bq-event-img-qm" style="z-index: 100;">?</p>
+                            <img th:src="${pItem.image}" style="filter: blur(5px); -webkit-filter: blur(5px); z-index: -1;" alt="">
+                        </div>
+                        <p class="bq-compare-goods-brand" th:text="${pItem.brand}"></p>
+                        <p class="bq-compare-goods-name" th:text="${pItem.name}"></p>
+                    </div>
+                </th:block>
+                <th:block th:unless="${event}">
+                    <div th:each="pItem:${productSim.cosmeticList}" class="bq-compare-col" th:onclick="|location.href='/expo/product/${pItem.id}';|">
+                        <div class="bq-compare-goods-image"><img th:src="${pItem.image}" alt=""></div>
+                        <p class="bq-compare-goods-brand" th:text="${pItem.brand}"></p>
+                        <p class="bq-compare-goods-name" th:text="${pItem.name}"></p>
+                    </div>
+                </th:block>
 
             </div>
         </div>
@@ -185,6 +201,5 @@
     </div>
 </nav>
 
-</html>
 
-<!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); -->
+</html>

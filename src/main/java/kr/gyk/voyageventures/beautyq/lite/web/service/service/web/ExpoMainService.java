@@ -27,6 +27,11 @@ public class ExpoMainService {
             }
         });
         List<Long> cosmeticList = new ArrayList<>();
+        for (int i = cosmeticMatchingListElementDTOList.size() - 1; i >= 0; i--)
+            if (70 < cosmeticMatchingListElementDTOList.get(i).getScoreMatching() && cosmeticMatchingListElementDTOList.get(i).getScoreMatching() <= 80) {
+                cosmeticList.add(cosmeticMatchingListElementDTOList.get(i).getId());
+                break;
+            }
         for (int i = 0; i < 4 && i < cosmeticMatchingListElementDTOList.size(); i++) cosmeticList.add(cosmeticMatchingListElementDTOList.get(i).getId());
 
         return cosmeticService.getCosmeticList(cosmeticList);

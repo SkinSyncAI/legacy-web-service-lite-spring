@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout.html}" layout:fragment="Content">
+
+<style>
+    #bq-search { height: 3rem; width: 88%; }
+    input#form-search { height: 100%; width: 100%; border-radius: 1.5rem; }
+</style>
+
+<th:block th:insert="~{fragment/navbar/blackword_back_menu :: Navbar('제품 검색')}"></th:block>
+<div id="bq-content-container" class="bq-w-100p">
+    <div id="bq-search" class="bq-ml-auto bq-mr-auto">
+        <label for="form-search"></label>
+        <input class="form-control" type="search" name="form-search" id="form-search" placeholder="'지성 피부에게 좋은 스킨' 검색해보세요!">
+    </div>
+</div>
+
+</html>

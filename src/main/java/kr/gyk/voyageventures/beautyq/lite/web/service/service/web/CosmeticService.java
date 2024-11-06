@@ -147,11 +147,11 @@ public class CosmeticService {
 
         int score = scoringComponent.getMatchingScore(stCosmetic, stUser, tagCosmetic, tagUser, countProhibit, scoreError);
 
-        short scoreHydration = (short) ((short) score * 0.9 + cosmetic.getScoreHydration() * 0.1);
-        short scoreSoothing = (short) ((short) score * 0.9 + cosmetic.getScoreSoothing() * 0.1);
-        short scoreBrightening = (short) ((short) score * 0.9 + cosmetic.getScoreBrightening() * 0.1);
-        short scoreBarrier = (short) ((short) score * 0.9 + cosmetic.getScoreBarrier() * 0.1);
-        short scoreMoisture = (short) ((short) score * 0.9 + cosmetic.getScoreMoisture() * 0.1);
+        short scoreHydration = (short) ((short) score * 0.6 + cosmetic.getScoreHydration() * 0.4);
+        short scoreSoothing = (short) ((short) score * 0.6 + cosmetic.getScoreSoothing() * 0.4);
+        short scoreBrightening = (short) ((short) score * 0.6 + cosmetic.getScoreBrightening() * 0.4);
+        short scoreBarrier = (short) ((short) score * 0.6 + cosmetic.getScoreBarrier() * 0.4);
+        short scoreMoisture = (short) ((short) score * 0.6 + cosmetic.getScoreMoisture() * 0.4);
         short scoreAll = (short) ((scoreHydration + scoreSoothing + scoreBrightening + scoreBarrier + scoreMoisture) / 5);
 
         return CosmeticMatchingListElementDTO.builder()
