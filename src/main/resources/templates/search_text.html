@@ -5,6 +5,25 @@
 <style>
     #bq-search { height: 3rem; width: 88%; }
     input#form-search { height: 100%; width: 100%; border-radius: 1.5rem; }
+
+    #bq-search-result { margin-top: 5vh ; }
+
+    .bq-product-goods { margin-bottom: 2vh; height: 22%; display: flex; align-content: flex-start; }
+    @media (max-width:479px) {
+        .bq-product-goods-image { height: 120%; width: 34%; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden; }
+    }
+    @media (min-width:480px) {
+        .bq-product-goods-image { height: 80%; width: 38%; display: block; background-color: #FFFFFF; border-radius: 1rem; margin-right: 3vw; overflow: hidden; }
+    }
+    .bq-product-goods-image img { height: 100%; width: 100%; }
+    .bq-product-goods-data { height: 100%; width: 90%; margin-top: 4%; display: flex; align-items: center; }
+    .bq-product-goods-data-inner { display: block; }
+    .bq-product-goods-data-etc { margin-top: 3%; display: flex; align-content: flex-start; align-items: center; }
+    .bq-product-goods-data-volume { margin-left: 1%; }
+    .bq-product-goods-data-star { margin-left: 3%; height: 0.68rem; width: 0.68rem; }
+    .bq-product-goods-data-review { margin-left: 0.5%; }
+    .bq-product-goods-data-name { overflow-x: hidden; }
+    .bq-product-goods-data-price { text-wrap: nowrap; width: auto; }
 </style>
 
 <th:block th:insert="~{fragment/navbar/blackword_back_menu :: Navbar('제품 검색')}"></th:block>
@@ -13,6 +32,30 @@
         <label for="form-search"></label>
         <input class="form-control" type="search" name="form-search" id="form-search" placeholder="'지성 피부에게 좋은 스킨' 검색해보세요!">
     </div>
+
+    <div id="bq-search-result">
+        <!-- Ajax Contents -->
+    </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#form-search").keyup(function (event) {
+            let value = $("#form-search").val();
+            $.ajax({
+                url: window.location.pathname + "/ajax",
+                method: "get",
+                data: {
+                    "keyword": value
+                },
+                dataType: "html",
+                success: function (data, status, xhr) {
+                    $("#bq-search-result").html($("#bq-search-result").html(data).find("#bq-search-result"));
+                }
+            });
+        });
+    });
+</script>
 
 </html>

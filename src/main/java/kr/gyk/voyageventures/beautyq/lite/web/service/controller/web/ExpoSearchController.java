@@ -3,6 +3,7 @@ package kr.gyk.voyageventures.beautyq.lite.web.service.controller.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.gyk.voyageventures.beautyq.lite.web.service.component.CookieComponent;
+import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.ExpoMainService;
 import kr.gyk.voyageventures.beautyq.lite.web.service.service.web.ExpoSearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ExpoSearchController {
     private final ExpoSearchService expoSearchService;
     private final CookieComponent cookieComponent;
+
+    private final ExpoMainService expoMainService;
 
     @GetMapping("/camera")
     public String getExpoSearchCamera (
@@ -40,11 +44,23 @@ public class ExpoSearchController {
 
     @GetMapping("/text")
     public String getExpoSearchText (
-        Model model,
-        HttpServletRequest httpServletRequest,
-        HttpServletResponse httpServletResponse
+            Model model,
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse
     ) throws Exception {
         return "search_text";
+    }
+
+    @GetMapping("/text/ajax")
+    public String getExpoSearchTextAjax (
+            Model model,
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse,
+            @RequestParam(name = "keyword") String keyword
+    ) throws Exception {
+        model.addAttribute("cosmeticList", expoSearchService.getExpoSearchTextAjax(keyword));
+
+        return "search_text_ajax";
     }
 
 }

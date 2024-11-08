@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div id="bq-search-result">
+
+    <div th:each="product:${cosmeticList.cosmeticList}" class="bq-product-goods" th:onclick="|location.href='/expo/search/product/${product.id}';|">
+        <div class="bq-product-goods-image"><img th:src="${product.image}" alt=""></div>
+        <div class="bq-product-goods-data">
+            <div class="bq-product-goods-data-inner">
+                <p class="bq-product-goods-data-brand" th:text="${product.brand}"></p>
+                <p class="bq-product-goods-data-name" th:text="${product.name}"></p>
+                <div class="bq-product-goods-data-etc">
+                    <p class="bq-product-goods-data-price"><span class="bq-number-comma">[[${product.priceDiscount}]]</span>원</p>
+                    <p class="bq-product-goods-data-volume">/[[${product.volume}]]</p>
+                    <img class="bq-product-goods-data-star" src="/image/main/product_star.svg" alt="Star">
+                    <p class="bq-product-goods-data-review">[[${product.rating}]](<span class="bq-number-comma">[[${product.countReview}]]</span>)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>
